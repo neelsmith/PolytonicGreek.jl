@@ -19,8 +19,10 @@ begin
 	Pkg.activate(".")
 	Pkg.add("Markdown")
 	Pkg.add("PlutoUI")
+	Pkg.add("Unicode")
 	using Markdown
 	using PlutoUI
+	using Unicode
 	#Pkg.add("PolytonicGreek")
 	# using PolytonicGreek
 	
@@ -90,9 +92,20 @@ PolytonicGreek.isPunctuation(";")
 # ╔═╡ 2515ee86-656c-11eb-1bcf-bd862a853538
 PolytonicGreek.isAlphabetic("μῆνιν")
 
+# ╔═╡ 14d71e8a-656e-11eb-2eee-092306f81a29
+md"""
+
+---
+"""
+
+# ╔═╡ 1c93f238-656e-11eb-11ed-5df25da03158
+md"All recognized punctuation characters:"
+
+# ╔═╡ 2557a112-656e-11eb-2046-9361e24dcccc
+PolytonicGreek.punctuation()
+
 # ╔═╡ b8a3cb52-656a-11eb-0523-034cb44b8955
 md"""
----
 
 All recognized alphabetic characters (in Unicode order):
 """
@@ -104,13 +117,41 @@ md"""
 
 """
 
+# ╔═╡ 07d856cc-6573-11eb-2f25-af7805e01de6
+md">Some formatting functions"
+
+# ╔═╡ 1b37606a-6572-11eb-265d-796b2e421c17
+function ucat(cp) 
+	if Unicode.isnumeric(cp)
+		"numeric"
+	elseif Unicode.ispunct(cp)
+		"punctuation"
+	elseif Unicode.isletter(cp)
+		"letter"
+	else
+		"uncrecognized category"
+	end
+end
+	
+
+# ╔═╡ c35e1238-656e-11eb-2092-85f48cdc3bab
+function stringinfo(s)
+	#string(s,  " (" , length(s) , ")")
+
+		
+	uc = Unicode.islowercase(s[begin]) ? "lowercase" : "uppercase"
+	
+	string("**", s, "** (*Unicode ", codepoint(s[begin]) , ", ", ucat(s[begin]), " ", uc,  "*)")
+
+end
+
 # ╔═╡ 56830e2c-656c-11eb-0a42-b59d378ee995
 begin
 	if byline
 		
 		chlist = []
 		for ch in PolytonicGreek.alphabetic() 
-			push!(chlist, "- " * ch)
+			push!(chlist, "- " * stringinfo(ch))
 		end
 		Markdown.parse(join(chlist,"\n"))
 	else
@@ -133,6 +174,12 @@ end
 # ╟─081371e6-656c-11eb-2f79-bf0067480cd6
 # ╠═131640be-656c-11eb-1e3f-7967f02c46a4
 # ╠═2515ee86-656c-11eb-1bcf-bd862a853538
+# ╟─14d71e8a-656e-11eb-2eee-092306f81a29
+# ╟─1c93f238-656e-11eb-11ed-5df25da03158
+# ╠═2557a112-656e-11eb-2046-9361e24dcccc
 # ╟─b8a3cb52-656a-11eb-0523-034cb44b8955
 # ╟─9bc2dfda-656c-11eb-284e-5750c39f56db
 # ╟─56830e2c-656c-11eb-0a42-b59d378ee995
+# ╟─07d856cc-6573-11eb-2f25-af7805e01de6
+# ╟─c35e1238-656e-11eb-2092-85f48cdc3bab
+# ╟─1b37606a-6572-11eb-265d-796b2e421c17
