@@ -32,7 +32,13 @@ function alphabetic()
     '\u1f20':'\u1f45' ; '\u1f48':'\u1f4d' ; 
     '\u1f50':'\u1f57';  '\u1f59' ; '\u1f5b' ;
     '\u1f5d' ; '\u1f5f':'\u1f7d' ;
-    '\u1f80':'\u1faf'
+    '\u1f80':'\u1faf'; '\u1fb2':'\u1fb4' ;
+    '\u1fb6':'\u1fbc'; 
+    '\u1fc5':'\u1fcc';
+    '\u1fd2':'\u1fd3'; '\u1fd6':'\u1fdc';
+    '\u1fe2':'\u1fe7';
+    '\u1fea':'\u1fec';
+    '\uf1f2':'\u1ff4'; '\u1ff6':'\u1ffc'
     ]
     join(ranges,"")
 end

@@ -4,7 +4,6 @@ using Orthography
 
 
 @testset "Test recognizing alphabet characters" begin
-    #s = "μῆνιν"
-    s = "μ"
+    s = "μῆνιν"
     @test Greek.isAlphabetic(s)
 end
