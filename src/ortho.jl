@@ -20,8 +20,8 @@ end
 
 "Split off any trailing punctuation and return an Array of leading strim + trailing punctuation."
 function splitPunctuation(s::AbstractString)
-    punct = Orthography.collecttail(s, Greek.punctuation())
-    trimmed = Orthography.trimtail(s, Greek.punctuation())
+    punct = Orthography.collecttail(s, PolytonicGreek.punctuation())
+    trimmed = Orthography.trimtail(s, PolytonicGreek.punctuation())
     filter(s -> ! isempty(s), [trimmed, punct])
 end
 

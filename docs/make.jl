@@ -3,6 +3,6 @@ pkg"activate .."
 push!(LOAD_PATH,"../src/")
 
 
-using Documenter, DocStringExtensions, Greek
+using Documenter, DocStringExtensions, PolytonicGreek
 
-makedocs(sitename = "Greek Documentation")
+makedocs(sitename = "PolytonicGreek Documentation")

@@ -1,6 +1,6 @@
-# Greek.jl Documentation
+# PolytonicGreek.jl Documentation
 ```@meta
-CurrentModule = Greek
+CurrentModule = PolytonicGreek
 ```
 ```@contents
 ```

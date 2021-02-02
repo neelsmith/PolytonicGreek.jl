@@ -1,4 +1,4 @@
-module Greek
+module PolytonicGreek
 
 using Documenter, DocStringExtensions
 using Orthography, Unicode
