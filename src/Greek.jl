@@ -1,7 +1,10 @@
 module Greek
 
 using Documenter, DocStringExtensions
-using Orthography
+using Orthography, Unicode
+
+export LiteraryGreekOrthography
+export literaryGreek, tokenizeLiteraryGreek
 
 include("ortho.jl")
 
