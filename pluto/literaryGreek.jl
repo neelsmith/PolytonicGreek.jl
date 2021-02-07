@@ -17,16 +17,11 @@ end
 begin
 	using Pkg
 	Pkg.activate(".")
-	Pkg.add("Markdown")
-	Pkg.add("PlutoUI")
-	Pkg.add("Unicode")
+	Pkg.instantiate()
+	
 	using Markdown
 	using PlutoUI
 	using Unicode
-	#Pkg.add("PolytonicGreek")
-	# using PolytonicGreek
-	
-	Pkg.add(url="https://github.com/neelsmith/PolytonicGreek.jl")
 	using PolytonicGreek
 end
 

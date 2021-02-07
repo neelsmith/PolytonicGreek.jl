@@ -43,8 +43,9 @@ function alphabetic()
     '\u1f5d' ; '\u1f5f':'\u1f7d' ;
     '\u1f80':'\u1faf'; '\u1fb2':'\u1fb4' ;
     '\u1fb6':'\u1fbc'; 
-    '\u1fc5':'\u1fcc';
-    '\u1fd2':'\u1fd3'; '\u1fd6':'\u1fdc';
+	'\u1fc2':'\u1fc4';
+    '\u1fc6':'\u1fcc';
+    '\u1fd2':'\u1fd3'; '\u1fd6':'\u1fdb';
     '\u1fe2':'\u1fe7';
     '\u1fea':'\u1fec';
     '\uf1f2':'\u1ff4'; '\u1ff6':'\u1ffc'
@@ -74,6 +75,10 @@ end
 function isAlphabetic(s::AbstractString)
     chlist = split(s,"")
     alphas = alphabetic()
+    tfs = []
+    for i in collect(eachindex(s)) 
+        push!(tfs, occursin(s[i], alphas))
+    end
     tfs = map(c -> occursin(c, alphas), chlist)
     nogood = false in tfs
    
