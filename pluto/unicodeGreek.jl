@@ -10,8 +10,6 @@ begin
 	Pkg.activate(".")
 	Pkg.instantiate()
 
-	using Markdown
-	using PlutoUI
 	using Unicode
 end
 
