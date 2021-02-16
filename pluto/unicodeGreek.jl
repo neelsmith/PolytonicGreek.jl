@@ -131,7 +131,17 @@ md"### Sorting"
 md"Alas, sorting has to follow the sequence of codepoints defined in the Unicode spec.  A rational sorting function needs to be added to the `PolytonicGreek` library."
 
 # ╔═╡ 531f5d54-706c-11eb-1b2d-af45c8e8b7a9
+md"But it's not hard!"
 
+# ╔═╡ d180d21a-707c-11eb-0351-61a13b87ea94
+words = split(str, " " )
+
+# ╔═╡ 29c76718-707d-11eb-0900-6b50b087bd16
+ begin 
+	strippedpairs = map(wd -> ( lowercase(Unicode.normalize(wd, stripmark=true)), wd),words)
+	sorted = sort(strippedpairs)
+	map(pr -> pr[2], sorted)
+end
 
 # ╔═╡ Cell order:
 # ╟─07723886-6564-11eb-2f61-65638d4bfb6c
@@ -166,4 +176,6 @@ md"Alas, sorting has to follow the sequence of codepoints defined in the Unicode
 # ╠═a5e46f4a-706d-11eb-2c0b-376a70ea5052
 # ╟─316d3cf4-706c-11eb-1c94-0d47ed01e6ae
 # ╟─3953686e-706c-11eb-0770-fd86b01a6bf9
-# ╠═531f5d54-706c-11eb-1b2d-af45c8e8b7a9
+# ╟─531f5d54-706c-11eb-1b2d-af45c8e8b7a9
+# ╠═d180d21a-707c-11eb-0351-61a13b87ea94
+# ╠═29c76718-707d-11eb-0900-6b50b087bd16

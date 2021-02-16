@@ -94,3 +94,10 @@ function isPunctuation(s::AbstractString)
    
     !nogood
 end
+
+"Alpahbetically sort a list of words in Unicode Greek."
+function sortWords(words)
+    strippedpairs = map(wd -> ( lowercase(Unicode.normalize(wd, stripmark=true)), wd),words)
+	sorted = sort(strippedpairs)
+	map(pr -> pr[2], sorted)
+end

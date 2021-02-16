@@ -1,7 +1,7 @@
 name = "PolytonicGreek"
 uuid = "72b824a7-2b4a-40fa-944c-ac4f345dc63a"
 authors = ["nsmith "]
-version = "0.1.2"
+version = "0.2.0"
 
 [deps]
 DocStringExtensions = "ffbed154-4ef7-542d-bbb7-c09d3a79fcae"
