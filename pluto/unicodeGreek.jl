@@ -7,10 +7,10 @@ using InteractiveUtils
 # ╔═╡ 07723886-6564-11eb-2f61-65638d4bfb6c
 begin
 	using Pkg
-	Pkg.activate(".")
-	Pkg.instantiate()
+	Pkg.add("PolytonicGreek")
 
 	using Unicode
+	using PolytonicGreek
 end
 
 
@@ -128,23 +128,39 @@ length(collect(eachindex(decomposed)) )
 md"### Sorting"
 
 # ╔═╡ 3953686e-706c-11eb-0770-fd86b01a6bf9
-md"Alas, sorting has to follow the sequence of codepoints defined in the Unicode spec.  A rational sorting function needs to be added to the `PolytonicGreek` library."
-
-# ╔═╡ 531f5d54-706c-11eb-1b2d-af45c8e8b7a9
-md"But it's not hard!"
+md"Alas, sorting has to follow the sequence of codepoints defined in the Unicode spec.  A rational sorting function is therefore part of the `PolytonicGreek` library."
 
 # ╔═╡ d180d21a-707c-11eb-0351-61a13b87ea94
 words = split(str, " " )
 
-# ╔═╡ 29c76718-707d-11eb-0900-6b50b087bd16
- begin 
-	strippedpairs = map(wd -> ( lowercase(Unicode.normalize(wd, stripmark=true)), wd),words)
-	sorted = sort(strippedpairs)
-	map(pr -> pr[2], sorted)
-end
+# ╔═╡ 3dc0b78c-707e-11eb-01d2-d16b90595765
+PolytonicGreek.sortWords(words)
+
+# ╔═╡ 531f5d54-706c-11eb-1b2d-af45c8e8b7a9
+md"""
+
+But the underlying implementation is actually very straightforward in Julia:
+
+1. Pair each word in the list with a lower-case version stripped of accents and breathings.
+2. Putting the stripped version first in the tuple lets us sort directly on the tuple.
+3. Extract only the original version from the new sorted list.
+
+"""
+
+# ╔═╡ 71dad2be-707e-11eb-347a-1d743974e033
+# 1. Pair each word in the list with a lower-case version stripped of accents and breathings.
+strippedpairs = map(wd -> ( lowercase(Unicode.normalize(wd, stripmark=true)), wd),words)
+
+# ╔═╡ 9f54a80a-707e-11eb-19fc-89b80c32a43e
+# Putting the stripped version first in the tuple lets us sort directly on the tuple.
+sorted = sort(strippedpairs)
+
+# ╔═╡ a1b964f0-707e-11eb-00bb-251de1e6f5b0
+# 3. Extract only the original version from the new sorted list.	
+map(pr -> pr[2], sorted)
 
 # ╔═╡ Cell order:
-# ╟─07723886-6564-11eb-2f61-65638d4bfb6c
+# ╠═07723886-6564-11eb-2f61-65638d4bfb6c
 # ╟─ee5aa2c2-6563-11eb-1f3a-6b907e19fd31
 # ╟─7dcc46bc-656a-11eb-0f29-01dd8a59d645
 # ╟─5c89aa08-656a-11eb-3d95-cb47ee3892aa
@@ -176,6 +192,9 @@ end
 # ╠═a5e46f4a-706d-11eb-2c0b-376a70ea5052
 # ╟─316d3cf4-706c-11eb-1c94-0d47ed01e6ae
 # ╟─3953686e-706c-11eb-0770-fd86b01a6bf9
-# ╟─531f5d54-706c-11eb-1b2d-af45c8e8b7a9
 # ╠═d180d21a-707c-11eb-0351-61a13b87ea94
-# ╠═29c76718-707d-11eb-0900-6b50b087bd16
+# ╠═3dc0b78c-707e-11eb-01d2-d16b90595765
+# ╟─531f5d54-706c-11eb-1b2d-af45c8e8b7a9
+# ╠═71dad2be-707e-11eb-347a-1d743974e033
+# ╠═9f54a80a-707e-11eb-19fc-89b80c32a43e
+# ╠═a1b964f0-707e-11eb-00bb-251de1e6f5b0
