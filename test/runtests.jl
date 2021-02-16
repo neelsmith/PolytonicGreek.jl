@@ -31,3 +31,9 @@ end
     @test length(tkns) == 8
     @test tkns[end] == OrthographicToken(",", PunctuationToken())
 end
+
+@testset "Test sorting" begin
+    s = "Μῆνιν ἄειδε, θεά, Πηληϊάδεω Ἀχιλῆος,"
+    res = PolytonicGreek.sortWords(split(s," "))
+    @test res == ["ἄειδε,", "Ἀχιλῆος,", "θεά,", "Μῆνιν", "Πηληϊάδεω"]
+end
