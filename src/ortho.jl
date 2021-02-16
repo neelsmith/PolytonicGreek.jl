@@ -7,7 +7,7 @@ struct LiteraryGreekOrthography <: OrthographicSystem
     tokenizer
 end
 
-"Instantiate a LycianAscii with correct code points and token types."
+"Instantiate a LiteraryGreekOrthography with correct code points and token types."
 function literaryGreek()
     cps = alphabetic() * " \t\n"
     ttypes = [
