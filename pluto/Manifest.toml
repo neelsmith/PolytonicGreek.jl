@@ -19,9 +19,9 @@ version = "0.8.3"
 
 [[Documenter]]
 deps = ["Base64", "Dates", "DocStringExtensions", "IOCapture", "InteractiveUtils", "JSON", "LibGit2", "Logging", "Markdown", "REPL", "Test", "Unicode"]
-git-tree-sha1 = "b7715ae18be02110a8cf9cc8ed2ccdb1e3e3aba2"
+git-tree-sha1 = "21fb992ef1b28ff8f315354d3808ebf4a8fa6e45"
 uuid = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
-version = "0.26.1"
+version = "0.26.2"
 
 [[IOCapture]]
 deps = ["Logging"]
@@ -58,9 +58,9 @@ uuid = "a63ad114-7e13-5084-954f-fe012c677804"
 
 [[Orthography]]
 deps = ["DocStringExtensions", "Documenter", "Test"]
-git-tree-sha1 = "53ae798c10043b4a990d1557a594388b0e07a57a"
+git-tree-sha1 = "bd8ac88de4d00c65432d84abf18288973a83b431"
 uuid = "0b4c9448-09b0-4e78-95ea-3eb3328be36d"
-version = "0.4.1"
+version = "0.5.0"
 
 [[Parsers]]
 deps = ["Dates"]
@@ -80,11 +80,11 @@ version = "0.6.11"
 
 [[PolytonicGreek]]
 deps = ["DocStringExtensions", "Documenter", "Orthography", "Test", "Unicode"]
-git-tree-sha1 = "a943a5557c26473dc01d89c6528a4e51b03fa833"
+git-tree-sha1 = "71cdcc713f3c3867edcd64745f9d747d4d33594c"
 repo-rev = "main"
 repo-url = "https://github.com/neelsmith/PolytonicGreek.jl"
 uuid = "72b824a7-2b4a-40fa-944c-ac4f345dc63a"
-version = "0.1.0"
+version = "0.1.2"
 
 [[Printf]]
 deps = ["Unicode"]
