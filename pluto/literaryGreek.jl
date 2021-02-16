@@ -16,8 +16,10 @@ end
 # ╔═╡ 07723886-6564-11eb-2f61-65638d4bfb6c
 begin
 	using Pkg
-	Pkg.activate(".")
-	Pkg.instantiate()
+	Pkg.add("Markdown")
+	Pkg.add("PlutoUI")
+	Pkg.add("PolytonicGreek")
+	
 
 	using Markdown
 	using PlutoUI
@@ -112,6 +114,28 @@ md"""
 
 """
 
+# ╔═╡ 259b0f04-7088-11eb-1dfc-733a62279518
+md"## Sorting"
+
+
+# ╔═╡ 2bf4aaea-7088-11eb-1e0c-f565dc7ddf85
+md"The `PolytonicGreek` package includes a `sortWords` function that sorts a list of polytonic Greek strings according to the logic of the Greek alphabet.
+
+The sort is case-insensitive.
+"
+
+# ╔═╡ 8f1cbb3a-7088-11eb-058d-5f01cee8f108
+words = split(str, " ")
+
+# ╔═╡ 9ae4eb24-7088-11eb-20c3-8b005ffd7304
+PolytonicGreek.sortWords(words)
+
+# ╔═╡ a274abd4-7088-11eb-1a9f-b59f06068b36
+md"Alphabetically sorted list of unique token strings:"
+
+# ╔═╡ 50858d3e-7088-11eb-253d-9540c5e48407
+unique(PolytonicGreek.sortWords(map(t -> t.text, tkns)))
+
 # ╔═╡ 07d856cc-6573-11eb-2f25-af7805e01de6
 md">Some formatting functions"
 
@@ -175,6 +199,12 @@ end
 # ╟─b8a3cb52-656a-11eb-0523-034cb44b8955
 # ╟─9bc2dfda-656c-11eb-284e-5750c39f56db
 # ╟─56830e2c-656c-11eb-0a42-b59d378ee995
+# ╟─259b0f04-7088-11eb-1dfc-733a62279518
+# ╟─2bf4aaea-7088-11eb-1e0c-f565dc7ddf85
+# ╠═8f1cbb3a-7088-11eb-058d-5f01cee8f108
+# ╠═9ae4eb24-7088-11eb-20c3-8b005ffd7304
+# ╠═a274abd4-7088-11eb-1a9f-b59f06068b36
+# ╠═50858d3e-7088-11eb-253d-9540c5e48407
 # ╟─07d856cc-6573-11eb-2f25-af7805e01de6
 # ╟─c35e1238-656e-11eb-2092-85f48cdc3bab
 # ╟─1b37606a-6572-11eb-265d-796b2e421c17
