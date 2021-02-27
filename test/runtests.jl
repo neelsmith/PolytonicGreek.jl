@@ -37,3 +37,14 @@ end
     res = PolytonicGreek.sortWords(split(s," "))
     @test res == ["ἄειδε,", "Ἀχιλῆος,", "θεά,", "Μῆνιν", "Πηληϊάδεω"]
 end
+
+@testset "Test orthographic validation" begin
+    s1 ="Μῆνιν ἄειδε θεὰ Πηληϊάδεω Ἀχιλῆος"    
+    s2 = "οὐλομένην· ἡ μυρί' Ἀχαιοῖς ἄλγε' ἔθηκεν"
+    ortho = literaryGreek()
+    
+    @test validstring(ortho, s1)
+    @test validstring(ortho, s2) == false
+end
+
+

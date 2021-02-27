@@ -5,7 +5,9 @@ using Orthography, Unicode
 
 export LiteraryGreekOrthography
 export literaryGreek, tokenizeLiteraryGreek
+export showcps
 
 include("ortho.jl")
+include("utils.jl")
 
 end # module
