@@ -7,5 +7,6 @@ export LiteraryGreekOrthography
 export literaryGreek, tokenizeLiteraryGreek
 
 include("ortho.jl")
+include("utils.jl")
 
 end # module
