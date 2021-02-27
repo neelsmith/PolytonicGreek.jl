@@ -37,6 +37,7 @@ end
 "Compose a string with all alphabetic characters."
 function alphabetic()
     ranges = ['α':'ω'; 'Α':'Ρ' ; 'Σ':'Ω' ;
+    'ϊ':'ϋ'; 'ά'; 'έ'; 'ή' ; 'ί';'ΰ';'ΐ';
     '\u1f00':'\u1f15'; '\u1f18':'\u1f1d' ;
     '\u1f20':'\u1f45' ; '\u1f48':'\u1f4d' ; 
     '\u1f50':'\u1f57';  '\u1f59' ; '\u1f5b' ;
@@ -57,6 +58,15 @@ end
 function punctuation()
     ".,;:"
 end
+
+function tonoi(s::AbstractString)
+    cleaner = []
+    for c in s
+        push!(cleaner, tonoi(c))
+    end
+    cleaner
+end
+
 
 "Create correct `OrthographicToken` for a given string."
 function tokenforstring(s::AbstractString)
