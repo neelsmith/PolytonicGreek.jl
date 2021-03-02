@@ -36,7 +36,9 @@ end
 
 "Compose a string with all alphabetic characters."
 function alphabetic()
-    ranges = ['α':'ω'; 'Α':'Ρ' ; 'Σ':'Ω' ;
+    ranges = [
+        '\u0027'; # single quote for elision
+        'α':'ω'; 'Α':'Ρ' ; 'Σ':'Ω' ;
     'ϊ':'ϋ'; 'ά'; 'έ'; 'ή' ; 'ί';'ΰ';'ΐ';
     '\u1f00':'\u1f15'; '\u1f18':'\u1f1d' ;
     '\u1f20':'\u1f45' ; '\u1f48':'\u1f4d' ; 
