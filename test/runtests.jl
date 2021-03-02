@@ -45,6 +45,12 @@ end
     
     @test validstring(ortho, s1)
     @test validstring(ortho, s2) == false
+    tkns = tokenizeLiteraryGreek(s2)
+    # High stop is wrong, rest is OK.
+    @test validstring(ortho, tkns[1].text) == false
+    for i in 2:length(tkns)
+        @test validstring(ortho, tkns[i].text)
+    end
 end
 
 
