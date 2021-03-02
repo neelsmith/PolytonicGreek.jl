@@ -51,6 +51,19 @@ end
     for i in 2:length(tkns)
         @test validstring(ortho, tkns[i].text)
     end
+
+    s3 = "κόσμηθεν ἅμ ̓ ἡγεμόνεσσιν"
+
+    s3tkns = tokenizeLiteraryGreek(s3)
+
+    for t in s3tkns
+        println(t.text, " Valid? ", validstring(ortho,t.text))
+    end
+    # Curly quote is wrong, rest is OK.
+    #@test validstring(ortho, s3tkns[1].text)
+    #@test validstring(ortho, s3tkns[2].text) == false
+    #@test validstring(ortho, s3tkns[3].text) == false
+    
 end
 
 
