@@ -8,6 +8,7 @@ export literaryGreek, tokenizeLiteraryGreek
 export showcps
 
 include("ortho.jl")
+include("syllabify.jl")
 include("utils.jl")
 
 end # module
