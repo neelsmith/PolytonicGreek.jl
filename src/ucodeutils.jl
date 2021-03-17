@@ -1,6 +1,18 @@
 using Unicode
 
 
+function normalizediaresis()
+    combos = [
+        "ΐ",
+        "ῒ",
+        "ῗ",
+        "ΰ",
+        "ῢ",
+        "ῧ"
+    ]
+    map(s -> Unicode.normalize(s, :NFKC), combos)
+end
+
 """Collect a normalized set of all codepoints
 with accent.
 """

@@ -1,5 +1,4 @@
 
-
 "An orthographic system for standard orthography of printed literary Greek."
 struct LiteraryGreekOrthography <: OrthographicSystem
     codepoints
@@ -61,6 +60,7 @@ function punctuation()
     ".,;:"
 end
 
+#=
 function tonoi(s::AbstractString)
     cleaner = []
     for c in s
@@ -68,7 +68,7 @@ function tonoi(s::AbstractString)
     end
     cleaner
 end
-
+=#
 
 "Create correct `OrthographicToken` for a given string."
 function tokenforstring(s::AbstractString)
