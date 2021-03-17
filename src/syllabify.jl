@@ -12,15 +12,26 @@ Smyth:
 =#
 
 
-const DIAERESES = r"([ΐῒῗΰῢῧ])"
-#const VCV = r"([$VOWELS])"
+const DIAERESES = Unicode.normalize("ΐῒῗΰῢῧϊϋ",:NFKC)
 const CONSONANTS= "βγδζθκλμνξπρστφχψ"
-const VOWELS = "αεηιουωᾳῃῳ" # And all the accentented combos...
+const VOWELS = "αεηιουωᾳῃῳ$(DIAERESES)" # And all the accentented combos...
+
+function splitdiaeresis(s)
+    re = Regex("([$DIAERESES])")
+    replace(s, re => s" \1") 
+end
+
+function splitvcv(s)
+    re = Regex("([$VOWELS])([$CONSONANTS])([$VOWELS])")
+    replace(s, re => s"\1 \2\3")
+end
 
 
+"""Split string `s` into an Array of strings representing syllables.
+"""
 function syllabify(s)
-    s1 = replace(s, DIAERESES => s" \1") 
-    replace(s1, r"([αεηιουωᾳῃῳ])([βγδζθκλμνξπρστφχψ])([αεηιουωᾳῃῳ])" => s"\1 \2\3")
+
+    splitdiaeresis(Unicode.normalize(s, :NFKC)) |> splitvcv |> split
 end
 #=
 from gsphone library in Scala:

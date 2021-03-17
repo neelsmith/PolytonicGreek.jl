@@ -6,7 +6,7 @@ using Orthography, Unicode
 export LiteraryGreekOrthography, AccentPlacement
 export literaryGreek, tokenizeLiteraryGreek
 export showcps
-export rmaccents
+export rmaccents, syllabify
 
 include("ortho.jl")
 include("accentuate.jl")
