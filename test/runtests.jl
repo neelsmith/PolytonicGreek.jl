@@ -3,6 +3,8 @@ using Test
 using Orthography
 
 
+include("test_accentuation.jl")
+
 @testset "Test recognizing alphabet characters" begin
     s = "μῆνιν"
     @test PolytonicGreek.isAlphabetic(s)
