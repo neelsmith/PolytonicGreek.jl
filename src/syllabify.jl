@@ -26,19 +26,76 @@ function splitvcv(s)
     replace(s, re => s"\1 \2\3")
 end
 
+function splitmunu(s)
+    replace(s, "μν" => " μν")
+end
+
+function splitliqcons(s)
+    # TBA
+    s
+end
+
+function splitdiphthongvowel(s)
+    # TBA
+    s
+end
+
+function splitvoweldiphthong(s)
+    # TBA
+    s
+end
+
+function splitshortvowelvowel(s)
+    # TBA
+    s
+end
+
+
+function splitlongvowelvowel(s)
+    # TBA
+    s
+end
+
+
+function splitupsilonvowel(s)
+    # TBA
+    s
+end
+
+function splitdoubleconsonant(s)
+    # TBA
+    s
+end
+
+
+function splitconsonantcluster(s)
+    # TBA
+    s
+end
+
+function splitcvc(s)
+    # TBA
+    s
+end
+
 
 """Split string `s` into an Array of strings representing syllables.
 """
 function syllabify(s)
-
-    splitdiaeresis(Unicode.normalize(s, :NFKC)) |> splitvcv |> split
+    cleaner = Unicode.normalize(s, :NFKC)
+    splitdiaeresis(cleaner) |> splitvcv |> splitmunu  |>
+    splitliqcons |> splitdiphthongvowel |>
+    splitvoweldiphthong |>  splitshortvowelvowel |> 
+    splitlongvowelvowel |> splitupsilonvowel |> 
+    splitdoubleconsonant |> splitconsonantcluster |> 
+    splitcvc |> split
 end
 #=
 from gsphone library in Scala:
 
     √ val dia = splitOnDiaeresis(strVector)
 
-    val mn = splitOnMuNu(dia)
+    √ val mn = splitOnMuNu(dia)
     val lc = splitOnLiqCons(mn)
     val dv = splitOnDiphthVowel(lc)
     val vd = splitOnVowelDiphth(dv)
