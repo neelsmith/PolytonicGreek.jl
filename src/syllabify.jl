@@ -14,25 +14,32 @@ Smyth:
 
 const DIAERESES = Unicode.normalize("ΐῒῗΰῢῧϊϋ",:NFKC)
 const CONSONANTS= "βγδζθκλμνξπρστφχψ"
+const NONLIQUIDS = "βγδζθκλξπστφχψ"
 const VOWELS = "αεηιουωᾳῃῳ$(DIAERESES)" # And all the accentented combos...
 const LIQUIDS = "μνρλ"
+const DIPHTHONGS = "αι|ει|οι|αυ|ευ|ου|ηυ|ωυ|υ"
 
+"""Diaeresis starts a new syllable."""
 function splitdiaeresis(s)
     re = Regex("([$DIAERESES])")
     replace(s, re => s" \1") 
 end
 
+"""Consonant between two vowels goes with second vowel."""
 function splitvcv(s)
     re = Regex("([$VOWELS])([$CONSONANTS])([$VOWELS])")
     replace(s, re => s"\1 \2\3")
 end
 
+"""Mu+nu stay together."""
 function splitmunu(s)
     replace(s, "μν" => " μν")
 end
 
+
+"""Split between a liquid and non-liquid consonant."""
 function splitliqcons(s)
-    re = Regex("([$LIQUIDS])([$CONSONANTS])")
+    re = Regex("([$LIQUIDS])([$NONLIQUIDS])")
     replace(s, re => s"\1 \2")
 end
 
