@@ -1,14 +1,36 @@
+
+@testset "Test splitting on diaeresis" begin
+    diaeresis = Unicode.normalize("προΐστημι", :NFKC) |> rmaccents
+    divided = PolytonicGreek.splitdiaeresis(diaeresis)
+    @test divided == "προ ϊστημι"
+end
+
+@testset "Test splitting on mu+nu" begin
+    munu = Unicode.normalize("ἀναμιμνησκόμενος") |> rmaccents
+    divided = PolytonicGreek.splitmunu(munu)
+    @test divided == "ἀναμι μνησκομενος"
+end
+
+
+#=
 @testset "Test syllabification" begin
     @test syllabify("ὀΐω") == ["ὀ", "ϊ", "ω" ]
     @test syllabify("λίμνη") == ["λι", "μνη"]
     @test syllabify("κελεύει") == ["κε", "λευ", "ει"]
     @test syllabify("οἰκίαις") == ["οἰ", "κι","αις"]
+    @test syllabify("ποιησαίμην") == ["ποι","η","σαι","μην"]
+
+    @test syllabify("ἀναμιμνησκόμενος") == []
+
     @test syllabify("ἔργμα") == ["ἐρ", "γμα"]
     @test syllabify("ποῖος") == ["ποι", "ος"]
     @test syllabify("ὀΐω") == ["ὀ", "ϊ", "ω" ]
     @test syllabify("ὀίω") == ["ὀ", "ϊ", "ω" ]
     @test syllabify("αἴει") == ["αἰ"    ,"ει"]
-
+    s = "προΐστημι"
+end
+=#
+#=
     longs = """
 περὶ πολλοῦ ἂν ποιησαίμην, ὦ ἄνδρες, 
 τὸ τοιούτους ὑμᾶς ἐμοὶ δικαστὰς περὶ τούτου τοῦ πράγματος γενέσθαι, 
@@ -19,7 +41,7 @@
 ὅστις οὐκ ἐπὶ τοῖς γεγενημένοις ἀγανακτοίη, 
 ἀλλὰ πάντες ἂν περὶ τῶν τὰ τοιαῦτα ἐπιτηδευόντων 
 τὰς ζημίας μικρὰς ἡγοῖσθε.
-#=
+
 
 def testMap = [
 
@@ -63,4 +85,3 @@ def testMap = [
 "e)gegra^pto" : "e)#ge#gra^#pto"
 ]
 =#
-end

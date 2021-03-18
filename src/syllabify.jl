@@ -107,7 +107,7 @@ end
 function syllabify(s)
     Unicode.normalize(s, :NFKC) |>
     rmaccents  |>
-    splitdiaeresis |> # √
+    splitdiaeresis |> # √ προΐστημι breaks ο-ΐ
     splitmunu  |> # √
     splitliqcons |> # √
     splitdiphthongvowel |> # √
