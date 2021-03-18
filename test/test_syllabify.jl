@@ -6,12 +6,46 @@
 end
 
 @testset "Test splitting on mu+nu" begin
-    munu = Unicode.normalize("ἀναμιμνησκόμενος") |> rmaccents
+    munu = Unicode.normalize("ἀναμιμνησκόμενος", :NFKC) |> rmaccents
     divided = PolytonicGreek.splitmunu(munu)
     @test divided == "ἀναμι μνησκομενος"
 end
 
+@testset "Test splitting on liquid+consonant" begin
+    liqcons = Unicode.normalize("ἄνδρασι", :NFKC) |> rmaccents
+    divided = PolytonicGreek.splitliqcons(liqcons)
+    @test divided == "ἀν δρασι"
+end
 
+@testset "Test splitting on diphthong+vowel" begin
+    dipvowel = Unicode.normalize("κελεύει", :NFKC) |> rmaccents
+    divided = PolytonicGreek.splitdiphthongvowel(dipvowel)
+    @test divided == "κελευ ει"
+end
+
+@testset "Test splitting on vowel+diphthong" begin
+    dipvowel = Unicode.normalize("οἰκίαις", :NFKC) |> rmaccents
+    divided = PolytonicGreek.splitvoweldiphthong(dipvowel)
+    @test divided == "οἰκι αις"
+end
+
+
+@testset "Test splitting on short vowel followed by vowel" begin
+    shortvowel = Unicode.normalize("δέομαι", :NFKC) |> rmaccents
+    divided = PolytonicGreek.splitshortvowelvowel(shortvowel)
+    @test divided == "δε ομαι"
+end
+
+# FAILING
+@testset "Test splitting on long vowel followed by vowel" begin
+    longvowel = Unicode.normalize("εἰσῄα", :NFKC) |> rmaccents
+    divided = PolytonicGreek.splitshortvowelvowel(longvowel)
+    @test divided == "δε ομαι"
+end
+
+
+
+#δεδιεναι
 #=
 @testset "Test syllabification" begin
     @test syllabify("ὀΐω") == ["ὀ", "ϊ", "ω" ]
