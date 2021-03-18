@@ -11,13 +11,27 @@ Smyth:
 - 
 =#
 
-
-const DIAERESES = Unicode.normalize("ΐῒῗΰῢῧϊϋ",:NFKC)
+# Consonants
 const CONSONANTS= "βγδζθκλμνξπρστφχψ"
 const NONLIQUIDS = "βγδζθκλξπστφχψ"
-const VOWELS = "αεηιουωᾳῃῳ$(DIAERESES)" # And all the accentented combos...
 const LIQUIDS = "μνρλ"
-const DIPHTHONGS = "αι|ει|οι|αυ|ευ|ου|ηυ|ωυ|υ"
+
+# Vowel classes:
+# these are strings that can be used in a Regex
+# class (in square brackets) to define a set of
+# Characters
+const SIMPLEVOWELS =  "αεηιου"
+const DIAERESES = Unicode.normalize("ϊϋ",:NFKC)
+const ROUGHVOWELS = Unicode.normalize("ἁἑἡἱὁὑὡ", :NFKC)
+const SMOOTHVOWELS = Unicode.normalize("ἀἐἠἰὀὐὠ", :NFKC)
+const IOTASUBS = Unicode.normalize("ᾳῃῳᾁᾑᾡᾀᾐᾠ", :NFKC)
+const VOWELS = "$(SIMPLEVOWELS)$(SMOOTHVOWELS)$(ROUGHVOWELS)$(DIAERESES)"
+const SHORTVOWELS = "εοἑἐὁὀ"
+const LONGVOWELS = "ηωᾳἡὡᾁἠὠᾀ"
+
+# diphthongs:
+# this is a Regex disjunction for diphthongs:
+const DIPHTHONGS = "αι|ει|οι|αυ|ευ|ου|ηυ|ωυ|υἰ|αἰ|εἰ|οἰ|αὐ|εὐ|οὐ|ηὐ|ωὐ|υἰ|αἱ|εἱ|οἱ|αὑ|εὑ|οὑ|ηὑ|ωὑ|υἱ"  
 
 """Diaeresis starts a new syllable."""
 function splitdiaeresis(s)
@@ -44,35 +58,36 @@ function splitliqcons(s)
 end
 
 function splitdiphthongvowel(s)
-    # TBA
-    s
+    re = Regex("($DIPHTHONGS)([$VOWELS])")
+    replace(s, re => s"\1 \2")
 end
 
 function splitvoweldiphthong(s)
-    # TBA
-    s
+    re = Regex("([$VOWELS])($DIPHTHONGS)")
+    replace(s, re => s"\1 \2")
+    
 end
 
 function splitshortvowelvowel(s)
-    # TBA
-    s
+    re = Regex("([$SHORTVOWELS])([$VOWELS])")
+    replace(s, re => s"\1 \2")
 end
 
 
 function splitlongvowelvowel(s)
-    # TBA
-    s
+    re = Regex("([$LONGVOWELS])([$VOWELS])")
+    replace(s, re => s"\1 \2")
 end
 
 
 function splitupsilonvowel(s)
-    # TBA
-    s
+    re = Regex("υ([$VOWELS])")
+    replace(s, re => s"υ \1")
 end
 
 function splitdoubleconsonant(s)
-    # TBA
-    s
+    re = Regex("([$CONSONANTS])([$CONSONANTS])")
+    replace(s, re => s"\1 \2")
 end
 
 
@@ -82,72 +97,29 @@ function splitconsonantcluster(s)
 end
 
 function splitcvc(s)
-    # TBA
-    s
+    re = Regex("([$CONSONANTS])([$VOWELS])([$CONSONANTS])")
+    replace(s, re => s"\1\2 \3")
 end
 
 
 """Split string `s` into an Array of strings representing syllables.
 """
 function syllabify(s)
-    cleaner = Unicode.normalize(s, :NFKC)
-    splitdiaeresis(cleaner) |> 
-    splitvcv |> 
-    splitmunu  |>
-    splitliqcons |> 
-    splitdiphthongvowel |>
-    splitvoweldiphthong |>  
+    Unicode.normalize(s, :NFKC) |>
+    rmaccents  |>
+    splitdiaeresis |> # √
+    splitmunu  |> # √
+    splitliqcons |> # √
+    splitdiphthongvowel |> # √
+    splitvoweldiphthong |>  # √ 
+    #=
     splitshortvowelvowel |> 
     splitlongvowelvowel |> 
+    =#
     splitupsilonvowel |> 
     splitdoubleconsonant |> 
-    splitconsonantcluster |> 
-    splitcvc |> 
+    splitvcv |> 
     split
+
 end
 
-
-#=
-
-def testMap = [
-"poios"  : "poi#os",
-"o)i+w" : "o)#i+#w",
-"pwu+" : "pw#u+",
-"oi)w" : "oi)#w",
-
-"a)nqos" : "a)n#qos",
-"e)lpis" : "e)l#pis",
-"e)rgma" : "e)r#gma",
-"a)ei" : "a)#ei",
-"dia" : "di#a",
-"die" : "di#e",
-"eu)+" : "e#u)+",
-"r(ea" : "r(e#a",
-"pragma" : "pra#gma",
-"sui+" : "su#i+",
-"tiw" :  "ti#w",
-"r(a" : "r(a",
-"oi(o" : "oi(#o",
-"a)asamhn": "a)#a#sa#mhn",
-"e)u+" : "e)#u+",
-"ou(tos" : "ou(#tos",
-"dw|h" : "dw|#h",
-"eu+n" : "e#u+n",
-"a)ll'": "a)ll'",
-"a)mf'" : "a)mf'",
-"e)aa|" : "e)#a#a|",
-"h)u+s" : "h)#u+s",
-"h)i+e" : "h)#i+#e",
-"kien" : "ki#en",
-"kion" : "ki#on",
-"ui(ei+" : "ui(#e#i+",
-"xiwn"  : "xi#wn",
-"a)u+th" : "a)#u+#th",
-"lu_e" : "lu_#e",
-"a)nalu_w": "a)#na#lu_#w",
-"is" : "is",
-"ios" : "i#os",
-"ni_ke": "ni_#ke",
-"e)gegra^pto" : "e)#ge#gra^#pto"
-]
-=#
