@@ -1,5 +1,8 @@
 @testset "Test syllabification" begin
+    @test syllabify("ὀΐω") == ["ὀ", "ϊ", "ω" ]
     @test syllabify("λίμνη") == ["λι", "μνη"]
+    @test syllabify("κελεύει") == ["κε", "λευ", "ει"]
+    @test syllabify("οἰκίαις") == ["οἰ", "κι","αις"]
     @test syllabify("ἔργμα") == ["ἐρ", "γμα"]
     @test syllabify("ποῖος") == ["ποι", "ος"]
     @test syllabify("ὀΐω") == ["ὀ", "ϊ", "ω" ]

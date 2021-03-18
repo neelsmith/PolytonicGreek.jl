@@ -69,7 +69,7 @@ function splitvoweldiphthong(s)
 end
 
 function splitshortvowelvowel(s)
-    re = Regex("([$SHORTVOWELS])([$VOWELS])")
+    re = Regex("([$SHORTVOWELS])([αεηοωᾳῃῳ])")
     replace(s, re => s"\1 \2")
 end
 
