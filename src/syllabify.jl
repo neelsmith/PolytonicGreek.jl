@@ -21,13 +21,8 @@ function splitdiaeresis(s)
     replace(s, re => s" \1") 
 end
 
-#=
-"""Consonant between two vowels goes with second vowel."""
-function splitvcv(s)
-    re = Regex("([$VOWELS])([$CONSONANTS])([$VOWELS])")
-    replace(s, re => s"\1 \2\3")
-end
-=#
+
+
 
 """Mu+nu stay together.
 
@@ -77,7 +72,8 @@ function splitshortvowelvowel(s)
 end
 
 """Split between a long vowel and a following vowel.
-εισηα
+
+εἰσῄα splits as "εἰσῃ α"
 
 """
 function splitlongvowelvowel(s)
@@ -86,27 +82,38 @@ function splitlongvowelvowel(s)
 end
 
 
+"""Split between upsilon and a following vowel.
+
+θύειν splits as "θυ ειν"
+
+"""
 function splitupsilonvowel(s)
     re = Regex("υ([$VOWELS])")
     replace(s, re => s"υ \1")
 end
 
+"""Split between doubled consonants.
+
+καταβάλλω splits as "καταβαλ λω"
+"""
 function splitdoubleconsonant(s)
-    re = Regex("([$CONSONANTS])([$CONSONANTS])")
-    replace(s, re => s"\1 \2")
+    re = Regex("([$CONSONANTS]){2}")
+    replace(s, re => s"\1 \1")
 end
 
 
 function splitconsonantcluster(s)
-    # TBA
-    s
+    re = Regex("([$VOWELS])([βγδζθκπξστφχψ][μνβγδζθκλξπρστφχψ])")
+    replace(s, re => s"\1 \2")
 end
 
-function splitcvc(s)
-    re = Regex("([$CONSONANTS])([$VOWELS])([$CONSONANTS])")
-    replace(s, re => s"\1\2 \3")
-end
 
+
+"""Consonant between two vowels goes with second vowel."""
+function splitvcv(s)
+    re = Regex("([$VOWELS])([$CONSONANTS])([$VOWELS])")
+    replace(s, re => s"\1 \2\3")
+end
 
 """Split string `s` into an Array of strings representing syllables.
 """
@@ -118,15 +125,11 @@ function syllabify(s)
     splitliqcons |> 
     splitdiphthongvowel |> 
     splitvoweldiphthong |>  
-   
     splitshortvowelvowel |> 
-     #=splitlongvowelvowel |> 
-    
+    splitlongvowelvowel |> 
     splitupsilonvowel |> 
     splitdoubleconsonant |> 
-    splitvcv |> 
-    =#
+    splitvcv |>   splitvcv |> # catch overlap
     split
-
 end
 

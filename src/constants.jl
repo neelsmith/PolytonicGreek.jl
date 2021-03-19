@@ -14,9 +14,9 @@ const ROUGHVOWELS = Unicode.normalize("ἁἑἡἱὁὑὡ", :NFKC)
 const SMOOTHVOWELS = Unicode.normalize("ἀἐἠἰὀὐὠ", :NFKC)
 const IOTASUBS = Unicode.normalize("ᾳῃῳᾁᾑᾡᾀᾐᾠ", :NFKC)
 const VOWELS = "$(SIMPLEVOWELS)$(SMOOTHVOWELS)$(ROUGHVOWELS)$(DIAERESES)"
-const SHORTVOWELS = "εοἑἐὁὀ"
-const POSSIBLESHORT = "αιἀἰἁἱ"
-const LONGVOWELS = "ηῃωῳᾳἡᾑὡᾡᾁἠᾐὠᾠᾀ"
+const SHORTVOWELS = Unicode.normalize("εοἑἐὁὀ", :NFKC)
+const POSSIBLESHORT = Unicode.normalize("αιἀἰἁἱ", :NFKC)
+const LONGVOWELS = Unicode.normalize("ηῃωῳᾳἡᾑὡᾡᾁἠᾐὠᾠᾀ", :NFKC)
 
 # diphthongs:
 # this is a Regex disjunction for diphthongs:

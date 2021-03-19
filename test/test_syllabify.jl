@@ -35,15 +35,41 @@ end
     @test divided == "δε ομαι"
 end
 
-# FAILING
 @testset "Test splitting on long vowel followed by vowel" begin
     longvowel = Unicode.normalize("εἰσῄα", :NFKC) |> rmaccents
     divided = PolytonicGreek.splitlongvowelvowel(longvowel)
-    @test divided == "δε ομαι"
+    @test divided == "εἰσῃ α"
+end
+
+@testset "Test splitting on upsilon followed by vowel" begin
+    upsilonvowel = Unicode.normalize("θύειν", :NFKC) |> rmaccents
+    divided = PolytonicGreek.splitupsilonvowel(upsilonvowel)
+    @test divided == "θυ ειν"
+end
+
+@testset "Test splitting on double consonant" begin
+    doubled = Unicode.normalize("καταβάλλω", :NFKC) |> rmaccents
+    divided = PolytonicGreek.splitdoubleconsonant(doubled)
+    @test divided == "καταβαλ λω"
 end
 
 
+@testset "Test splitting on consonant clusters" begin
+    cluster = Unicode.normalize("καταισχύνουσι", :NFKC) |> rmaccents
+    divided = PolytonicGreek.splitconsonantcluster(cluster)
+    @test divided == "καται σχυνουσι"
+end
 
+@testset "Test splitting VCV" begin
+    vcv = Unicode.normalize("οὐδέποτε", :NFKC) |> rmaccents
+    divided = PolytonicGreek.splitvcv(vcv)
+    @test divided == "οὐ δεπο τε"
+end
+
+
+#οὐδέποτε
+#καταβαλλω
+# εωρακυια
 #δεδιεναι
 #=
 @testset "Test syllabification" begin
