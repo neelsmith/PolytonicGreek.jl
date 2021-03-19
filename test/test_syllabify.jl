@@ -29,7 +29,6 @@ end
     @test divided == "οἰκι αις"
 end
 
-
 @testset "Test splitting on short vowel followed by vowel" begin
     shortvowel = Unicode.normalize("δέομαι", :NFKC) |> rmaccents
     divided = PolytonicGreek.splitshortvowelvowel(shortvowel)
@@ -39,7 +38,7 @@ end
 # FAILING
 @testset "Test splitting on long vowel followed by vowel" begin
     longvowel = Unicode.normalize("εἰσῄα", :NFKC) |> rmaccents
-    divided = PolytonicGreek.splitshortvowelvowel(longvowel)
+    divided = PolytonicGreek.splitlongvowelvowel(longvowel)
     @test divided == "δε ομαι"
 end
 

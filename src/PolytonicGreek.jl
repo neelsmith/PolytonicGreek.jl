@@ -9,6 +9,7 @@ export showcps
 export rmaccents, syllabify
 
 include("ortho.jl")
+include("constants.jl")
 include("accentuate.jl")
 include("accentdicts.jl")
 include("syllabify.jl")
