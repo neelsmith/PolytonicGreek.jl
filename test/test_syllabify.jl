@@ -1,3 +1,9 @@
+@testset "Test splitting on morpheme boundary" begin
+    morph = Unicode.normalize("εἰσ#ῄα", :NFKC) |> rmaccents
+    divided = PolytonicGreek.splitmorphemeboundary(morph)
+    @test divided == "εἰσ ῃα"
+end
+
 
 @testset "Test splitting on diaeresis" begin
     diaeresis = Unicode.normalize("προΐστημι", :NFKC) |> rmaccents
@@ -49,7 +55,7 @@ end
 
 @testset "Test splitting on double consonant" begin
     doubled = Unicode.normalize("καταβάλλω", :NFKC) |> rmaccents
-    divided = PolytonicGreek.splitdoubleconsonant(doubled)
+    divided = PolytonicGreek.splitdoubleconsonants(doubled)
     @test divided == "καταβαλ λω"
 end
 
@@ -63,23 +69,43 @@ end
 @testset "Test splitting VCV" begin
     vcv = Unicode.normalize("οὐδέποτε", :NFKC) |> rmaccents
     divided = PolytonicGreek.splitvcv(vcv)
-    @test divided == "οὐ δεπο τε"
+    # This is OK:
+    # we need a second pass to get full syllabification
+    @test divided == "οὐ δεπο τε" 
+
+    diph = Unicode.normalize("εἰσῄα", :NFKC) |> rmaccents
+    divideddiph = PolytonicGreek.splitvcv(diph)
+    #@test divideddiph == []
 end
 
 
-#οὐδέποτε
-#καταβαλλω
-# εωρακυια
-#δεδιεναι
-#=
+
+
 @testset "Test syllabification" begin
+    @test syllabify("προΐστημι")== ["προ","ϊ","στη","μι"]
+    @test syllabify("ἀναμιμνησκόμενος") == ["ἀ","να","μι","μνη","σκο","με","νος"]
+    @test syllabify("ἄνδρασι") == ["ἀν","δρα","σι"]
+    @test syllabify("κελεύει") == ["κε","λευ","ει"]
+    @test syllabify("οἰκίαις") == ["οἰ","κι", "αις"]
+    @test syllabify("δέομαι") == ["δε","ο","μαι"]
+    @test syllabify("θύειν") == ["θυ","ειν"]
+    @test syllabify("καταβάλλω") == ["κα","τα","βαλ","λω"]
+    @test syllabify("οὐδέποτε") == ["οὐ","δε","πο","τε"]
+    @test syllabify("ποιησαίμην") == ["ποι","η","σαι","μην"]
+end
+
+@testset "Support addition of morphological boundary markers in syllabification" begin
+    @test syllabify("εἰσ#ῄα") == ["εἰσ","ῃ","α"]
+    @test syllabify("κατ#αισχύνουσι") == [ "κατ", "αι","σχυ","νου","σι"]
+end
+    #=
     @test syllabify("ὀΐω") == ["ὀ", "ϊ", "ω" ]
     @test syllabify("λίμνη") == ["λι", "μνη"]
     @test syllabify("κελεύει") == ["κε", "λευ", "ει"]
     @test syllabify("οἰκίαις") == ["οἰ", "κι","αις"]
-    @test syllabify("ποιησαίμην") == ["ποι","η","σαι","μην"]
+    
 
-    @test syllabify("ἀναμιμνησκόμενος") == []
+
 
     @test syllabify("ἔργμα") == ["ἐρ", "γμα"]
     @test syllabify("ποῖος") == ["ποι", "ος"]
@@ -87,8 +113,13 @@ end
     @test syllabify("ὀίω") == ["ὀ", "ϊ", "ω" ]
     @test syllabify("αἴει") == ["αἰ"    ,"ει"]
     s = "προΐστημι"
-end
+    #οὐδέποτε
+#καταβαλλω
+# εωρακυια
+#δεδιεναι
 =#
+
+
 #=
     longs = """
 περὶ πολλοῦ ἂν ποιησαίμην, ὦ ἄνδρες, 

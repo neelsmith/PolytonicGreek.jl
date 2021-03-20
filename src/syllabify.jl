@@ -11,6 +11,14 @@ Smyth:
 - 
 =#
 
+
+"""Syllabification respects morpheme boundaries.
+
+"""
+function splitmorphemeboundary(s)
+    replace(s, "#" => " ")
+end
+
 """Diaeresis starts a new syllable.
 
 προΐστημι breaks as "προ ϊστημι"
@@ -20,9 +28,6 @@ function splitdiaeresis(s)
     re = Regex("([$DIAERESES])")
     replace(s, re => s" \1") 
 end
-
-
-
 
 """Mu+nu stay together.
 
@@ -96,9 +101,8 @@ end
 
 καταβάλλω splits as "καταβαλ λω"
 """
-function splitdoubleconsonant(s)
-    re = Regex("([$CONSONANTS]){2}")
-    replace(s, re => s"\1 \1")
+function splitdoubleconsonants(s)
+    replace(s, r"([βγδζθκλμνξπρστφχψ])(?=\1+)" => s"\1 ")
 end
 
 
@@ -120,6 +124,7 @@ end
 function syllabify(s)
     Unicode.normalize(s, :NFKC) |>
     rmaccents  |>
+    splitmorphemeboundary |>
     splitdiaeresis |> 
     splitmunu  |> 
     splitliqcons |> 
@@ -128,7 +133,8 @@ function syllabify(s)
     splitshortvowelvowel |> 
     splitlongvowelvowel |> 
     splitupsilonvowel |> 
-    splitdoubleconsonant |> 
+    splitdoubleconsonants |> 
+    splitconsonantcluster |>
     splitvcv |>   splitvcv |> # catch overlap
     split
 end
