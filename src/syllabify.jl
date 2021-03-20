@@ -87,13 +87,14 @@ function splitlongvowelvowel(s)
 end
 
 
-"""Split between upsilon and a following vowel.
+"""Split between upsilon and a following vowel other than iota.
 
 θύειν splits as "θυ ειν"
 
 """
 function splitupsilonvowel(s)
-    re = Regex("υ([$VOWELS])")
+    upsilonbreakers = "αεουηωᾳῃῳ"
+    re = Regex("υ([$upsilonbreakers])")
     replace(s, re => s"υ \1")
 end
 

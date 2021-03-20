@@ -98,10 +98,8 @@ end
     @test syllabify("ὀίω") == ["ὀι", "ω" ]
     @test syllabify("#γνώμην") == ["γνω", "μην"]
     @test syllabify("δεδιέναι") == ["δε","δι","ε","ναι"]
-    # Still fails:
-    #@test syllabify("ὀΐω") == ["ὀ", "ϊ", "ω" ]
-    # Missing diphthong
-    # ἑωρακυῖα
+    @test syllabify("ὀΐω") == ["ὀ", "ϊ", "ω" ]
+    @test syllabify("ἑωρακυῖα") == ["ἑ", "ω", "ρα", "κυι", "α"]
 end
 
 @testset "Support addition of morphological boundary markers in syllabification" begin
