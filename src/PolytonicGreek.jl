@@ -3,10 +3,12 @@ module PolytonicGreek
 using Documenter, DocStringExtensions
 using Orthography, Unicode
 
-export LiteraryGreekOrthography, AccentPlacement
+export LiteraryGreekOrthography 
 export literaryGreek, tokenizeLiteraryGreek
 export showcps
-export rmaccents, syllabify
+export rmaccents, flipaccent, tokenaccent
+export syllabify
+export accentsyllable, accentword
 
 include("ortho.jl")
 include("constants.jl")
