@@ -113,3 +113,4 @@ function sortWords(words)
 	sorted = sort(strippedpairs)
 	map(pr -> pr[2], sorted)
 end
+
