@@ -77,14 +77,48 @@ end
 function addcircumflex(vowel::AbstractString)
     dict = Dict(
         [
-        "α" => "ᾶ"
+            "α" => "ᾶ",
+            "ι" => "ῖ",
+            "υ" => "ῦ",
+            "η" => "ῆ",
+            "ω" => "ῶ",
+    
+            "ἀ" => "ἆ",
+            "ἰ" => "ἶ",
+            "ὐ" => "ὖ",
+            "ἠ" => "ἦ",
+            "ὤ" => "ὦ",
+    
+            "ἁ" => "ἇ",
+            "ἱ" => "ἷ",
+            "ὑ" => "ὗ",
+            "ἡ" => "ἧ",
+            "ὡ" => "ὧ", 
+    
+            # iota subs
+            "ᾳ" => "ᾷ",
+            "ῃ" => "ῇ",
+            "ῳ" => "ῷ",
+    
+            "ᾀ" => "ᾆ",
+            "ᾐ" => "ᾖ",
+            "ᾠ" => "ᾦ",
+    
+            "ᾁ" => "ᾇ",
+            "ᾑ" => "ᾗ",
+            "ᾡ" => "ᾧ", 
+    
+            # diaereses
+            "ϊ" => "ῗ",
+            "ϋ" => "ῧ"
+    
         ]
     )
 
     if vowel in keys(dict)
         dict[vowel]
     else
-        @warn("addacute: can't add acute accent to vowel $vowel")
+        @warn("addcircumflex: can't add circumflex accent to vowel $vowel")
         nothing
     end
 end
