@@ -223,7 +223,6 @@ julia> PolytonicGreek.accentsyllable("τα", :ACUTE)
 julia> PolytonicGreek.accentsyllable("ᾀ", :ACUTE)
 "ᾄ"
 ```
-
 """
 function accentsyllable(syll::AbstractString, accent::Symbol)
     # Check that only one syllable
@@ -245,31 +244,64 @@ function accentsyllable(syll::AbstractString, accent::Symbol)
     end
 end
 
-function  accentword(wrd::AbstractString, placement::Symbol)
-    if placement == :PENULT
-        sylls = syllabify(wrd)
-        #=
-        must be 2 sylls or more
-        if ultima is long, then acute
-        else if penult is long, CIRCUMFLEX
-        else acute
-        end
-        =#
 
-        wrd
-    elseif placement == :RECESSIVE
-        sylls = syllabify(wrd)
-         #=
-        must be 2 sylls or more
-        if 2 sylls accentword(:PENULT)
+
+"""
+    accentword(wrd::AbstractString, placement::Symbol)
+
+Accent word according to specified system of accent placement.
+`wrd` is a string value representing a single lexical token.
+`placement` is one of `:RECESSIVE` for recessive accent 
+or `:PENULT` for persistent accent on the penultimate syllable.
+Note that it is not possible to accent the ultima correctly without
+additional morphological information beyond the string value of the token.
+
+Examples:
+```julia-repl
+
+```
+"""
+function  accentword(wrd::AbstractString, placement::Symbol)
+    sylls = syllabify(wrd)
+    ult = ultima(wrd)
+    if placement == :PENULT    
+        if length(sylls) < 2
+            @warn("accentword: cannot accent $wrd on penult since it does not have two syllables.")
+            nothing
         else
-        if ultima is long, then acute on antepenult
-            ....
-        else if penult is long, CIRCUMFLEX
-        else acute
+            pnlt = penult(wrd)
+            accentedsyll =  ""
+            if longsyllable(ult)
+                accentedsyll = accentsyllable(pnlt, :ACUTE)
+            else
+                if longsyllable(pnlt)
+                    accentedsyll = accentsyllable(pnlt, :CIRCUMFLEX)
+                else
+                    accentedsyll = accentsyllable(pnlt, :ACUTE)
+                end
+            end
+            sylls[end - 1] = accentedsyll
+            join(sylls,"")
         end
-        =#
-        wrd
+         
+    elseif placement == :RECESSIVE
+        if length(sylls) < 2
+            @warn("accentword: string $wrd has fewer than 2 syllables.")
+            nothing
+        else
+            if length(sylls) == 2
+                accentword(wrd, :PENULT)
+
+            elseif longsyllable(ult)
+                accentword(wrd, :PENULT)
+
+            else
+                ante = antepenult(wrd)
+                sylls[end - 2] = accentsyllable(ante, :ACUTE)
+                join(sylls, "")
+            end
+        end
+     
     else
         @warn("accentword: value of placement was neither :PENULT nor :RECESSIVE.")
     end
@@ -278,6 +310,41 @@ end
 
 ######################################
 # Functions private to package:
+
+
+function ultima(s)
+    sylls = syllabify(s)
+    if isempty(sylls)
+        @warn("ultima: no syllables in string $s")
+        nothing
+    else
+        sylls[end]
+    end
+end
+
+function penult(s)
+    sylls = syllabify(s)
+    if length(sylls) < 2
+        @warn("penult: cannot extract penult from word with < 2 syllables: $s")
+        nothing
+    else
+        sylls[end - 1]
+    end
+end
+
+"""
+NB: Rms accent since they're not relevant to syllables.
+"""
+function antepenult(s)
+    sylls = syllabify(s)
+    if length(sylls) < 3
+        @warn("penult: cannot extract antepenult from word with < 3 syllables: $s")
+        nothing
+    else
+        sylls[end - 2]
+    end
+end
+
 
 """
     flipaccent(s)
@@ -322,7 +389,6 @@ function longsyllable(syll::AbstractString)
         vowelsonly = replace(syll, re => "")
         diphlist = split(DIPHTHONGS, "|") 
         longies = split(LONGVOWELS,"")
-
         #println("VOWELS: ", vowelsonly)
         #println("DIPH? ", (vowelsonly in diphlist))
         #println("LONG BY N ATURE? ", (vowelsonly in longies))

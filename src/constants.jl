@@ -1,6 +1,6 @@
 
 # Consonants
-const CONSONANTS= "βγδζθκλμνξπρστφχψ"
+const CONSONANTS= "βγδζθκλμνξπρστφχψς"
 const NONLIQUIDS = "βγδζθκλξπστφχψ"
 const LIQUIDS = "μνρλ"
 

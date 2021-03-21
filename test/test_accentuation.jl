@@ -28,4 +28,13 @@ end
 end
 
 @testset "Test adding accents to words" begin
+    @test accentword("ἀνθρωπος", :RECESSIVE) == "ἄνθρωπος"
+    @test accentword("ἀνθρωπους", :RECESSIVE) == "ἀνθρώπους"
+    @test accentword("δωρον", :PENULT) == "δῶρον"
+    @test accentword("δωρῳ", :PENULT) == "δώρῳ"
+end
+
+@testset "Test extracting syllables from words" begin
+    @test PolytonicGreek.accentsyllable("ἄνθρωπος") == "ἀν"
+    @test PolytonicGreek.penult("ἄνθρωπος") ==  "θρω"
 end
