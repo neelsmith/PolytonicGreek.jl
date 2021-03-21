@@ -22,6 +22,13 @@ end
     addacute(vowel::AbstractString
 
 Add an acute accent to a single vowel or diphthong.
+
+```julia-repl
+julia> PolytonicGreek.addacute("ᾀ")
+"ᾄ"
+julia> PolytonicGreek.addacute("τα")
+┌ Warning: addacute: can't add acute accent to vowel τα
+```
 """
 function addacute(vowel::AbstractString)
     dict = Dict(
@@ -107,6 +114,20 @@ function addacute(vowel::AbstractString)
     end
 end
 
+
+"""
+    addcircumflex(vowel::AbstractString)
+
+Add a circumflex accent to a single vowel or diphthong
+
+Examples:
+```julia-repl
+julia> PolytonicGreek.addcircumflex("ᾀ")
+"ᾆ"
+julia> PolytonicGreek.addcircumflex("τα")
+┌ Warning: addcircumflex: can't add circumflex accent to vowel τα
+```
+"""
 function addcircumflex(vowel::AbstractString)
     dict = Dict(
         [
@@ -186,7 +207,24 @@ function addcircumflex(vowel::AbstractString)
     end
 end
 
+"""
+    accentsyllable(syll::AbstractString, accent::Symbol)
 
+Add specified accent to a single syllable.  
+`syll` is a string value for a single syllable.
+`accent` is either `:ACUTE` or `:CIRCUMFLEX`.  The
+function returns `nothing` for any other symble for accent.
+
+```julia-repl
+julia> PolytonicGreek.accentsyllable("των", :CIRCUMFLEX)
+"τῶν"
+julia> PolytonicGreek.accentsyllable("τα", :ACUTE)
+"τά"
+julia> PolytonicGreek.accentsyllable("ᾀ", :ACUTE)
+"ᾄ"
+```
+
+"""
 function accentsyllable(syll::AbstractString, accent::Symbol)
     # Check that only one syllable
     sylls = syllabify(syll)
@@ -194,7 +232,7 @@ function accentsyllable(syll::AbstractString, accent::Symbol)
         @warn("accentsyllable: string $syll is more than one syllable.")
         nothing
     else
-        re = Regex("[CONSONANTS]")
+        re = Regex("[$CONSONANTS]")
         vowelsonly = replace(syll, re => "" )
 
         if accent == :ACUTE

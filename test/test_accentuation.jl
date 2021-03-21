@@ -22,7 +22,9 @@ end
 
 
 @testset "Test adding accents to syllables" begin
-    
+    @test PolytonicGreek.accentsyllable("των", :CIRCUMFLEX) == "τῶν"
+    @test PolytonicGreek.accentsyllable("τα", :ACUTE) == "τά"
+    @test PolytonicGreek.accentsyllable("ᾀ", :ACUTE) == "ᾄ"
 end
 
 @testset "Test adding accents to words" begin
