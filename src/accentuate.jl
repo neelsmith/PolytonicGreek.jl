@@ -244,6 +244,33 @@ function accentsyllable(syll::AbstractString, accent::Symbol)
     end
 end
 
+function accentultima(wrd::AbstractString, accent::Symbol)
+    sylls = syllabify(wrd)
+    sylls[end] = accentsyllable(ultima(wrd), accent)
+    join(sylls,"")
+end
+
+function accentpenult(wrd::AbstractString, accent::Symbol)
+    sylls = syllabify(wrd)
+    if length(sylls) < 2
+        @warn("accentpenult: can't accent word with fewer than two syllables $wrd")
+        nothing
+    else
+        sylls[end - 1] = accentsyllable(penult(wrd), accent)
+        join(sylls,"")
+    end
+end
+
+function accentantepenult(wrd::AbstractString)
+    sylls = syllabify(wrd)
+    if length(sylls) < 3
+        @warn("accentantepenult: can't accent word with fewer than three syllables $wrd")
+        nothing
+    else
+        sylls[end - 2] = accentsyllable(antepenult(wrd), :ACUTE)
+        join(sylls,"")
+    end
+end
 
 
 """
@@ -270,18 +297,11 @@ function  accentword(wrd::AbstractString, placement::Symbol)
             nothing
         else
             pnlt = penult(wrd)
-            accentedsyll =  ""
-            if longsyllable(ult)
-                accentedsyll = accentsyllable(pnlt, :ACUTE)
+            if longsyllable(pntl) && shortsyllable(ult)
+                accentpenult(wrd, :CIRCUMFLEX)
             else
-                if longsyllable(pnlt)
-                    accentedsyll = accentsyllable(pnlt, :CIRCUMFLEX)
-                else
-                    accentedsyll = accentsyllable(pnlt, :ACUTE)
-                end
+                accentpenult(wrd, :ACUTE)
             end
-            sylls[end - 1] = accentedsyll
-            join(sylls,"")
         end
          
     elseif placement == :RECESSIVE
@@ -293,12 +313,10 @@ function  accentword(wrd::AbstractString, placement::Symbol)
                 accentword(wrd, :PENULT)
 
             elseif longsyllable(ult)
-                accentword(wrd, :PENULT)
+                accentultima(wrd, :ACUTE)
 
             else
-                ante = antepenult(wrd)
-                sylls[end - 2] = accentsyllable(ante, :ACUTE)
-                join(sylls, "")
+                accentantepenult(wrd)
             end
         end
      
@@ -308,8 +326,6 @@ function  accentword(wrd::AbstractString, placement::Symbol)
 end
 
 
-######################################
-# Functions private to package:
 
 
 function ultima(s)
