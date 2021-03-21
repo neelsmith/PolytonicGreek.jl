@@ -4,3 +4,7 @@
     expected = "πολλα"
     @test rmaccents(s) == expected
 end
+
+@test "Test adding accents" begin
+    
+end
