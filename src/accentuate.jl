@@ -134,7 +134,7 @@ function addcircumflex(vowel::AbstractString)
             "ῳ" => "ῷ",
     
             "ᾀ" => "ᾆ",
-            "ᾐ" => ᾖ,
+            "ᾐ" => "ᾖ",
             "ᾠ" => "ᾦ",
     
             "ᾁ" => "ᾇ",
@@ -143,7 +143,7 @@ function addcircumflex(vowel::AbstractString)
     
             # diaereses
             "ϊ" => "ῗ",
-            "ϋ" => "ῧ"
+            "ϋ" => "ῧ",
     
             # diphthongs
             "αι" => "αῖ",
