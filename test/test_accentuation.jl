@@ -38,3 +38,9 @@ end
     @test PolytonicGreek.accentsyllable("ἄνθρωπος") == "ἀν"
     @test PolytonicGreek.penult("ἄνθρωπος") ==  "θρω"
 end
+
+@testset "Test adding accent to specified syllable of word" begin
+    @test accentpenult("γνωμη", :ACUTE) == "γνώμη"
+    @test accentultima("γνωμων", :CIRCUMFLEX) == "γνωμῶν"
+    @test accentantepenult("ἐκελευον") == "ἐκέλευον"
+end

@@ -5,10 +5,10 @@ using Orthography, Unicode
 
 export LiteraryGreekOrthography 
 export literaryGreek, tokenizeLiteraryGreek
-export showcps
 export rmaccents, flipaccent, tokenaccent
 export syllabify
 export accentsyllable, accentword
+export accentpenult, accentantepenult, accentultima
 
 include("ortho.jl")
 include("constants.jl")
