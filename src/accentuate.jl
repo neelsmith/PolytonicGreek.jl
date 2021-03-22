@@ -301,15 +301,21 @@ end
 Convert grave accent to acute.    
 """
 function flipaccent(s)
-    sylls = syllabify(s)
-    vowels = vowelsonly(sylls[end])
     dict = flipdict()
-    if vowels in keys(dict)
-        sylls[end] = replace(s, vowels => dict[s])
-        join(sylls,"")
-    else
-        s
+    modified = []
+    for c in nfkc(s)
+        #println(string(c))
+        #showcps(string(c))
+        #println("Key? ", string(c) in keys(dict))
+        if string(c) in keys(dict)
+            flipped = dict[string(c)]
+            #println("Flipped ", flipped)
+            push!(modified, flipped)
+        else
+            push!(modified, string(c)) 
+        end
     end
+    join(modified,"")
 end 
 
 

@@ -46,9 +46,9 @@ end
 end
 
 @testset "Test flipping grave to acute" begin
-    @test PolytonicGreek.flipaccent("τῶν") == "τῶν"
-    @test PolytonicGreek.flipaccent("τά") == "τά"
-    @test PolytonicGreek.flipaccent("τὰ") == "τά"
+    @test PolytonicGreek.flipaccent("τὰ") == nfkc("τά")
+    @test PolytonicGreek.flipaccent("τῶν") == nfkc("τῶν")
+    @test PolytonicGreek.flipaccent("τά") == nfkc("τά")
 end
 
 @testset "Test stripping consonants" begin
@@ -66,5 +66,5 @@ end
 
 @testset "Test normalizing word string to morphologically normal form" begin
     @test PolytonicGreek.tokenform("ἄνθρωπός") == "ἄνθρωπος"
-
+    @test PolytonicGreek.tokenform("ὁδὸν") == "ὁδόν"
 end
