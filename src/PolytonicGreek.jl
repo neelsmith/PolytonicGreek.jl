@@ -9,6 +9,7 @@ export rmaccents, flipaccent, tokenaccent
 export syllabify
 export accentsyllable, accentword
 export accentpenult, accentantepenult, accentultima
+export nfkc
 
 include("ortho.jl")
 include("constants.jl")

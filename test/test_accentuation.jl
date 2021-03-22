@@ -35,7 +35,7 @@ end
 end
 
 @testset "Test extracting syllables from words" begin
-    @test PolytonicGreek.accentsyllable("ἄνθρωπος") == "ἀν"
+    @test PolytonicGreek.antepenult("ἄνθρωπος") == "ἀν"
     @test PolytonicGreek.penult("ἄνθρωπος") ==  "θρω"
 end
 
@@ -43,4 +43,28 @@ end
     @test accentpenult("γνωμη", :ACUTE) == "γνώμη"
     @test accentultima("γνωμων", :CIRCUMFLEX) == "γνωμῶν"
     @test accentantepenult("ἐκελευον") == "ἐκέλευον"
+end
+
+@testset "Test flipping grave to acute" begin
+    @test PolytonicGreek.flipaccent("τῶν") == "τῶν"
+    @test PolytonicGreek.flipaccent("τά") == "τά"
+    @test PolytonicGreek.flipaccent("τὰ") == "τά"
+end
+
+@testset "Test stripping consonants" begin
+    @test PolytonicGreek.vowelsonly("τῶν") == "ῶ"
+end
+
+@testset "Test counting accents" begin
+    @test PolytonicGreek.countaccents("ό") == 1
+    @test PolytonicGreek.countaccents("ἄνθρωπός") == 2
+end
+
+@testset "Test stripping enclitic" begin
+    @test PolytonicGreek.stripenclitic("ἄνθρωπός") == "ἄνθρωπος"
+end
+
+@testset "Test normalizing word string to morphologically normal form" begin
+    @test PolytonicGreek.tokenform("ἄνθρωπός") == "ἄνθρωπος"
+
 end

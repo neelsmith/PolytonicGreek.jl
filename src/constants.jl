@@ -1,7 +1,7 @@
 
 # Consonants
 const CONSONANTS= "βγδζθκλμνξπρστφχψς"
-const NONLIQUIDS = "βγδζθκλξπστφχψ"
+const NONLIQUIDS = "βγδζθκλξπστφχψς"
 const LIQUIDS = "μνρλ"
 
 # Vowel classes:

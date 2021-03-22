@@ -7,7 +7,7 @@ Remove all accent characters from `s`.
 """
 function rmaccents(s::AbstractString)
     stripped = []
-    dict = accentdict()
+    dict = accentstripdict()
     for c in Unicode.normalize(s, :NFKC)
         if c in keys(dict)
             push!(stripped, dict[c])
@@ -31,81 +31,7 @@ julia> PolytonicGreek.addacute("τα")
 ```
 """
 function addacute(vowel::AbstractString)
-    dict = Dict(
-        [
-            "α" => "ά",
-            "ε" => "έ",
-            "ι" => "ί",
-            "ο" => "ό",
-            "υ" => "ύ",
-            "η" => "ή",
-            "ω" => "ώ",
-    
-            "ἀ" => "ἄ",
-            "ἐ" => "ἔ",
-            "ἰ" => "ἴ",
-            "ὀ" => "ὄ",
-            "ὐ" => "ὔ",
-            "ἠ" => "ἤ",
-            "ὤ" => "ὤ",
-    
-            "ἁ" => "ἅ",
-            "ἑ" => "ἕ",
-            "ἱ" => "ἵ",
-            "ὁ" => "ὅ",
-            "ὑ" => "ὕ",
-            "ἡ" => "ἥ",
-            "ὡ" => "ὥ", 
-    
-            # iota subs
-            "ᾳ" => "ᾴ",
-            "ῃ" => "ῄ",
-            "ῳ" => "ῴ",
-    
-            "ᾀ" => "ᾄ",
-            "ᾐ" => "ᾔ",
-            "ᾠ" => "ᾤ",
-    
-            "ᾁ" => "ᾅ",
-            "ᾑ" => "ᾕ",
-            "ᾡ" => "ᾥ", 
-    
-            # diaereses
-            "ϊ" => "ΐ",
-            "ϋ" => "ΰ",
-    
-            # diphthongs
-            "αι" => "αί",
-            "ει" => "εί",
-            "οι" => "οί",
-            "υι" => "υί",
-            "αυ" => "αύ",
-            "ευ" => "εύ",
-            "ου" => "ού",
-            "ηυ" => "ηύ",
-            "ωυ" => "ωύ",
-            "υι" => "υί",
-            "αἰ" => "αἴ",
-            "εἰ" => "εἴ",
-            "οἰ" => "οἴ",
-            "αὐ" => "αὔ",
-            "εὐ" => "εὔ",
-            "οὐ" => "οὔ",
-            "ηὐ" => "ηὔ",
-            "ωὐ" => "ωὔ",
-            "υἰ" => "υἴ",
-            "αἱ" => "αἵ",
-            "εἱ" => "εἵ",
-            "οἱ" => "οἵ",
-            "αὑ" => "αὕ",
-            "εὑ" => "εὕ",
-            "οὑ" => "οὕ",
-            "ηὑ" => "ηὕ",
-            "ωὑ" => "ωὕ",
-            "υἱ" => "υἵ"
-        ]
-    )
-
+    dict = acutedict()
     if vowel in keys(dict)
         dict[vowel]
     else
@@ -129,76 +55,7 @@ julia> PolytonicGreek.addcircumflex("τα")
 ```
 """
 function addcircumflex(vowel::AbstractString)
-    dict = Dict(
-        [
-            "α" => "ᾶ",
-            "ι" => "ῖ",
-            "υ" => "ῦ",
-            "η" => "ῆ",
-            "ω" => "ῶ",
-    
-            "ἀ" => "ἆ",
-            "ἰ" => "ἶ",
-            "ὐ" => "ὖ",
-            "ἠ" => "ἦ",
-            "ὤ" => "ὦ",
-    
-            "ἁ" => "ἇ",
-            "ἱ" => "ἷ",
-            "ὑ" => "ὗ",
-            "ἡ" => "ἧ",
-            "ὡ" => "ὧ", 
-    
-            # iota subs
-            "ᾳ" => "ᾷ",
-            "ῃ" => "ῇ",
-            "ῳ" => "ῷ",
-    
-            "ᾀ" => "ᾆ",
-            "ᾐ" => "ᾖ",
-            "ᾠ" => "ᾦ",
-    
-            "ᾁ" => "ᾇ",
-            "ᾑ" => "ᾗ",
-            "ᾡ" => "ᾧ", 
-    
-            # diaereses
-            "ϊ" => "ῗ",
-            "ϋ" => "ῧ",
-    
-            # diphthongs
-            "αι" => "αῖ",
-            "ει" => "εῖ",
-            "οι" => "οῖ",
-            "υι" => "υῖ",
-            "αυ" => "αῦ",
-            "ευ" => "εῦ",
-            "ου" => "οῦ",
-            "ηυ" => "ηῦ",
-            "ωυ" => "ωῦ",
-            "υι" => "υῖ",
-            "αἰ" => "αἶ",
-            "εἰ" => "εἶ",
-            "οἰ" => "οἶ",
-            "αὐ" => "αὖ",
-            "εὐ" => "εὖ",
-            "οὐ" => "οὖ",
-            "ηὐ" => "ηὖ",
-            "ωὐ" => "ωὖ",
-            "υἰ" => "υἶ",
-            "αἱ" => "αἷ",
-            "εἱ" => "εἷ",
-            "οἱ" => "οἷ",
-            "αὑ" => "αὗ",
-            "εὑ" => "εὗ",
-            "οὑ" => "οὗ",
-            "ηὑ" => "ηὗ",
-            "ωὑ" => "ωὗ",
-            "υἱ" => "υἷ"
-    
-        ]
-    )
-
+    dict = circumflexdict() 
     if vowel in keys(dict)
         dict[vowel]
     else
@@ -231,13 +88,12 @@ function accentsyllable(syll::AbstractString, accent::Symbol)
         @warn("accentsyllable: string $syll is more than one syllable.")
         nothing
     else
-        re = Regex("[$CONSONANTS]")
-        vowelsonly = replace(syll, re => "" )
+        vowels = vowelsonly(syll)
 
         if accent == :ACUTE
-            replace(syll, vowelsonly => addacute(vowelsonly))
+            replace(syll, vowels => addacute(vowels))
         elseif accent == :CIRCUMFLEX
-            replace(syll, vowelsonly => addcircumflex(vowelsonly))
+            replace(syll, vowels => addcircumflex(vowels))
         else
             @warn("accentsyllable: value of accent was neither :ACUTE nor :CIRCUMFLEX.")
         end
@@ -297,7 +153,7 @@ function  accentword(wrd::AbstractString, placement::Symbol)
             nothing
         else
             pnlt = penult(wrd)
-            if longsyllable(pntl) && shortsyllable(ult)
+            if longsyllable(pnlt) && shortsyllable(ult)
                 accentpenult(wrd, :CIRCUMFLEX)
             else
                 accentpenult(wrd, :ACUTE)
@@ -313,7 +169,7 @@ function  accentword(wrd::AbstractString, placement::Symbol)
                 accentword(wrd, :PENULT)
 
             elseif longsyllable(ult)
-                accentultima(wrd, :ACUTE)
+                accentpenult(wrd, :ACUTE)
 
             else
                 accentantepenult(wrd)
@@ -362,21 +218,9 @@ function antepenult(s)
 end
 
 
-"""
-    flipaccent(s)
 
-Convert grave accent to acute.    
-"""
-function flipaccent(s)
-    nothing
-end 
 
-"""
-    tokenaccent(s::AbstractString)
-"""
-function tokenaccent(s::AbstractString)
-    stripenclitic(s) |> flipaccent
-end
+
 
 
 """
@@ -401,14 +245,10 @@ function longsyllable(syll::AbstractString)
         @warn("longsyllable: string $syll includes more than syllable.")
         nothing
     else
-        re = Regex("[$CONSONANTS]")
-        vowelsonly = replace(syll, re => "")
+        vowels = vowelsonly(syll)
         diphlist = split(DIPHTHONGS, "|") 
         longies = split(LONGVOWELS,"")
-        #println("VOWELS: ", vowelsonly)
-        #println("DIPH? ", (vowelsonly in diphlist))
-        #println("LONG BY N ATURE? ", (vowelsonly in longies))
-        vowelsonly in diphlist || vowelsonly in longies
+        vowels in diphlist || vowels in longies
     end
 end
 
@@ -454,12 +294,91 @@ function includesdiphthong(s::AbstractString)
     false
 end
 
+
+"""
+    flipaccent(s)
+
+Convert grave accent to acute.    
+"""
+function flipaccent(s)
+    sylls = syllabify(s)
+    vowels = vowelsonly(sylls[end])
+    dict = flipdict()
+    if vowels in keys(dict)
+        sylls[end] = replace(s, vowels => dict[s])
+        join(sylls,"")
+    else
+        s
+    end
+end 
+
+
+"""
+    vowelsonly(s::AbstractString)
+
+Remove all consonants from `s`.
+
+Example:
+
+```julia-repl
+julia> PolytonicGreek.vowelsonly("τῶν")
+"ῶ"
+```
+"""
+function vowelsonly(s::AbstractString)
+    re = Regex("[$CONSONANTS]")
+    replace(s, re => "")
+end
+
+"""
+    tokenaccent(s::AbstractString)
+"""
+function tokenform(s::AbstractString)
+    stripenclitic(s) |> flipaccent
+end
+
+"""
+
+
+"""
+function countaccents(s::AbstractString)
+    normed = Unicode.normalize(s, :NFKC)
+    accents = 0
+    repertoire = allaccents()
+    for c in normed
+        if string(c) in repertoire
+            accents = accents + 1
+        end
+    end
+    accents
+end
+
+
 """
     stripenclitic(s::AbstractString)
 
 Remove any second enclitic accent from `s`.
 """
 function stripenclitic(s::AbstractString)
-    nothing
+    normed = Unicode.normalize(s, :NFKC)
+    dict = accentstripdict()
+    seen = 0
+    repertoire = allaccents()
+    modified = []
+    for c in normed
+        if string(c) in repertoire
+            seen = seen + 1
+            if seen == 2
+                push!(modified, dict[c])
+            elseif seen > 2
+                @warn("stripenclitic: too many accents in $s")
+                return nothing
+            else
+                push!(modified, c)
+            end
+        else
+            push!(modified, c)
+        end
+    end
+    join(modified,"")
 end
-
