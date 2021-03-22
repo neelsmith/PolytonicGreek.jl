@@ -1,3 +1,6 @@
+function nfkc(s)
+    Unicode.normalize(s, :NFKC)
+end
 
 function showcps(s)
     println("As received:")
