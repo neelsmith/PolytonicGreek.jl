@@ -1,11 +1,15 @@
+# Run this from repository root, e.g. with
+# 
+#    julia --project=docs/ docs/make.jl
+#
 using Pkg
-pkg"activate .."
-push!(LOAD_PATH,"../src/")
+Pkg.activate(".")
+Pkg.instantiate()
+#push!(LOAD_PATH,"../src/")
 
 
 using Documenter, DocStringExtensions
 using PolytonicGreek
-
 
 makedocs(
     sitename = "PolytonicGreek.jl",
