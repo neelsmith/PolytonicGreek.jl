@@ -14,14 +14,24 @@ Smyth:
 
 
 
-"""Syllabification respects morpheme boundaries.
+"""$(SIGNATURES)
 
+Respect explicitly indicated morpheme boundaries.
+
+# Example
+```jldoctest
+PolytonicGreek.splitmorphemeboundary("εἰσ#ῄα")
+"εἰσ ῄα"
+```
 """
 function splitmorphemeboundary(s)
     replace(s, "#" => " ")
 end
 
-"""Diaeresis starts a new syllable.
+"""
+Diaeresis starts a new syllable.
+
+$(SIGNATURES)
 
 προΐστημι breaks as "προ ϊστημι"
 
@@ -47,10 +57,15 @@ function splitliqcons(s)
 end
 
 
-"""Split between a diphthong and following vowel.
+"""$(SIGNATURES)
 
-κελεύει split as "κελευ ει"
+Split between a diphthong and following vowel.
 
+# Example
+```jldoctest
+PolytonicGreek.splitdiphthongvowel("κελεύει")
+"κελευ ει"
+```
 """
 function splitdiphthongvowel(s)
     re = Regex("($DIPHTHONGS)([$VOWELS])")
@@ -122,7 +137,17 @@ function splitvcv(s)
     replace(s, re => s"\1 \2\3")
 end
 
-"""Split string `s` into an Array of strings representing syllables.
+"""$(SIGNATURES)
+
+Split string `s` into an Array of strings representing syllables.
+
+# Example
+```jldoctest
+syllables = PolytonicGreek.syllabify("κελεύει")
+join(syllables, "-")
+"κε-λευ-ει"
+```
+
 """
 function syllabify(s)
     Unicode.normalize(s, :NFKC) |>
