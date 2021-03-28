@@ -1,5 +1,3 @@
-
-
 "An orthographic system for standard orthography of printed literary Greek."
 struct LiteraryGreekOrthography <: OrthographicSystem
     codepoints
@@ -7,7 +5,11 @@ struct LiteraryGreekOrthography <: OrthographicSystem
     tokenizer
 end
 
-"Instantiate a LiteraryGreekOrthography with correct code points and token types."
+"""
+Instantiate a LiteraryGreekOrthography with correct code points and token types.
+
+$(SIGNATURES)
+"""
 function literaryGreek()
     cps = alphabetic() * " \t\n"
     ttypes = [
@@ -17,21 +19,6 @@ function literaryGreek()
     LiteraryGreekOrthography(cps, ttypes, tokenizeLiteraryGreek)
 end
 
-
-"Split off any trailing punctuation and return an Array of leading strim + trailing punctuation."
-function splitPunctuation(s::AbstractString)
-    punct = Orthography.collecttail(s, PolytonicGreek.punctuation())
-    trimmed = Orthography.trimtail(s, PolytonicGreek.punctuation())
-    filter(s -> ! isempty(s), [trimmed, punct])
-end
-
-"Tokenize a string in standard literary Greek orthography."
-function tokenizeLiteraryGreek(s::AbstractString)
-    wsdelimited = split(s)
-    depunctuated = map(s -> splitPunctuation(s), wsdelimited)
-    tknstrings = collect(Iterators.flatten(depunctuated))
-    tkns = map(t -> tokenforstring(t), tknstrings)
-end
 
 
 "Compose a string with all alphabetic characters."
@@ -56,34 +43,18 @@ function alphabetic()
     join(ranges,"")
 end
 
+
 "Compose a string with all alphabetic characters."
 function punctuation()
     ".,;:"
 end
 
-function tonoi(s::AbstractString)
-    cleaner = []
-    for c in s
-        push!(cleaner, tonoi(c))
-    end
-    cleaner
-end
 
+"""
+True if all characters in s are alphabetic.
 
-"Create correct `OrthographicToken` for a given string."
-function tokenforstring(s::AbstractString)
-    normed = Unicode.normalize(s, :NFKC)
-    if isAlphabetic(normed)
-        OrthographicToken(normed, LexicalToken())
-    elseif isPunctuation(normed)
-        OrthographicToken(normed, PunctuationToken())
-    else
-        OrthographicToken(normed, Orthography.UnanalyzedToken())
-    end
-end
-
-
-"True if all characters in s are alphabetic."
+$(SIGNATURES)    
+"""
 function isAlphabetic(s::AbstractString)
     chlist = split(s,"")
     alphas = alphabetic()
@@ -97,7 +68,11 @@ function isAlphabetic(s::AbstractString)
     !nogood
 end
 
-"True if all characters in s are puncutation."
+"""
+True if all characters in s are puncutation.
+   
+$(SIGNATURES)      
+"""
 function isPunctuation(s::AbstractString)
     chlist = split(s,"")
     puncts = punctuation()
@@ -107,10 +82,55 @@ function isPunctuation(s::AbstractString)
     !nogood
 end
 
-"Alpahbetically sort a list of words in Unicode Greek."
+"""
+Alphabetically sort a list of words in Unicode Greek.
+
+$(SIGNATURES)
+"""
 function sortWords(words)
     strippedpairs = map(wd -> ( lowercase(Unicode.normalize(wd, stripmark=true)), wd),words)
 	sorted = sort(strippedpairs)
 	map(pr -> pr[2], sorted)
 end
 
+
+"""
+Create correct OrthographicToken for a given string.
+
+$(SIGNATURES)    
+"""
+function tokenforstring(s::AbstractString)
+    normed = Unicode.normalize(s, :NFKC)
+    if isAlphabetic(normed)
+        OrthographicToken(normed, LexicalToken())
+    elseif isPunctuation(normed)
+        OrthographicToken(normed, PunctuationToken())
+    else
+        OrthographicToken(normed, Orthography.UnanalyzedToken())
+    end
+end
+
+
+
+"""
+Split off any trailing punctuation and return an Array of leading string + trailing punctuation.
+
+$(SIGNATURES)  
+"""
+function splitPunctuation(s::AbstractString)
+    punct = Orthography.collecttail(s, PolytonicGreek.punctuation())
+    trimmed = Orthography.trimtail(s, PolytonicGreek.punctuation())
+    filter(s -> ! isempty(s), [trimmed, punct])
+end
+
+"""
+Tokenize a string in standard literary Greek orthography.
+
+$(SIGNATURES)  
+"""
+function tokenizeLiteraryGreek(s::AbstractString)
+    wsdelimited = split(s)
+    depunctuated = map(s -> splitPunctuation(s), wsdelimited)
+    tknstrings = collect(Iterators.flatten(depunctuated))
+    tkns = map(t -> tokenforstring(t), tknstrings)
+end

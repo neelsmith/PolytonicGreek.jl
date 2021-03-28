@@ -40,9 +40,9 @@ end
 end
 
 @testset "Test adding accent to specified syllable of word" begin
-    @test accentpenult("γνωμη", :ACUTE) == "γνώμη"
-    @test accentultima("γνωμων", :CIRCUMFLEX) == "γνωμῶν"
-    @test accentantepenult("ἐκελευον") == "ἐκέλευον"
+    @test PolytonicGreek.accentpenult("γνωμη", :ACUTE) == "γνώμη"
+    @test PolytonicGreek.accentultima("γνωμων", :CIRCUMFLEX) == "γνωμῶν"
+    @test PolytonicGreek.accentantepenult("ἐκελευον") == "ἐκέλευον"
 end
 
 @testset "Test flipping grave to acute" begin

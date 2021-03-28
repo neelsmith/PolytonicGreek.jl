@@ -1,8 +1,14 @@
-"""
-    accentstripdict()
+"""Function B echo."""
+function funcb(s)
+    string("Greet ", s, " from file B.")
+end
 
+
+"""
 Dictionary mapping Unicode codepoints with accents to
 codepoint with accent stripped.
+
+
 
 We can't just use Unicode.normalize with stripmark flag because
 that strips breathings, iota subscripts, and diaereses as well.
@@ -106,6 +112,8 @@ function accentstripdict()
    )
 end
 
+
+"Dictionary of circumflexes"
 function circumflexdict()
     Dict(
         [
@@ -178,6 +186,7 @@ function circumflexdict()
     )
 end
 
+"Dictionary of acutes."
 function acutedict()
     Dict(
         [
@@ -256,6 +265,7 @@ function acutedict()
 end
 
 
+"Flip dictionary"
 function flipdict()
     Dict(
         [
@@ -303,6 +313,8 @@ function flipdict()
     )
 end
 
+
+"List all code points including an accent."
 function allaccents()
     acutes = acutedict() |> values |> collect
     circumflexes = circumflexdict() |> values |> collect

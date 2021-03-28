@@ -1,4 +1,9 @@
-function nfkc(s)
+"""
+    nfkc(s::AbstractString)
+
+Shorthand function to normalize string `s` to Unicode form NFKC.
+"""
+function nfkc(s::AbstractString)
     Unicode.normalize(s, :NFKC)
 end
 

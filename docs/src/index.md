@@ -1,42 +1,12 @@
-# PolytonicGreek.jl Documentation
-```@meta
-CurrentModule = PolytonicGreek
-```
-```@contents
-```
-## Types
-```@docs
-LiteraryGreekOrthography
-```
-
-## Functions
-
-### Implementing the MID orthography interface
-
-```@docs
-literaryGreek()
-alphabetic()
-punctuation()
-isAlphabetic(s::AbstractString)
-isPunctuation(s::AbstractString)
-tokenforstring(s::AbstractString)
-tokenizeLiteraryGreek(s::AbstractString)
-```
-
-### Working with accentuation and syllabification of literary Greek
-
-```@docs
-syllabify(s::AbstractString)
-accentword(wrd::AbstractString, placement::Symbol)
-accentsyllable(syll::AbstractString, accent::Symbol)
-rmaccents(s::AbstractString)
-addacute(s::AbstractString)
-addcircumflex(s::AbstractString)
-
-```
+# PolytonicGreek.jl
 
 
+*A rigorously defined orthography of polytonic ancient Greek.* 
 
-## Index
-```@index
-```
+The `PolytonicGreek` package supports working with accented ancient Greek encoded in Unicode.  It includes functions that
+
+- implement the MID Orthography interface, with semantic tokenization of text in polytonic Greek
+-  work with accents, including correct placement for recessive and persistent accent patterns
+- sort Unicode Greek strings by the logic of the Greek alphabet
+- syllabify Greek strings
+

@@ -1,8 +1,6 @@
 # Functions for manipulating accents.
 
 """
-    rmaccents(s::AbstractString
-
 Remove all accent characters from `s`.
 """
 function rmaccents(s::AbstractString)
@@ -19,8 +17,6 @@ function rmaccents(s::AbstractString)
 end
 
 """
-    addacute(vowel::AbstractString
-
 Add an acute accent to a single vowel or diphthong.
 
 ```julia-repl
@@ -42,8 +38,6 @@ end
 
 
 """
-    addcircumflex(vowel::AbstractString)
-
 Add a circumflex accent to a single vowel or diphthong
 
 Examples:
@@ -65,8 +59,6 @@ function addcircumflex(vowel::AbstractString)
 end
 
 """
-    accentsyllable(syll::AbstractString, accent::Symbol)
-
 Add specified accent to a single syllable.  
 `syll` is a string value for a single syllable.
 `accent` is either `:ACUTE` or `:CIRCUMFLEX`.  The
@@ -100,12 +92,15 @@ function accentsyllable(syll::AbstractString, accent::Symbol)
     end
 end
 
+
+"Place accent on ultima"
 function accentultima(wrd::AbstractString, accent::Symbol)
     sylls = syllabify(wrd)
     sylls[end] = accentsyllable(ultima(wrd), accent)
     join(sylls,"")
 end
 
+"Place accent on penult"
 function accentpenult(wrd::AbstractString, accent::Symbol)
     sylls = syllabify(wrd)
     if length(sylls) < 2
@@ -117,6 +112,7 @@ function accentpenult(wrd::AbstractString, accent::Symbol)
     end
 end
 
+"Place accent on antepenult"
 function accentantepenult(wrd::AbstractString)
     sylls = syllabify(wrd)
     if length(sylls) < 3
@@ -130,8 +126,6 @@ end
 
 
 """
-    accentword(wrd::AbstractString, placement::Symbol)
-
 Accent word according to specified system of accent placement.
 `wrd` is a string value representing a single lexical token.
 `placement` is one of `:RECESSIVE` for recessive accent 
@@ -183,7 +177,7 @@ end
 
 
 
-
+"Return ultima"
 function ultima(s)
     sylls = syllabify(s)
     if isempty(sylls)
@@ -194,6 +188,8 @@ function ultima(s)
     end
 end
 
+
+"Return penult"
 function penult(s)
     sylls = syllabify(s)
     if length(sylls) < 2
@@ -224,8 +220,6 @@ end
 
 
 """
-    longsyllable(syll::AbstractString)
-
 True if `syll` is metrically long by nature.
 
 Examples:
@@ -253,8 +247,6 @@ function longsyllable(syll::AbstractString)
 end
 
 """
-    shortsyllable(syll::AbstractString)
-
 True if `syll` is *not* long by nature.
 Examples:
 
@@ -271,8 +263,6 @@ function shortsyllable(syll::AbstractString)
 end
 
 """
-    includesdiphthong(s::AbstractString)
-
 True if `s` contains a diphthong.
 
 Examples:
@@ -296,8 +286,6 @@ end
 
 
 """
-    flipaccent(s)
-
 Convert grave accent to acute.    
 """
 function flipaccent(s)
@@ -320,8 +308,6 @@ end
 
 
 """
-    vowelsonly(s::AbstractString)
-
 Remove all consonants from `s`.
 
 Example:
@@ -361,8 +347,6 @@ end
 
 
 """
-    stripenclitic(s::AbstractString)
-
 Remove any second enclitic accent from `s`.
 """
 function stripenclitic(s::AbstractString)

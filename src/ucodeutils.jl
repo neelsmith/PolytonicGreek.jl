@@ -1,6 +1,6 @@
 using Unicode
 
-
+"Create NFKC forms of code points with diaeresis."
 function normalizediaresis()
     combos = [
         "ΐ",
