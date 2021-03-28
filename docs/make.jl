@@ -1,3 +1,7 @@
+# Run this from repository root, e.g. with
+# 
+#    julia --project=docs/ docs/make.jl
+#
 using Pkg
 Pkg.activate(".")
 Pkg.instantiate()
