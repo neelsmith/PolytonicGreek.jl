@@ -5,8 +5,6 @@
 using Pkg
 Pkg.activate(".")
 Pkg.instantiate()
-#push!(LOAD_PATH,"../src/")
-
 
 using Documenter, DocStringExtensions
 using PolytonicGreek
@@ -32,3 +30,8 @@ makedocs(
         ]
     ]
 )
+
+
+deploydocs(
+    repo = "github.com/neelsmith/PolytonicGreek.jl.git",
+) 
