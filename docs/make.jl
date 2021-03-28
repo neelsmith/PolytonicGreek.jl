@@ -1,12 +1,12 @@
 using Pkg
-pkg"activate .."
-push!(LOAD_PATH,"../src/")
+Pkg.activate(".")
+Pkg.instantiate()
+#push!(LOAD_PATH,"../src/")
 
 
 using Documenter, DocStringExtensions
 using PolytonicGreek
 
-#=
 makedocs(
     sitename = "PolytonicGreek.jl",
     pages = [
@@ -28,4 +28,3 @@ makedocs(
         ]
     ]
 )
-=#
