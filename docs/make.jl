@@ -13,11 +13,11 @@ makedocs(
         "Home" => "index.md",
         "Manual" => Any[
             "guide/orthography.md",
-            "guide/accents.md",
             "guide/sorting.md",
+            "guide/accents.md",
             "guide/syllabification.md",
             "utilities.md"
         ],
-        "API documentation" => "apis.md"
+        "API documentation" => "api/apis.md"
     ]
 )

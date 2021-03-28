@@ -12,6 +12,7 @@ include("ucodeutils.jl")
 
 export LiteraryGreekOrthography, literaryGreek
 export tokenizeLiteraryGreek
+export rmaccents, accentword
 
 end # module
 

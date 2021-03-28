@@ -1,16 +1,36 @@
 # API documentation
 
 
+## Orthography
+
+```@docs
+LiteraryGreekOrthography
+literaryGreek
+tokenizeLiteraryGreek
+```
+
+## Internals: orthography
+
+```@docs
+PolytonicGreek.alphabetic
+PolytonicGreek.punctuation
+PolytonicGreek.isAlphabetic
+PolytonicGreek.isPunctuation
+PolytonicGreek.sortWords
+PolytonicGreek.tokenforstring
+PolytonicGreek.splitPunctuation
+```
+
 ## Accentuation
 
 ```@docs
-PolytonicGreek.allaccents
+rmaccents
+accentword
 ```
 
 
 ```@docs
-PolytonicGreek.rmaccents
-PolytonicGreek.accentword
+PolytonicGreek.allaccents
 PolytonicGreek.accentstripdict
 PolytonicGreek.flipdict
 PolytonicGreek.acutedict
