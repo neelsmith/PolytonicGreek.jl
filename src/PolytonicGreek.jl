@@ -1,25 +1,22 @@
 "Work with polytonic Greek."
 module PolytonicGreek
 
-using Documenter
+using Documenter, DocStringExtensions
 using Orthography, Unicode
 
 include("constants.jl")
 include("accentdicts.jl")
 include("accentuate.jl")
+include("ortho.jl")
 include("ucodeutils.jl")
 
-export rmaccents, accentword
-
+export LiteraryGreekOrthography, literaryGreek
+export tokenizeLiteraryGreek
 
 end # module
 
-
-#using Orthography, Unicode
 #=
-export LiteraryGreekOrthography 
-export literaryGreek, tokenizeLiteraryGreek
-export rmaccents, flipaccent, tokenaccent
+
 export syllabify
 export accentsyllable, accentword
 export accentpenult, accentantepenult, accentultima

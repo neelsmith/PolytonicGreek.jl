@@ -1,11 +1,12 @@
 # PolytonicGreek.jl
-```@meta
-CurrentModule = PolytonicGreek
-```
+
 
 *A rigorously defined orthography of polytonic ancient Greek.* 
 
-- implements the MID Orthography interface, with semantic tokenization of text in polytonic Greek
-- syllabification of Greek text
-- correct accent placement for recessive and persistent accent patterns
-- sorting
+The `PolytonicGreek` package supports working with accented ancient Greek encoded in Unicode.  It includes functions that
+
+- implement the MID Orthography interface, with semantic tokenization of text in polytonic Greek
+-  work with accents, including correct placement for recessive and persistent accent patterns
+- sort Unicode Greek strings by the logic of the Greek alphabet
+- syllabify Greek strings
+

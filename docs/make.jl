@@ -3,7 +3,7 @@ pkg"activate .."
 push!(LOAD_PATH,"../src/")
 
 
-using Documenter
+using Documenter, DocStringExtensions
 using PolytonicGreek
 
 
@@ -13,8 +13,8 @@ makedocs(
         "Home" => "index.md",
         "Manual" => Any[
             "guide/orthography.md",
-            "guide/sorting.md",
             "guide/accents.md",
+            "guide/sorting.md",
             "guide/syllabification.md",
             "utilities.md"
         ],

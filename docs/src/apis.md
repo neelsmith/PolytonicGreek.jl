@@ -9,8 +9,8 @@ PolytonicGreek.allaccents
 
 
 ```@docs
-rmaccents
-accentword
+PolytonicGreek.rmaccents
+PolytonicGreek.accentword
 PolytonicGreek.accentstripdict
 PolytonicGreek.flipdict
 PolytonicGreek.acutedict

@@ -13,9 +13,9 @@ uuid = "8ba89e20-285c-5b6f-9357-94700520ee1b"
 
 [[DocStringExtensions]]
 deps = ["LibGit2", "Markdown", "Pkg", "Test"]
-git-tree-sha1 = "50ddf44c53698f5e784bbebb3f4b21c5807401b1"
+git-tree-sha1 = "9d4f64f79012636741cf01133158a54b24924c32"
 uuid = "ffbed154-4ef7-542d-bbb7-c09d3a79fcae"
-version = "0.8.3"
+version = "0.8.4"
 
 [[Documenter]]
 deps = ["Base64", "Dates", "DocStringExtensions", "IOCapture", "InteractiveUtils", "JSON", "LibGit2", "Logging", "Markdown", "REPL", "Test", "Unicode"]
@@ -58,9 +58,9 @@ uuid = "a63ad114-7e13-5084-954f-fe012c677804"
 
 [[Orthography]]
 deps = ["DocStringExtensions", "Documenter", "Test"]
-git-tree-sha1 = "bd8ac88de4d00c65432d84abf18288973a83b431"
+git-tree-sha1 = "5627e1899c83e2fef3747eafa27149e6a3d44e9b"
 uuid = "0b4c9448-09b0-4e78-95ea-3eb3328be36d"
-version = "0.5.0"
+version = "0.6.3"
 
 [[Parsers]]
 deps = ["Dates"]
