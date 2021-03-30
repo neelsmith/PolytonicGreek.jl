@@ -2,7 +2,11 @@
 
 A Julia module for working with polytonic ancient Greek.
 
-The `pluto` directory has notebooks demonstrating usage of the package that you'll be able to run once the package is available from the Julia Registry.
+See documentation [here](https://neelsmith.github.io/PolytonicGreek.jl/stable/).
+
+## Pluto notebooks
+
+The `pluto` directory has notebooks demonstrating usage of the package that you'll be able to run once the package is available from the Julia Registry.  It's currently out of date, and needs to be updated.  
 
 
 You can also run them on binder using these links:
