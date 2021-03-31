@@ -6,7 +6,7 @@ using Orthography, Unicode
 
 
 include("abstract.jl")
-include("lgortho.jl")
+include("litgreek/lgortho.jl")
 
 
 include("common/accentuate.jl")
