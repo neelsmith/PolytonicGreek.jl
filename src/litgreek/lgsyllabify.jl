@@ -25,6 +25,17 @@ function splitdiaeresis(s)
 end
 
 
+
+"""Mu+nu stay together.
+
+$(SIGNATURES)
+
+ἀναμιμνησκόμενος breaks as "ἀναμι μνησκομενος"
+"""
+function splitmunu(s)
+    replace(s, "μν" => " μν")
+end
+
 """Split between a liquid and non-liquid consonant."""
 function splitliqcons(s)
     re = Regex("([$LG_LIQUIDS])([$LG_NONLIQUIDS])")
@@ -112,9 +123,9 @@ function splitvcv(s)
     replace(s, re => s"\1 \2\3")
 end
 
-"""$(SIGNATURES)
+"""Split string `s` into an Array of strings representing syllables.
 
-Split string `s` into an Array of strings representing syllables.
+$(SIGNATURES)
 
 # Example
 ```jldoctest
@@ -124,7 +135,7 @@ join(syllables, "-")
 ```
 
 """
-function syllabify(s)
+function syllabify(s, ortho::LiteraryGreekOrthography)
     nfkc(s) |>
     rmaccents  |>
     splitmorphemeboundary |>

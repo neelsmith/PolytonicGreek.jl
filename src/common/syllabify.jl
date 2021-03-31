@@ -1,7 +1,21 @@
 
-"""$(SIGNATURES)
+"""Split string `s` into an Array of strings representing syllables.
 
-Respect explicitly indicated morpheme boundaries.
+$(SIGNATURES)
+
+Default to using `LiteraryGreekOrthography`.
+```
+
+"""
+function syllabify(s)
+    syllabify(s, literaryGreek())
+end
+
+
+"""Respect explicitly indicated morpheme boundaries.
+
+$(SIGNATURES)
+
 
 # Example
 ```jldoctest
@@ -11,13 +25,4 @@ PolytonicGreek.splitmorphemeboundary("εἰσ#ῄα")
 """
 function splitmorphemeboundary(s)
     replace(s, "#" => " ")
-end
-
-
-"""Mu+nu stay together.
-
-ἀναμιμνησκόμενος breaks as "ἀναμι μνησκομενος"
-"""
-function splitmunu(s)
-    replace(s, "μν" => " μν")
 end
