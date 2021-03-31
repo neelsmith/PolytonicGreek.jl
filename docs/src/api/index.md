@@ -2,18 +2,21 @@
 
 
 ```@contents
-Pages = ["apis.md"]
+Pages = ["index.md"]
 Depth = 3
 ```
 
 ## Accentuation
 
+### Exported functions
 
 ```@docs
 rmaccents
 accentword
 ```
 
+
+### Internals
 
 ```@docs
 PolytonicGreek.allaccents
@@ -43,13 +46,16 @@ PolytonicGreek.normalizeaccentcombos
 
 ##  Orthography
 
+
+### Exported functions and structure
+
 ```@docs
 LiteraryGreekOrthography
 literaryGreek
 tokenizeLiteraryGreek
 ```
 
-### Internals: orthography
+### Internals
 
 ```@docs
 PolytonicGreek.alphabetic

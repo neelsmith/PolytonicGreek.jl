@@ -20,14 +20,7 @@ makedocs(
             "guide/syllabification.md",
             "utilities.md"
         ],
-        "API documentation" => Any[
-            "api/apis_ortho.md",
-            "api/apis_sorting.md",
-            "api/apis_accents.md",
-            "api/apis_syllables.md",
-            "api/apis_other.md",
-            
-        ]
+        "API documentation" => "api/index.md"
     ]
 )
 
