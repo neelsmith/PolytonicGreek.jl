@@ -1,0 +1,1 @@
+# Orthography: gorey details

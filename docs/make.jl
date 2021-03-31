@@ -15,6 +15,7 @@ makedocs(
         "Home" => "index.md",
         "Manual" => Any[
             "guide/orthography.md",
+            "guide/orthography-details.md",
             "guide/sorting.md",
             "guide/accents.md",
             "guide/syllabification.md",

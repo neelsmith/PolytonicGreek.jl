@@ -1,3 +1,4 @@
+# These dictionaries should be implemented for any subtype of `Greek`
 """Dictionary of barytone to oxytone conversions.
 
 $(SIGNATURES)

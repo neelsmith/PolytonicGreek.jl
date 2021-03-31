@@ -5,9 +5,8 @@ using Documenter, DocStringExtensions
 using Orthography, Unicode
 
 
-include("abstract.jl")
+include("common/abstract.jl")
 include("litgreek/lgortho.jl")
-include("utils.jl")
 
 include("common/accentuate.jl")
 include("common/accentdicts.jl")
@@ -19,15 +18,11 @@ include("litgreek/lgaccentuate.jl")
 include("litgreek/lgsyllabify.jl")
 include("litgreek/ucodeutils.jl")
 
-
-
-
-
 export LiteraryGreekOrthography, literaryGreek
 export tokenizeLiteraryGreek
 export rmaccents, accentword
 export syllabify
-export nfkc
+
 
 end # module
 

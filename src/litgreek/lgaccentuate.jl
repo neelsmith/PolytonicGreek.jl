@@ -1,22 +1,5 @@
 # Functions for manipulating accents.
 
-"""
-Remove all accent characters from `s`.
-
-$(SIGNATURES)
-"""
-function rmaccents(s::AbstractString; ortho::OrthographicSystem=literaryGreek())
-    stripped = []
-    dict = accentstripdict(ortho)
-    for c in Unicode.normalize(s, :NFKC)
-        if c in keys(dict)
-            push!(stripped, dict[c])
-        else
-            push!(stripped,c)
-        end
-    end
-    join(stripped,"")
-end
 
 """
 Add an acute accent to a single vowel or diphthong.
@@ -42,7 +25,7 @@ function addacute(vowel::AbstractString; ortho::OrthographicSystem=literaryGreek
             accented
         end
     else
-        @warn("addacute: can't add acute accent to vowel $vowel")
+        @warn("addacute: can't add acute accent to string $vowel")
         nothing
     end
 end
@@ -73,7 +56,7 @@ function addcircumflex(vowel::AbstractString; ortho::OrthographicSystem=literary
             accented
         end
     else
-        @warn("addcircumflex: can't add circumflex accent to vowel $vowel")
+        @warn("addcircumflex: can't add circumflex accent to string $vowel")
         nothing
     end
 end
@@ -101,7 +84,7 @@ julia> PolytonicGreek.accentsyllable("ᾀ", :ACUTE)
 ```
 """
 function accentsyllable(syll::AbstractString, accent::Symbol)
-    # Check that only one syllable
+    # Check that syll is only one syllable
     sylls = syllabify(syll)
     if length(sylls) > 1
         @warn("accentsyllable: string $syll is more than one syllable.")
@@ -178,16 +161,17 @@ end
 
 """
 Accent word according to specified system of accent placement.
-`wrd` is a string value representing a single lexical token.
-`placement` is one of `:RECESSIVE` for recessive accent 
+
+$(SIGNATURES)
+
+# Parameters
+
+- `wrd` is a string value representing a single lexical token.
+- `placement` is one of `:RECESSIVE` for recessive accent 
 or `:PENULT` for persistent accent on the penultimate syllable.
+
 Note that it is not possible to accent the ultima correctly without
 additional morphological information beyond the string value of the token.
-
-Examples:
-```julia-repl
-
-```
 """
 function  accentword(wrd::AbstractString, placement::Symbol)
     sylls = syllabify(wrd)
@@ -198,7 +182,7 @@ function  accentword(wrd::AbstractString, placement::Symbol)
             nothing
         else
             pnlt = penult(wrd)
-            if longsyllable(pnlt) && shortsyllable(ult)
+            if longsyllable(pnlt) && finalshort(ult)
                 accentpenult(wrd, :CIRCUMFLEX)
             else
                 accentpenult(wrd, :ACUTE)
@@ -213,7 +197,7 @@ function  accentword(wrd::AbstractString, placement::Symbol)
             if length(sylls) == 2
                 accentword(wrd, :PENULT)
 
-            elseif longsyllable(ult)
+            elseif finallong(ult)
                 accentpenult(wrd, :ACUTE)
 
             else
@@ -228,7 +212,10 @@ end
 
 
 
-"Return ultima"
+"""Return ultima.
+
+$(SIGNATURES)
+"""
 function ultima(s)
     sylls = syllabify(s)
     if isempty(sylls)
@@ -240,7 +227,10 @@ function ultima(s)
 end
 
 
-"Return penult"
+"""Return penult.
+
+$(SIGNATURES)
+"""
 function penult(s)
     sylls = syllabify(s)
     if length(sylls) < 2
@@ -251,7 +241,10 @@ function penult(s)
     end
 end
 
-"""
+"""Return antepenult.
+
+$(SIGNATURES)
+
 NB: Rms accent since they're not relevant to syllables.
 """
 function antepenult(s)
@@ -264,16 +257,15 @@ function antepenult(s)
     end
 end
 
-
-
-
-
-
-
 """
 True if `syll` is metrically long by nature.
 
 $(SIGNATURES)
+
+# Arguments
+
+- `syll` is text for a single syllable
+- `ortho` is a `GreekOrthography`
 
 # Examples
 
@@ -284,7 +276,7 @@ julia> PolytonicGreek.longsyllable("τε")
 false
 ```
 """
-function longsyllable(syll::AbstractString)
+function longsyllable(syll::AbstractString; ortho::GreekOrthography = literaryGreek())
     # Sanity check:
     sylls = syllabify(syll)
     
@@ -292,13 +284,49 @@ function longsyllable(syll::AbstractString)
         @warn("longsyllable: string $syll includes more than syllable.")
         nothing
     else
+        vowels = rmaccents(syll) |> vowelsonly
+        diphlist = split(LG_DIPHTHONGS, "|") 
+        longies = split(LG_LONGVOWELS,"")
+        
+        vowels in diphlist || vowels in longies || vowels in lglongbynature()
+    end
+end
+
+
+
+"""
+True if `syll` counts as long for accent in ultima.
+
+$(SIGNATURES)
+"""
+function finallong(syll::AbstractString; ortho::GreekOrthography = literaryGreek())
+    # Sanity check:
+    sylls = syllabify(syll)
+    
+    if (length(sylls) > 1)
+        @warn("finallong: string $syll includes more than syllable.")
+        nothing
+    else
         vowels = vowelsonly(syll)
         diphlist = split(LG_DIPHTHONGS, "|") 
         longies = split(LG_LONGVOWELS,"")
         
-        
-        vowels in diphlist || vowels in longies || vowels in lglongbynature()
+        if vowels in LG_FINALSHORT
+            false
+        else 
+            vowels in diphlist || vowels in longies || vowels in lglongbynature()
+        end
     end
+end
+
+
+"""
+True if `syll` counts as short for accent in ultima.
+
+$(SIGNATURES)
+"""
+function finalshort(syll::AbstractString)
+    ! finallong(syll)
 end
 
 """
@@ -374,7 +402,9 @@ end
 """
 Remove all consonants from `s`.
 
-Example:
+$(SIGNATURES)
+
+# Example
 
 ```julia-repl
 julia> PolytonicGreek.vowelsonly("τῶν")

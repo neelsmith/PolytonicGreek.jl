@@ -1,229 +1,116 @@
-```@meta
-CurrentModule = PolytonicGreek
+
+# `GreekOrthography`
+
+```@contents
+Pages = ["orthography.md"]
+Depth = 3
 ```
 
-# Orthography
 
-## Literary Greek orthography
+`PolytonicGreek` defines an abstract type called `GreekOrthography`, which in turn is a 
+subtype of the [Orthography package](https://github.com/hcmid/Orthography.jl)'s `OrthographicSystem`.
 
-The `literaryGreek` function creates a `LiteraryGreekOrthography`.  
-This is a subtype of the absract `GreekOrthography` type, which in turn is a subtype of the [Orthography.jl package](https://github.com/hcmid/Orthography.jl)'s `OrthographicSystem` and therefore can be used with generic functions to assess the validity of characters and strings, and to tokenize a string into a series of explicitly classified tokens.
+Implementations of `GreekOrthography` can therefore can be used with generic functions of the `Orthography` package to assess the validity of characters and strings, and to tokenize a string into a series of explicitly classified tokens.
+
+In addition, they can use functions specific to implementations of `GreekOrthography` to remove and add accents to words, to break words into syllables, and to sort words according to the logic of the Greek alphabet.
 
 
-```jldoctest loaded
+## Literary Greek: generic functions
+
+`LiteraryGreekOrthography` is a subtype of `GreekOrthography`.  The `literaryGreek()` function creates a `LiteraryGreekOrthography` configured to work texts in the orthography of standard printed editions of literary Greek.  You can see its inheritance from `Orthography` via `GreekOrthography`.  This gives you access to functions applying to any subtype of `Orthography` or any subtype the more specific `GreekOrthography`.
+
+
+
+```@example loaded
 using PolytonicGreek
 lg = literaryGreek()
 typeof(lg)
-
-# output
-
-LiteraryGreekOrthography
 ```
 
-```jldoctest loaded
+```@example loaded
 typeof(lg) |> supertype
-
-# output
-
-PolytonicGreek.GreekOrthography
 ```
 
-```jldoctest loaded
+```@example loaded
 typeof(lg) |> supertype |> supertype
-
-# output
-
-Orthography.OrthographicSystem
 ```
-
-You can therefore use generic functions from the `Orthography` package to determine if a character or string is valid in this orthography, to enumerate valid characters and types of tokens that are recognized in this orthography, and to analyze strings in this orthography as sequences of classified tokens.
 
 
 
 ### Assessing characters and strings
-
-
-```jldoctest ortho
-using Orthography, PolytonicGreek
-ortho = literaryGreek()
+    
+    
+```@example loaded
+using Orthography
 omicron = "ο"
-Orthography.validchar(ortho, omicron)
-
-# output
-true
+validchar(lg, omicron)
 ```
 
-```jldoctest ortho
+```@example loaded
 latinO = "o"
-Orthography.validchar(ortho, latinO)
-
-# output
-false
+validchar(lg, latinO)
 ```
 
 
-```jldoctest ortho
+```@example loaded
 greek = "μῆνιν ἄειδε"
-Orthography.validstring(ortho, greek)
-
-# output
-true
+validstring(lg, greek)
 ```
 
-```jldoctest ortho
+```@example loaded
 notgreek = "μῆνιν?"
-Orthography.validstring(ortho, notgreek)
-
-# output
-false
+validstring(lg, notgreek)
 ```
-
-### Enumerating codepoints and token types
-
 
 
 ### Tokenizing strings
-
+    
 Subtypes of `Orthography.OrthographicSystem` include a `tokenizer` function that analyzes a string encoded in this orthographic system into an Array of `OrthographicToken`s, which are classified string values.  For example, the string *μῆνιν ἄειδε,* is analyzed as three tokens, two of type `LexicalToken`, and one of type `PunctuationToken`
 
-```jldoctest loaded
+```@example loaded
 tokenized = lg.tokenizer("μῆνιν ἄειδε,")
 length(tokenized)
-
-# output
-
-3
 ```
 
-```jldoctest loaded
+```@example loaded
 tokenized[1].text
-
-# output
-
-"μῆνιν"
 ```
 
-```jldoctest loaded
+```@example loaded
 tokenized[1].tokencategory
-
-# output
-Orthography.LexicalToken()
 ```
 
 
-```jldoctest loaded
+```@example loaded
 tokenized[end].text
-
-# output
-
-","
 ```
 
 
-```
-jldoctest loaded
+```@example loaded
 tokenized[end].tokencategory
-
-# output
-Orthography.PunctuationToken()
 ```
 
+## Literary Greek: functions specific to Greek
 
-## Under the hood
+### Accentuation
 
-The package can enumerate all valid Unicode code points for alphabetic and punctuation characters.
+Strip accents from a string according to a specified implementation of `GreekOrthography`.
 
-```jldoctest loaded
-puncts = PolytonicGreek.punctuation()
-
-# output
-
-".,;:"
+```@example loaded
+rmaccents("πολλά", ortho = lg)
 ```
 
-```jldoctest loaded
-PolytonicGreek.alphabetic() |> length
+The default orthography is a `LiteraryGreekOrthography`, so you could equivalently:
 
-# output
-267
+```@example loaded
+rmaccents("πολλά")
 ```
 
-It uses these to categorize tokens and to divide strings into  sequences of alphabetic and punctuation characters.
+You can add accents to an unaccented word by ....
 
-```jldoctest loaded
-PolytonicGreek.isAlphabetic("μῆνιν")
+accentword("ἀνθρωποι", :RECESSIVE) 
 
-# output
-
-true
-```
-
-```jldoctest loaded
-PolytonicGreek.isPunctuation(":")
-
-# output
-
-true
-```
+### Syllabification
 
 
-```jldoctest loaded
-PolytonicGreek.splitPunctuation("ἄειδε,")
-
-# output
-
-2-element Array{AbstractString,1}:
- "ἄειδε"
- ","
-```
-
-
-### Functions supporting tokenization
-
-
-The `tokenforstring` function returns a single `OrthographicToken`.
-
-
-```jldoctest loaded
-t = PolytonicGreek.tokenforstring("μῆνιν")
-t.tokencategory
-
-# output
-
-Orthography.LexicalToken()
-```
-
-```jldoctest loaded
-t.text
-
-# output
-
-"μῆνιν"
-```
-
-
-The `tokenizeLiteraryGreek` is the function assigned to the `tokenizer` member of `LiteraryGreekOrthography`s.  Using it by itself is identical to creating a `LiteraryGreekOrthography` and using its generic `tokenize` function, as illustrated above.
-
-```jldoctest loaded
-tokens = PolytonicGreek.tokenizeLiteraryGreek("μῆνιν ἄειδε,")
-length(tokens)
-
-# output
-
-3
-``` 
-
-```jldoctest loaded
-tokens[end].text
-
-# output
-
-","
-```
-
-```jldoctest loaded
-tokens[end].tokencategory
-
-# output
-Orthography.PunctuationToken()
-```
+### Sorting

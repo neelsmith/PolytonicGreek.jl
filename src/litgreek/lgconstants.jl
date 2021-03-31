@@ -35,3 +35,5 @@ end
 # diphthongs:
 # this is a Regex disjunction for diphthongs:
 const LG_DIPHTHONGS = "αι|ει|οι|υι|αυ|ευ|ου|ηυ|ωυ|υἰ|αἰ|εἰ|οἰ|αὐ|εὐ|οὐ|ηὐ|ωὐ|υἰ|αἱ|εἱ|οἱ|αὑ|εὑ|οὑ|ηὑ|ωὑ|υἱ"  
+const LG_FINALSHORT = ["αι", "οι"]
+
