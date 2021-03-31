@@ -7,7 +7,7 @@ CurrentModule = PolytonicGreek
 ## Literary Greek orthography
 
 The `literaryGreek` function creates a `LiteraryGreekOrthography`.  
-This is a subtype of the [Orthography.jl package](https://github.com/hcmid/Orthography.jl)'s `OrthographicSystem` and therefore can be used with generic functions to assess the validity of characters and strings, and to tokenize a string into a series of explicitly classified tokens.
+This is a subtype of the absract `GreekOrthography` type, which in turn is a subtype of the [Orthography.jl package](https://github.com/hcmid/Orthography.jl)'s `OrthographicSystem` and therefore can be used with generic functions to assess the validity of characters and strings, and to tokenize a string into a series of explicitly classified tokens.
 
 
 ```jldoctest loaded
@@ -22,6 +22,14 @@ LiteraryGreekOrthography
 
 ```jldoctest loaded
 typeof(lg) |> supertype
+
+# output
+
+PolytonicGreek.GreekOrthography
+```
+
+```jldoctest loaded
+typeof(lg) |> supertype |> supertype
 
 # output
 
