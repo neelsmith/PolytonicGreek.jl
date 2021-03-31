@@ -55,9 +55,15 @@ julia> PolytonicGreek.addcircumflex("τα")
 ```
 """
 function addcircumflex(vowel::AbstractString; ortho::OrthographicSystem=literaryGreek())
+    bare = stripquant(vowel)
     dict = circumflexdict(ortho) 
-    if vowel in keys(dict)
-        dict[vowel]
+    if bare in keys(dict)
+        accented = dict[bare]
+        if occursin("_", vowel)
+            string(accented,"_")
+        else
+            accented
+        end
     else
         @warn("addcircumflex: can't add circumflex accent to vowel $vowel")
         nothing
@@ -297,9 +303,10 @@ end
 Convert grave accent to acute.    
 """
 function flipaccent(s)
+    bare = stripquant(s)
     dict = flipdict()
     modified = []
-    for c in nfkc(s)
+    for c in nfkc(bare)
         #println(string(c))
         #showcps(string(c))
         #println("Key? ", string(c) in keys(dict))
@@ -311,7 +318,12 @@ function flipaccent(s)
             push!(modified, string(c)) 
         end
     end
-    join(modified,"")
+    accented = join(modified,"")
+    if occursin("_", s)
+        string(accented, "_")
+    else
+        accented
+    end
 end 
 
 
