@@ -21,6 +21,9 @@ end
 """
 Add an acute accent to a single vowel or diphthong.
 
+$(SIGNATURES)
+
+# Examples
 ```julia-repl
 julia> PolytonicGreek.addacute("ᾀ")
 "ᾄ"
@@ -48,7 +51,10 @@ end
 """
 Add a circumflex accent to a single vowel or diphthong
 
-Examples:
+$(SIGNATURES)
+
+# Examples
+
 ```julia-repl
 julia> PolytonicGreek.addcircumflex("ᾀ")
 "ᾆ"
@@ -74,9 +80,16 @@ end
 
 """
 Add specified accent to a single syllable.  
+
+$(SIGNATURES)
+
+# Parameters
+
 `syll` is a string value for a single syllable.
 `accent` is either `:ACUTE` or `:CIRCUMFLEX`.  The
 function returns `nothing` for any other symble for accent.
+
+# Examples
 
 ```julia-repl
 julia> PolytonicGreek.accentsyllable("των", :CIRCUMFLEX)
@@ -260,7 +273,9 @@ end
 """
 True if `syll` is metrically long by nature.
 
-Examples:
+$(SIGNATURES)
+
+# Examples
 
 ```julia-repl
 julia> PolytonicGreek.longsyllable("τει")
@@ -280,9 +295,9 @@ function longsyllable(syll::AbstractString)
         vowels = vowelsonly(syll)
         diphlist = split(LG_DIPHTHONGS, "|") 
         longies = split(LG_LONGVOWELS,"")
-
-
-        vowels in diphlist || vowels in longies
+        
+        
+        vowels in diphlist || vowels in longies || vowels in lglongbynature()
     end
 end
 

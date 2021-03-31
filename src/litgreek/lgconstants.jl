@@ -9,14 +9,28 @@ const LG_LIQUIDS = "μνρλ"
 # class (in square brackets) to define a set of
 # Characters
 const LG_SIMPLEVOWELS =  "αεηιουω"
-const LG_DIAERESES = Unicode.normalize("ϊϋ",:NFKC)
-const LG_ROUGHVOWELS = Unicode.normalize("ἁἑἡἱὁὑὡ", :NFKC)
-const LG_SMOOTHVOWELS = Unicode.normalize("ἀἐἠἰὀὐὠ", :NFKC)
-const LG_IOTASUBS = Unicode.normalize("ᾳῃῳᾁᾑᾡᾀᾐᾠ", :NFKC)
+const LG_DIAERESES = nfkc("ϊϋ")
+const LG_ROUGHVOWELS = nfkc("ἁἑἡἱὁὑὡ")
+const LG_SMOOTHVOWELS = nfkc("ἀἐἠἰὀὐὠ")
+const LG_IOTASUBS = nfkc("ᾳῃῳᾁᾑᾡᾀᾐᾠ")
 const LG_VOWELS = "$(LG_SIMPLEVOWELS)$(LG_SMOOTHVOWELS)$(LG_ROUGHVOWELS)$(LG_DIAERESES)$(LG_IOTASUBS)"
-const LG_SHORTVOWELS = Unicode.normalize("εοἑἐὁὀ", :NFKC)
-const LG_POSSIBLESHORT = Unicode.normalize("αιἀἰἁἱϊ", :NFKC)
-const LG_LONGVOWELS = Unicode.normalize("ηῃωῳᾳἡᾑὡᾡᾁἠᾐὠᾠᾀ", :NFKC)
+const LG_SHORTVOWELS = nfkc("εοἑἐὁὀ")
+const LG_POSSIBLESHORT = nfkc("αιἀἰἁἱϊ")
+const LG_LONGVOWELS = nfkc("ηῃωῳᾳἡᾑὡᾡᾁἠᾐὠᾠᾀ")
+const LG_AMBIGUOUSVOWELS = nfkc("αιυἀἰὐἁἱὑϊϋ")
+
+"""Compose a list of all possible vowels with breathing or diaeresis that could
+be qualified by a vowel length marker.
+
+$(SIGNATURES)
+"""
+function lglongbynature() 
+    macra = []
+    for c in LG_AMBIGUOUSVOWELS
+        push!(macra,string(c,"_"))
+    end
+    macra
+end
 
 # diphthongs:
 # this is a Regex disjunction for diphthongs:

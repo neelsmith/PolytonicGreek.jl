@@ -7,7 +7,7 @@ using Orthography, Unicode
 
 include("abstract.jl")
 include("litgreek/lgortho.jl")
-
+include("utils.jl")
 
 include("common/accentuate.jl")
 include("common/accentdicts.jl")
@@ -20,7 +20,7 @@ include("litgreek/lgsyllabify.jl")
 include("litgreek/ucodeutils.jl")
 
 
-include("utils.jl")
+
 
 
 export LiteraryGreekOrthography, literaryGreek

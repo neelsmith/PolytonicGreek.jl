@@ -4,6 +4,11 @@
     @test PolytonicGreek.stripquant(s) == expected
 end
 
+
+@testset "Test removing accents from long syllables" begin
+    @test rmaccents(nfkc("πᾶ_σι")) == nfkc("πα_σι")
+end
+
 @testset "Test adding acute to long vowel" begin
     @test PolytonicGreek.addacute("α_") == nfkc("ά_")
 end
@@ -13,24 +18,15 @@ end
     @test PolytonicGreek.addcircumflex("α_") == nfkc("ᾶ_")
 end
 
-
 @testset "Test flipping barytone with long vowel" begin
     @test PolytonicGreek.flipaccent(nfkc("ὰ_")) == nfkc("ά_")
 end
 
-
-@testset "Test removing accents from long syllables" begin
-    @test rmaccents(nfkc("πᾶ_σι")) == nfkc("πα_σι")
-end
-
-
-
-@testset "Test adding accents to syllables" begin
+@testset "Test adding accents to syllables with long vowels" begin
     @test PolytonicGreek.accentsyllable("τα_ν", :CIRCUMFLEX) == "τᾶ_ν"
     @test PolytonicGreek.accentsyllable("τα_", :ACUTE) == "τά_"
 end
 
-
-
-# accentsyllables
-# accentword
+@testset "Test adding accents to words with long vowels" begin
+    @test accentword("γνωμα_ς", :PENULT) == nfkc("γνώμα_ς")
+end
