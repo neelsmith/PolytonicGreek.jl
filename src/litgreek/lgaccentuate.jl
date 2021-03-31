@@ -27,9 +27,15 @@ julia> PolytonicGreek.addacute("τα")
 ```
 """
 function addacute(vowel::AbstractString; ortho::OrthographicSystem=literaryGreek())
+    bare = stripquant(vowel)
     dict = acutedict(ortho)
-    if vowel in keys(dict)
-        dict[vowel]
+    if bare in keys(dict)
+        accented = dict[bare]
+        if occursin("_", vowel)
+            string(accented,"_")
+        else
+            accented
+        end
     else
         @warn("addacute: can't add acute accent to vowel $vowel")
         nothing
@@ -242,6 +248,8 @@ function longsyllable(syll::AbstractString)
         vowels = vowelsonly(syll)
         diphlist = split(LG_DIPHTHONGS, "|") 
         longies = split(LG_LONGVOWELS,"")
+
+
         vowels in diphlist || vowels in longies
     end
 end
