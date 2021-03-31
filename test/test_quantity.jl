@@ -17,6 +17,20 @@ end
 @testset "Test flipping barytone with long vowel" begin
     @test PolytonicGreek.flipaccent(nfkc("ὰ_")) == nfkc("ά_")
 end
-# flipaccent
+
+
+@testset "Test removing accents from long syllables" begin
+    @test rmaccents(nfkc("πᾶ_σι")) == nfkc("πα_σι")
+end
+
+
+
+@testset "Test adding accents to syllables" begin
+    @test PolytonicGreek.accentsyllable("τα_ν", :CIRCUMFLEX) == "τᾶ_ν"
+    @test PolytonicGreek.accentsyllable("τα_", :ACUTE) == "τά_"
+end
+
+
+
 # accentsyllables
 # accentword

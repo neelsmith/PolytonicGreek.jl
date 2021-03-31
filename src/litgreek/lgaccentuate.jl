@@ -2,6 +2,8 @@
 
 """
 Remove all accent characters from `s`.
+
+$(SIGNATURES)
 """
 function rmaccents(s::AbstractString; ortho::OrthographicSystem=literaryGreek())
     stripped = []
@@ -93,11 +95,26 @@ function accentsyllable(syll::AbstractString, accent::Symbol)
         nothing
     else
         vowels = vowelsonly(syll)
+        barevowels = stripquant(vowels)
 
         if accent == :ACUTE
-            replace(syll, vowels => addacute(vowels))
+            accentedvowel = addacute(barevowels)
+            if occursin("_", vowels)
+                rplcmnt = string(accentedvowel,"_")
+                replace(syll, string(barevowels,"_") => rplcmnt)
+            else 
+                replace(syll, barevowels => accentedvowel)
+            end
+
         elseif accent == :CIRCUMFLEX
-            replace(syll, vowels => addcircumflex(vowels))
+            accentedvowel = addcircumflex(barevowels)
+            if occursin("_", vowels)
+                rplcmnt = string(accentedvowel,"_")
+                replace(syll, string(barevowels,"_") => rplcmnt)
+            else 
+                replace(syll, barevowels => accentedvowel)
+            end
+
         else
             @warn("accentsyllable: value of accent was neither :ACUTE nor :CIRCUMFLEX.")
         end
@@ -105,14 +122,20 @@ function accentsyllable(syll::AbstractString, accent::Symbol)
 end
 
 
-"Place accent on ultima"
+"""Place accent on ultima.
+
+$(SIGNATURES)
+"""
 function accentultima(wrd::AbstractString, accent::Symbol)
     sylls = syllabify(wrd)
     sylls[end] = accentsyllable(ultima(wrd), accent)
     join(sylls,"")
 end
 
-"Place accent on penult"
+"""Place accent on penult.
+
+$(SIGNATURES)
+"""
 function accentpenult(wrd::AbstractString, accent::Symbol)
     sylls = syllabify(wrd)
     if length(sylls) < 2
@@ -124,7 +147,10 @@ function accentpenult(wrd::AbstractString, accent::Symbol)
     end
 end
 
-"Place accent on antepenult"
+"""Place accent on antepenult.
+
+$(SIGNATURES)
+"""
 function accentantepenult(wrd::AbstractString)
     sylls = syllabify(wrd)
     if length(sylls) < 3
@@ -262,7 +288,10 @@ end
 
 """
 True if `syll` is *not* long by nature.
-Examples:
+
+$(SIGNATURES)
+
+# Examples
 
 ```julia-repl
 julia> PolytonicGreek.shortsyllable("ε")
@@ -279,7 +308,9 @@ end
 """
 True if `s` contains a diphthong.
 
-Examples:
+$(SIGNATURES)
+
+# Examples
 
 ```julia-repl
 julia> PolytonicGreek.includesdiphthong("εὐθύς")
@@ -300,19 +331,17 @@ end
 
 
 """
-Convert grave accent to acute.    
+Convert grave accent to acute.   
+
+$(SIGNATURES)
 """
 function flipaccent(s)
     bare = stripquant(s)
     dict = flipdict()
     modified = []
     for c in nfkc(bare)
-        #println(string(c))
-        #showcps(string(c))
-        #println("Key? ", string(c) in keys(dict))
         if string(c) in keys(dict)
             flipped = dict[string(c)]
-            #println("Flipped ", flipped)
             push!(modified, flipped)
         else
             push!(modified, string(c)) 
