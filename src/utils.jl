@@ -1,7 +1,7 @@
 """
-    nfkc(s::AbstractString)
-
 Shorthand function to normalize string `s` to Unicode form NFKC.
+
+$(SIGNATURES)    
 """
 function nfkc(s::AbstractString)
     Unicode.normalize(s, :NFKC)

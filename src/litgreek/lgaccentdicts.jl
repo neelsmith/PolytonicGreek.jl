@@ -1,19 +1,13 @@
-"""Function B echo."""
-function funcb(s)
-    string("Greet ", s, " from file B.")
-end
-
-
 """
 Dictionary mapping Unicode codepoints with accents to
-codepoint with accent stripped.
+codepoint with accent stripped for `LiteraryGreekOrthography`.
 
-
+$(SIGNATURES)
 
 We can't just use Unicode.normalize with stripmark flag because
 that strips breathings, iota subscripts, and diaereses as well.
 """
-function accentstripdict() 
+function accentstripdict(ortho::LiteraryGreekOrthography) 
     Dict(
        'ά'  => 'α',
        'ὰ' => 'α',
@@ -113,8 +107,11 @@ function accentstripdict()
 end
 
 
-"Dictionary of circumflexes"
-function circumflexdict()
+"""Dictionary of circumflexes for `LiteraryGreekOrthography`.
+
+$(SIGNATURES)
+"""
+function circumflexdict(ortho::LiteraryGreekOrthography)
     Dict(
         [
             "α" => "ᾶ",
@@ -186,8 +183,11 @@ function circumflexdict()
     )
 end
 
-"Dictionary of acutes."
-function acutedict()
+"""Dictionary of acutes for `LiteraryGreekOrthography`.
+
+$(SIGNATURES)
+"""
+function acutedict(ortho::LiteraryGreekOrthography)
     Dict(
         [
             "α" => "ά",
@@ -265,8 +265,11 @@ function acutedict()
 end
 
 
-"Flip dictionary"
-function flipdict()
+"""Dictionary of barytone to oxytone conversions for `LiteraryGreekOrthography`.
+
+$(SIGNATURES)
+"""
+function flipdict(ortho::LiteraryGreekOrthography)
     Dict(
         [
             "ὰ" => "ά" ,
@@ -314,10 +317,13 @@ function flipdict()
 end
 
 
-"List all code points including an accent."
-function allaccents()
-    acutes = acutedict() |> values |> collect
-    circumflexes = circumflexdict() |> values |> collect
-    graves = flipdict() |> values |> collect
+"""List all code points including an accent in `LiteraryGreekOrthography`.
+
+$(SIGNATURES)
+"""
+function allaccents(ortho::LiteraryGreekOrthography)
+    acutes = acutedict(ortho::LiteraryGreekOrthography) |> values |> collect
+    circumflexes = circumflexdict(ortho::LiteraryGreekOrthography) |> values |> collect
+    graves = flipdict(ortho::LiteraryGreekOrthography) |> values |> collect
     vcat(acutes, circumflexes, graves)
 end

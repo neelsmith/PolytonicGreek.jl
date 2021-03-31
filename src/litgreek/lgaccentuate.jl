@@ -3,9 +3,9 @@
 """
 Remove all accent characters from `s`.
 """
-function rmaccents(s::AbstractString)
+function rmaccents(s::AbstractString; ortho::OrthographicSystem=literaryGreek())
     stripped = []
-    dict = accentstripdict()
+    dict = accentstripdict(ortho)
     for c in Unicode.normalize(s, :NFKC)
         if c in keys(dict)
             push!(stripped, dict[c])
@@ -26,8 +26,8 @@ julia> PolytonicGreek.addacute("τα")
 ┌ Warning: addacute: can't add acute accent to vowel τα
 ```
 """
-function addacute(vowel::AbstractString)
-    dict = acutedict()
+function addacute(vowel::AbstractString; ortho::OrthographicSystem=literaryGreek())
+    dict = acutedict(ortho)
     if vowel in keys(dict)
         dict[vowel]
     else
@@ -48,8 +48,8 @@ julia> PolytonicGreek.addcircumflex("τα")
 ┌ Warning: addcircumflex: can't add circumflex accent to vowel τα
 ```
 """
-function addcircumflex(vowel::AbstractString)
-    dict = circumflexdict() 
+function addcircumflex(vowel::AbstractString; ortho::OrthographicSystem=literaryGreek())
+    dict = circumflexdict(ortho) 
     if vowel in keys(dict)
         dict[vowel]
     else
@@ -240,8 +240,8 @@ function longsyllable(syll::AbstractString)
         nothing
     else
         vowels = vowelsonly(syll)
-        diphlist = split(DIPHTHONGS, "|") 
-        longies = split(LONGVOWELS,"")
+        diphlist = split(LG_DIPHTHONGS, "|") 
+        longies = split(LG_LONGVOWELS,"")
         vowels in diphlist || vowels in longies
     end
 end
@@ -275,7 +275,7 @@ false
 ```
 """
 function includesdiphthong(s::AbstractString)
-    diphlist = split(DIPHTHONGS, "|")
+    diphlist = split(LG_DIPHTHONGS, "|")
     for diph in diphlist
         if occursin(diph, s)
             return true
@@ -318,7 +318,7 @@ julia> PolytonicGreek.vowelsonly("τῶν")
 ```
 """
 function vowelsonly(s::AbstractString)
-    re = Regex("[$CONSONANTS]")
+    re = Regex("[$LG_CONSONANTS]")
     replace(s, re => "")
 end
 

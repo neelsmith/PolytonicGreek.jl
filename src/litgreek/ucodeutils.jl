@@ -1,6 +1,9 @@
 using Unicode
 
-"Create NFKC forms of code points with diaeresis."
+"""Create NFKC forms of code points with diaeresis.
+
+$(SIGNATURES)
+"""
 function normalizediaresis()
     combos = [
         "ΐ",
@@ -15,6 +18,8 @@ end
 
 """Collect a normalized set of all codepoints
 with accent.
+
+$(SIGNATURES)
 """
 function normalizeaccentcombos()
     combos = [
