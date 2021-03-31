@@ -2,7 +2,7 @@
 
 A Julia module for working with polytonic ancient Greek.
 
-The `pluto` directory has notebooks demonstrating usage of the package that you'll be able to run once the package is available from the Julia Registry.
+The `pluto` directory has notebooks demonstrating usage of some older versions of the package.
 
 
 You can also run them on binder using these links:
