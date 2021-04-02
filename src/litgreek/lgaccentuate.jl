@@ -1,24 +1,12 @@
 # Functions for manipulating accents.
 
-"""
-Remove all accent characters from `s`.
-"""
-function rmaccents(s::AbstractString)
-    stripped = []
-    dict = accentstripdict()
-    for c in Unicode.normalize(s, :NFKC)
-        if c in keys(dict)
-            push!(stripped, dict[c])
-        else
-            push!(stripped,c)
-        end
-    end
-    join(stripped,"")
-end
 
 """
 Add an acute accent to a single vowel or diphthong.
 
+$(SIGNATURES)
+
+# Examples
 ```julia-repl
 julia> PolytonicGreek.addacute("ᾀ")
 "ᾄ"
@@ -26,12 +14,18 @@ julia> PolytonicGreek.addacute("τα")
 ┌ Warning: addacute: can't add acute accent to vowel τα
 ```
 """
-function addacute(vowel::AbstractString)
-    dict = acutedict()
-    if vowel in keys(dict)
-        dict[vowel]
+function addacute(vowel::AbstractString; ortho::OrthographicSystem=literaryGreek())
+    bare = stripquant(vowel)
+    dict = acutedict(ortho)
+    if bare in keys(dict)
+        accented = dict[bare]
+        if occursin("_", vowel)
+            string(accented,"_")
+        else
+            accented
+        end
     else
-        @warn("addacute: can't add acute accent to vowel $vowel")
+        @warn("addacute: can't add acute accent to string $vowel")
         nothing
     end
 end
@@ -40,7 +34,10 @@ end
 """
 Add a circumflex accent to a single vowel or diphthong
 
-Examples:
+$(SIGNATURES)
+
+# Examples
+
 ```julia-repl
 julia> PolytonicGreek.addcircumflex("ᾀ")
 "ᾆ"
@@ -48,21 +45,34 @@ julia> PolytonicGreek.addcircumflex("τα")
 ┌ Warning: addcircumflex: can't add circumflex accent to vowel τα
 ```
 """
-function addcircumflex(vowel::AbstractString)
-    dict = circumflexdict() 
-    if vowel in keys(dict)
-        dict[vowel]
+function addcircumflex(vowel::AbstractString; ortho::OrthographicSystem=literaryGreek())
+    bare = stripquant(vowel)
+    dict = circumflexdict(ortho) 
+    if bare in keys(dict)
+        accented = dict[bare]
+        if occursin("_", vowel)
+            string(accented,"_")
+        else
+            accented
+        end
     else
-        @warn("addcircumflex: can't add circumflex accent to vowel $vowel")
+        @warn("addcircumflex: can't add circumflex accent to string $vowel")
         nothing
     end
 end
 
 """
 Add specified accent to a single syllable.  
+
+$(SIGNATURES)
+
+# Parameters
+
 `syll` is a string value for a single syllable.
 `accent` is either `:ACUTE` or `:CIRCUMFLEX`.  The
 function returns `nothing` for any other symble for accent.
+
+# Examples
 
 ```julia-repl
 julia> PolytonicGreek.accentsyllable("των", :CIRCUMFLEX)
@@ -74,18 +84,33 @@ julia> PolytonicGreek.accentsyllable("ᾀ", :ACUTE)
 ```
 """
 function accentsyllable(syll::AbstractString, accent::Symbol)
-    # Check that only one syllable
+    # Check that syll is only one syllable
     sylls = syllabify(syll)
     if length(sylls) > 1
         @warn("accentsyllable: string $syll is more than one syllable.")
         nothing
     else
         vowels = vowelsonly(syll)
+        barevowels = stripquant(vowels)
 
         if accent == :ACUTE
-            replace(syll, vowels => addacute(vowels))
+            accentedvowel = addacute(barevowels)
+            if occursin("_", vowels)
+                rplcmnt = string(accentedvowel,"_")
+                replace(syll, string(barevowels,"_") => rplcmnt)
+            else 
+                replace(syll, barevowels => accentedvowel)
+            end
+
         elseif accent == :CIRCUMFLEX
-            replace(syll, vowels => addcircumflex(vowels))
+            accentedvowel = addcircumflex(barevowels)
+            if occursin("_", vowels)
+                rplcmnt = string(accentedvowel,"_")
+                replace(syll, string(barevowels,"_") => rplcmnt)
+            else 
+                replace(syll, barevowels => accentedvowel)
+            end
+
         else
             @warn("accentsyllable: value of accent was neither :ACUTE nor :CIRCUMFLEX.")
         end
@@ -93,14 +118,20 @@ function accentsyllable(syll::AbstractString, accent::Symbol)
 end
 
 
-"Place accent on ultima"
+"""Place accent on ultima.
+
+$(SIGNATURES)
+"""
 function accentultima(wrd::AbstractString, accent::Symbol)
     sylls = syllabify(wrd)
     sylls[end] = accentsyllable(ultima(wrd), accent)
     join(sylls,"")
 end
 
-"Place accent on penult"
+"""Place accent on penult.
+
+$(SIGNATURES)
+"""
 function accentpenult(wrd::AbstractString, accent::Symbol)
     sylls = syllabify(wrd)
     if length(sylls) < 2
@@ -112,7 +143,10 @@ function accentpenult(wrd::AbstractString, accent::Symbol)
     end
 end
 
-"Place accent on antepenult"
+"""Place accent on antepenult.
+
+$(SIGNATURES)
+"""
 function accentantepenult(wrd::AbstractString)
     sylls = syllabify(wrd)
     if length(sylls) < 3
@@ -127,16 +161,17 @@ end
 
 """
 Accent word according to specified system of accent placement.
-`wrd` is a string value representing a single lexical token.
-`placement` is one of `:RECESSIVE` for recessive accent 
+
+$(SIGNATURES)
+
+# Parameters
+
+- `wrd` is a string value representing a single lexical token.
+- `placement` is one of `:RECESSIVE` for recessive accent 
 or `:PENULT` for persistent accent on the penultimate syllable.
+
 Note that it is not possible to accent the ultima correctly without
 additional morphological information beyond the string value of the token.
-
-Examples:
-```julia-repl
-
-```
 """
 function  accentword(wrd::AbstractString, placement::Symbol)
     sylls = syllabify(wrd)
@@ -147,7 +182,7 @@ function  accentword(wrd::AbstractString, placement::Symbol)
             nothing
         else
             pnlt = penult(wrd)
-            if longsyllable(pnlt) && shortsyllable(ult)
+            if longsyllable(pnlt) && finalshort(ult)
                 accentpenult(wrd, :CIRCUMFLEX)
             else
                 accentpenult(wrd, :ACUTE)
@@ -162,7 +197,7 @@ function  accentword(wrd::AbstractString, placement::Symbol)
             if length(sylls) == 2
                 accentword(wrd, :PENULT)
 
-            elseif longsyllable(ult)
+            elseif finallong(ult)
                 accentpenult(wrd, :ACUTE)
 
             else
@@ -177,7 +212,10 @@ end
 
 
 
-"Return ultima"
+"""Return ultima.
+
+$(SIGNATURES)
+"""
 function ultima(s)
     sylls = syllabify(s)
     if isempty(sylls)
@@ -189,7 +227,10 @@ function ultima(s)
 end
 
 
-"Return penult"
+"""Return penult.
+
+$(SIGNATURES)
+"""
 function penult(s)
     sylls = syllabify(s)
     if length(sylls) < 2
@@ -200,7 +241,10 @@ function penult(s)
     end
 end
 
-"""
+"""Return antepenult.
+
+$(SIGNATURES)
+
 NB: Rms accent since they're not relevant to syllables.
 """
 function antepenult(s)
@@ -213,16 +257,17 @@ function antepenult(s)
     end
 end
 
-
-
-
-
-
-
 """
 True if `syll` is metrically long by nature.
 
-Examples:
+$(SIGNATURES)
+
+# Arguments
+
+- `syll` is text for a single syllable
+- `ortho` is a `GreekOrthography`
+
+# Examples
 
 ```julia-repl
 julia> PolytonicGreek.longsyllable("τει")
@@ -239,16 +284,57 @@ function longsyllable(syll::AbstractString)
         @warn("longsyllable: string $syll includes more than syllable.")
         nothing
     else
-        vowels = vowelsonly(syll)
-        diphlist = split(DIPHTHONGS, "|") 
-        longies = split(LONGVOWELS,"")
-        vowels in diphlist || vowels in longies
+        vowels = rmaccents(syll) |> vowelsonly
+        diphlist = split(LG_DIPHTHONGS, "|") 
+        longies = split(LG_LONGVOWELS,"")
+        
+        vowels in diphlist || vowels in longies || vowels in lglongbynature()
     end
+end
+
+
+
+"""
+True if `syll` counts as long for accent in ultima.
+
+$(SIGNATURES)
+"""
+function finallong(syll::AbstractString)
+    # Sanity check:
+    sylls = syllabify(syll)
+    
+    if (length(sylls) > 1)
+        @warn("finallong: string $syll includes more than syllable.")
+        nothing
+    else
+        vowels = vowelsonly(syll)
+        diphlist = split(LG_DIPHTHONGS, "|") 
+        longies = split(LG_LONGVOWELS,"")
+        
+        if vowels in LG_FINALSHORT
+            false
+        else 
+            vowels in diphlist || vowels in longies || vowels in lglongbynature()
+        end
+    end
+end
+
+
+"""
+True if `syll` counts as short for accent in ultima.
+
+$(SIGNATURES)
+"""
+function finalshort(syll::AbstractString)
+    ! finallong(syll)
 end
 
 """
 True if `syll` is *not* long by nature.
-Examples:
+
+$(SIGNATURES)
+
+# Examples
 
 ```julia-repl
 julia> PolytonicGreek.shortsyllable("ε")
@@ -265,7 +351,9 @@ end
 """
 True if `s` contains a diphthong.
 
-Examples:
+$(SIGNATURES)
+
+# Examples
 
 ```julia-repl
 julia> PolytonicGreek.includesdiphthong("εὐθύς")
@@ -275,7 +363,7 @@ false
 ```
 """
 function includesdiphthong(s::AbstractString)
-    diphlist = split(DIPHTHONGS, "|")
+    diphlist = split(LG_DIPHTHONGS, "|")
     for diph in diphlist
         if occursin(diph, s)
             return true
@@ -286,31 +374,37 @@ end
 
 
 """
-Convert grave accent to acute.    
+Convert grave accent to acute.   
+
+$(SIGNATURES)
 """
 function flipaccent(s)
+    bare = stripquant(s)
     dict = flipdict()
     modified = []
-    for c in nfkc(s)
-        #println(string(c))
-        #showcps(string(c))
-        #println("Key? ", string(c) in keys(dict))
+    for c in nfkc(bare)
         if string(c) in keys(dict)
             flipped = dict[string(c)]
-            #println("Flipped ", flipped)
             push!(modified, flipped)
         else
             push!(modified, string(c)) 
         end
     end
-    join(modified,"")
+    accented = join(modified,"")
+    if occursin("_", s)
+        string(accented, "_")
+    else
+        accented
+    end
 end 
 
 
 """
 Remove all consonants from `s`.
 
-Example:
+$(SIGNATURES)
+
+# Example
 
 ```julia-repl
 julia> PolytonicGreek.vowelsonly("τῶν")
@@ -318,7 +412,7 @@ julia> PolytonicGreek.vowelsonly("τῶν")
 ```
 """
 function vowelsonly(s::AbstractString)
-    re = Regex("[$CONSONANTS]")
+    re = Regex("[$LG_CONSONANTS]")
     replace(s, re => "")
 end
 

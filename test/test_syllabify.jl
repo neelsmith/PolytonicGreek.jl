@@ -1,5 +1,5 @@
 @testset "Test splitting on morpheme boundary" begin
-    morph = Unicode.normalize("εἰσ#ῄα", :NFKC) |> rmaccents
+    morph = nfkc("εἰσ#ῄα") |> rmaccents
     divided = PolytonicGreek.splitmorphemeboundary(morph)
     @test divided == "εἰσ ῃα"
 end
@@ -120,3 +120,4 @@ end
     @test syllables == expected
 end
   
+

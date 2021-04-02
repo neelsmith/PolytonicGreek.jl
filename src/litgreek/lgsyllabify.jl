@@ -11,27 +11,24 @@ Smyth:
 - 
 =#
 
-
-
-
-"""Syllabification respects morpheme boundaries.
-
 """
-function splitmorphemeboundary(s)
-    replace(s, "#" => " ")
-end
+Diaeresis starts a new syllable.
 
-"""Diaeresis starts a new syllable.
+$(SIGNATURES)
 
 προΐστημι breaks as "προ ϊστημι"
 
 """
 function splitdiaeresis(s)
-    re = Regex("([$DIAERESES])")
+    re = Regex("([$LG_DIAERESES])")
     replace(s, re => s" \1") 
 end
 
+
+
 """Mu+nu stay together.
+
+$(SIGNATURES)
 
 ἀναμιμνησκόμενος breaks as "ἀναμι μνησκομενος"
 """
@@ -39,21 +36,25 @@ function splitmunu(s)
     replace(s, "μν" => " μν")
 end
 
-
 """Split between a liquid and non-liquid consonant."""
 function splitliqcons(s)
-    re = Regex("([$LIQUIDS])([$NONLIQUIDS])")
+    re = Regex("([$LG_LIQUIDS])([$LG_NONLIQUIDS])")
     replace(s, re => s"\1 \2")
 end
 
 
-"""Split between a diphthong and following vowel.
+"""$(SIGNATURES)
 
-κελεύει split as "κελευ ει"
+Split between a diphthong and following vowel.
 
+# Example
+```jldoctest
+PolytonicGreek.splitdiphthongvowel("κελεύει")
+"κελευ ει"
+```
 """
 function splitdiphthongvowel(s)
-    re = Regex("($DIPHTHONGS)([$VOWELS])")
+    re = Regex("($LG_DIPHTHONGS)([$LG_VOWELS])")
     replace(s, re => s"\1 \2")
 end
 
@@ -63,7 +64,7 @@ end
 
 """
 function splitvoweldiphthong(s)
-    re = Regex("([$VOWELS])($DIPHTHONGS)")
+    re = Regex("([$LG_VOWELS])($LG_DIPHTHONGS)")
     replace(s, re => s"\1 \2")
     
 end
@@ -74,7 +75,7 @@ end
 
 """
 function splitshortvowelvowel(s)
-    re = Regex("([$POSSIBLESHORT$SHORTVOWELS])([αεηοωᾳῃῳ])")
+    re = Regex("([$LG_POSSIBLESHORT$LG_SHORTVOWELS])([αεηοωᾳῃῳ])")
     replace(s, re => s"\1 \2")
 end
 
@@ -84,7 +85,7 @@ end
 
 """
 function splitlongvowelvowel(s)
-    re = Regex("([$LONGVOWELS])([$VOWELS])")
+    re = Regex("([$LG_LONGVOWELS])([$LG_VOWELS])")
     replace(s, re => s"\1 \2")
 end
 
@@ -110,7 +111,7 @@ end
 
 
 function splitconsonantcluster(s)
-    re = Regex("([$VOWELS])([βγδζθκπξστφχψ][μνβγδζθκλξπρστφχψ])")
+    re = Regex("([$LG_VOWELS])([βγδζθκπξστφχψ][μνβγδζθκλξπρστφχψ])")
     replace(s, re => s"\1 \2")
 end
 
@@ -118,14 +119,24 @@ end
 
 """Consonant between two vowels goes with second vowel."""
 function splitvcv(s)
-    re = Regex("([$VOWELS])([$CONSONANTS])([$VOWELS])")
+    re = Regex("([$LG_VOWELS])([$LG_CONSONANTS])([$LG_VOWELS])")
     replace(s, re => s"\1 \2\3")
 end
 
 """Split string `s` into an Array of strings representing syllables.
+
+$(SIGNATURES)
+
+# Example
+```jldoctest
+syllables = PolytonicGreek.syllabify("κελεύει")
+join(syllables, "-")
+"κε-λευ-ει"
+```
+
 """
-function syllabify(s)
-    Unicode.normalize(s, :NFKC) |>
+function syllabify(s, ortho::LiteraryGreekOrthography)
+    nfkc(s) |>
     rmaccents  |>
     splitmorphemeboundary |>
     splitdiaeresis |> 

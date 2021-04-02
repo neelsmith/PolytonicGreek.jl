@@ -15,19 +15,13 @@ makedocs(
         "Home" => "index.md",
         "Manual" => Any[
             "guide/orthography.md",
+            "guide/orthography-details.md",
             "guide/sorting.md",
             "guide/accents.md",
             "guide/syllabification.md",
             "utilities.md"
         ],
-        "API documentation" => Any[
-            "api/apis_ortho.md",
-            "api/apis_sorting.md",
-            "api/apis_accents.md",
-            "api/apis_syllables.md",
-            "api/apis_other.md",
-            
-        ]
+        "API documentation" => "api/index.md"
     ]
 )
 

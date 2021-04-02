@@ -1,5 +1,5 @@
 "An orthographic system for standard orthography of printed literary Greek."
-struct LiteraryGreekOrthography <: OrthographicSystem
+struct LiteraryGreekOrthography <: GreekOrthography
     codepoints
     tokencategories
     tokenizer

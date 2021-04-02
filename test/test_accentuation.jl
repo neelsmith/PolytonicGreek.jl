@@ -65,6 +65,13 @@ end
 end
 
 @testset "Test normalizing word string to morphologically normal form" begin
-    @test PolytonicGreek.tokenform("ἄνθρωπός") == "ἄνθρωπος"
-    @test PolytonicGreek.tokenform("ὁδὸν") == "ὁδόν"
+    @test PolytonicGreek.tokenform("ἄνθρωπός") == nfkc("ἄνθρωπος")
+    @test PolytonicGreek.tokenform("ὁδὸν") == nfkc("ὁδόν")
+end
+
+
+@testset "Test recognizing final οι/αι as short" begin
+    @test PolytonicGreek.finallong("οι") == false
+    @test accentword("ἀνθρωποι", :RECESSIVE) == nfkc("ἄνθρωποι")
+    @test accentword("γνωμα_ς", :PENULT) == nfkc("γνώμα_ς")
 end
