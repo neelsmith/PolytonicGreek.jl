@@ -33,7 +33,3 @@ end
 function accentword(s::AbstractString)
 end
 
-
-function longsyllable(s::AbstractString)
-    longsyllable(s, literaryGreek())
-end

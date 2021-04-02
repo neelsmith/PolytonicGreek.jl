@@ -276,7 +276,7 @@ julia> PolytonicGreek.longsyllable("τε")
 false
 ```
 """
-function longsyllable(syll::AbstractString; ortho::GreekOrthography = literaryGreek())
+function longsyllable(syll::AbstractString)
     # Sanity check:
     sylls = syllabify(syll)
     
@@ -299,7 +299,7 @@ True if `syll` counts as long for accent in ultima.
 
 $(SIGNATURES)
 """
-function finallong(syll::AbstractString; ortho::GreekOrthography = literaryGreek())
+function finallong(syll::AbstractString)
     # Sanity check:
     sylls = syllabify(syll)
     

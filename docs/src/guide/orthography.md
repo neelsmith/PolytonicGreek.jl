@@ -15,9 +15,11 @@ Implementations of `GreekOrthography` can therefore can be used with generic fun
 In addition, they can use functions specific to implementations of `GreekOrthography` to remove and add accents to words, to break words into syllables, and to sort words according to the logic of the Greek alphabet.
 
 
-## Literary Greek: generic functions
+## An implementation for literary Greek
 
-`LiteraryGreekOrthography` is a subtype of `GreekOrthography`.  The `literaryGreek()` function creates a `LiteraryGreekOrthography` configured to work texts in the orthography of standard printed editions of literary Greek.  You can see its inheritance from `Orthography` via `GreekOrthography`.  This gives you access to functions applying to any subtype of `Orthography` or any subtype the more specific `GreekOrthography`.
+The `literaryGreek()` function creates a `LiteraryGreekOrthography` object. This  is a subtype of `GreekOrthography` configured to work with texts in the orthography of standard printed editions of literary Greek. 
+
+In the following code blocks, you can see its inheritance from `Orthography` via `GreekOrthography`.  This gives you access both to functions applying to any subtype of `Orthography` and to functions applying to subtypes of the more specific `GreekOrthography`.
 
 
 
@@ -36,8 +38,9 @@ typeof(lg) |> supertype |> supertype
 ```
 
 
+### From the `OrthographicSystem` interface
 
-### Assessing characters and strings
+#### Assessing characters and strings
     
     
 ```@example loaded
@@ -63,7 +66,7 @@ validstring(lg, notgreek)
 ```
 
 
-### Tokenizing strings
+#### Tokenizing strings
     
 Subtypes of `Orthography.OrthographicSystem` include a `tokenizer` function that analyzes a string encoded in this orthographic system into an Array of `OrthographicToken`s, which are classified string values.  For example, the string *μῆνιν ἄειδε,* is analyzed as three tokens, two of type `LexicalToken`, and one of type `PunctuationToken`
 
@@ -90,9 +93,11 @@ tokenized[end].text
 tokenized[end].tokencategory
 ```
 
-## Literary Greek: functions specific to Greek
+### From the `GreekOrthography` interface
 
-### Accentuation
+The following functions allow you to specify a `GreekOrthography` to apply, but also allow you to default to using the `LiteraryGreekOrthography`.
+
+#### Accentuation
 
 Strip accents from a string according to a specified implementation of `GreekOrthography`.
 
@@ -100,7 +105,7 @@ Strip accents from a string according to a specified implementation of `GreekOrt
 rmaccents("πολλά", ortho = lg)
 ```
 
-The default orthography is a `LiteraryGreekOrthography`, so you could equivalently:
+Equivalently:
 
 ```@example loaded
 rmaccents("πολλά")
@@ -110,7 +115,10 @@ You can add accents to an unaccented word by ....
 
 accentword("ἀνθρωποι", :RECESSIVE) 
 
-### Syllabification
+#### Syllabification
 
+syllabify
 
-### Sorting
+#### Sorting
+
+sortWords

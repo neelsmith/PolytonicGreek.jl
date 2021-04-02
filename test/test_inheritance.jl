@@ -6,7 +6,10 @@
     @test rmaccents("πολλά") == expected
 end
 
-@testset "Test syllable quantity" begin
-    lg = literaryGreek()
-    @test PolytonicGreek.longsyllable("οὖν", ortho = lg)
-end
+#= Add tests for 
+
+    - accentsyllable
+    - syllabify
+    - sortwords
+    
+=#
