@@ -2,13 +2,13 @@
 
 @testset "Test simple categories in literary Greek" begin
     lg = literaryGreek()
-    @test occursin("β", consonants(lg))
-    @test occursin("α", consonants(lg)) == false
+    @test occursin("β", lg.consonants())
+    @test occursin("α", lg.consonants()) == false
 
-    @test occursin(  "α", vowels(lg))
-    @test occursin( "ἀ", vowels(lg))
-    @test occursin( "ἁ", vowels(lg))
-    @test occursin( "ᾳ", vowels(lg))
-    @test occursin( "β", vowels(lg)) == false
+    @test occursin(  "α", lg.vowels())
+    @test occursin( "ἁ", lg.vowels())
+    @test occursin( "ἀ", lg.vowels())
+    @test occursin( "ᾳ", lg.vowels())
+    @test occursin( "β", lg.vowels()) == false
 end
 

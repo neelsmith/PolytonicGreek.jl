@@ -5,7 +5,7 @@
 
 $(SIGNATURES)
 """
-function consonants(ortho::LiteraryGreekOrthography)
+function lgconsonants()
     "βγδζθκλμνξπρστφχψς"
 end
 
@@ -20,6 +20,6 @@ This does not include codepoints for vowels combined with accents.
 It does include codepoints for vowels combined
 with breathing, diaeresis or iota subscript.        
 """
-function vowels(ortho::LiteraryGreekOrthography)
+function lgvowels()
     nfkc("αἀἁᾳἐἑηἠἡῃιἱἰϊοὁὀυὑὐϋωὡὠῳ")
 end
