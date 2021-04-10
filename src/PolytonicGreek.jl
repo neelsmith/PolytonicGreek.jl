@@ -18,7 +18,8 @@ include("litgreek/lgsyllabify.jl")
 include("litgreek/ucodeutils.jl")
 include("litgreek/simplecategories.jl")
 
-export vowels, consonants
+
+export GreekOrthography, vowels, consonants
 export LiteraryGreekOrthography, literaryGreek
 export tokenizeLiteraryGreek
 export rmaccents, accentword
