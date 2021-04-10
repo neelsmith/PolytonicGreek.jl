@@ -4,7 +4,6 @@ module PolytonicGreek
 using Documenter, DocStringExtensions
 using Orthography, Unicode
 
-
 include("common/abstract.jl")
 include("litgreek/lgortho.jl")
 
@@ -17,7 +16,9 @@ include("litgreek/lgaccentdicts.jl")
 include("litgreek/lgaccentuate.jl")
 include("litgreek/lgsyllabify.jl")
 include("litgreek/ucodeutils.jl")
+include("litgreek/simplecategories.jl")
 
+export vowels, consonants
 export LiteraryGreekOrthography, literaryGreek
 export tokenizeLiteraryGreek
 export rmaccents, accentword

@@ -53,6 +53,8 @@ PolytonicGreek.normalizeaccentcombos
 LiteraryGreekOrthography
 literaryGreek
 tokenizeLiteraryGreek
+vowels
+consonants
 ```
 
 ### Internals
