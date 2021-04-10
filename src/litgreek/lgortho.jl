@@ -3,6 +3,8 @@ struct LiteraryGreekOrthography <: GreekOrthography
     codepoints
     tokencategories
     tokenizer
+    vowels
+    consonants
 end
 
 """
@@ -16,7 +18,8 @@ function literaryGreek()
         Orthography.LexicalToken,
         Orthography.PunctuationToken
     ]
-    LiteraryGreekOrthography(cps, ttypes, tokenizeLiteraryGreek)
+    LiteraryGreekOrthography(cps, ttypes, tokenizeLiteraryGreek, lgvowels, lgconsonants)
+  
 end
 
 
