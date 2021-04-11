@@ -16,7 +16,7 @@ $(SIGNATURES)
 - `s` is a Greek string
 - `ortho` is an implementation of `GreekOrthography`
 """
-function rmaccents(s::AbstractString; ortho = literaryGreek())
+function rmaccents(s::AbstractString; ortho::T = literaryGreek()) where {T <: GreekOrthography}
     stripped = []
     dict = accentstripdict(ortho)
     for c in nfkc(s)
@@ -29,7 +29,7 @@ function rmaccents(s::AbstractString; ortho = literaryGreek())
     join(stripped,"")
 end
 
-
+#=
 function accentword(s::AbstractString)
 end
-
+=#
