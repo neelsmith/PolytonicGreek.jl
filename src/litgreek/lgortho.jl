@@ -7,6 +7,23 @@ struct LiteraryGreekOrthography <: GreekOrthography
     consonants
 end
 
+
+"""Implement Orthography's codepoints functions for LiteraryGreekOrthography.
+
+$(SIGNATURES)    
+"""    
+function codepoints(ortho::LiteraryGreekOrthography)
+    ortho.codepoints
+end
+
+"""Implement Orthography's tokentypes functions for LiteraryGreekOrthography.
+
+$(SIGNATURES)    
+"""    
+function tokentypes(ortho::LiteraryGreekOrthography)
+    ortho.tokencategories
+end
+
 """
 Instantiate a LiteraryGreekOrthography with correct code points and token types.
 
@@ -24,7 +41,10 @@ end
 
 
 
-"Compose a string with all alphabetic characters."
+"""Compose a string with all alphabetic characters.
+
+$(SIGNATURES)
+"""
 function alphabetic()
     ranges = [
         '\u0027'; # single quote for elision
@@ -47,7 +67,10 @@ function alphabetic()
 end
 
 
-"Compose a string with all alphabetic characters."
+"""Compose a string with all alphabetic characters.
+
+$(SIGNATURES)
+"""
 function punctuation()
     ".,;:"
 end

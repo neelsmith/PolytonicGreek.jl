@@ -1,3 +1,8 @@
+@testset "Test literary Greek implementation of Orthography functions" begin
+    lg = literaryGreek()
+    @test codepoints(lg) == lg.codepoints
+    @test tokentypes(lg) == [Orthography.LexicalToken, Orthography.PunctuationToken]
+end
 
 @testset "Test generating alphabetic characters" begin
     alphas = PolytonicGreek.alphabetic()

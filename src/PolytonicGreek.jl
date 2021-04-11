@@ -2,7 +2,12 @@
 module PolytonicGreek
 
 using Documenter, DocStringExtensions
-using Orthography, Unicode
+using Unicode
+using Orthography
+
+import Orthography: tokentypes 
+import Orthography: codepoints 
+
 
 include("common/abstract.jl")
 include("litgreek/lgortho.jl")
@@ -21,6 +26,7 @@ include("litgreek/simplecategories.jl")
 
 export GreekOrthography, vowels, consonants
 export LiteraryGreekOrthography, literaryGreek
+export tokentypes, codepoints
 export tokenizeLiteraryGreek
 export rmaccents, accentword
 export syllabify

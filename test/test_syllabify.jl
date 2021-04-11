@@ -123,7 +123,7 @@ end
 
 @testset "Test syllabification with explicit orthography" begin
     lg = literaryGreek()
-    @test syllabify("κατ#αισχύνουσι", ortho = lg) == [ "κατ", "αι","σχυ","νου","σι"]
+    @test syllabify("κατ#αισχύνουσι", lg) == [ "κατ", "αι","σχυ","νου","σι"]
 end
 
 
