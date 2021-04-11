@@ -13,8 +13,8 @@ This does not include code points representing vowels combined
 with accents. It does include any code points representing
 vowels plus breathing or vowels with subscript.
 """
-function vowels(ortho::GreekOrthography)
-    @warn "Function vowels not defined for orthography $ortho"
+function vowels(ortho::T) where {T <: GreekOrthography}
+    @warn "Function vowels not defined for orthography $(typeof(ortho))"
     nothing
 end
 
@@ -23,7 +23,7 @@ end
 
 $(SIGNATURES)
 """
-function consonants(ortho::GreekOrthography)
-    @warn "Function consonants not defined for orthography $ortho"
+function consonants(ortho::T) where {T <: GreekOrthography}
+    @warn "Function consonants not defined for orthography $(typeof(ortho))"
     nothing
 end

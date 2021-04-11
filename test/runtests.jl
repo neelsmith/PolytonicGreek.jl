@@ -11,6 +11,4 @@ include("test_orthography.jl")
 include("test_simple.jl")
 include("test_quantity.jl")
 include("test_inheritance.jl")
-
-
-
+include("test_incompleteimpl.jl")
