@@ -1,9 +1,20 @@
 
-@testset "Test stripping accents" begin
+@testset "Test stripping accents with default orthography" begin
     s = "πολλά"
     expected = "πολλα"
     @test rmaccents(s) == expected
 end
+
+
+
+
+@testset "Test stripping accents with specified orthography" begin
+    s = "πολλά"
+    expected = "πολλα"
+    lg = literaryGreek()
+    @test rmaccents(s, ortho = lg) == expected
+end
+
 
 @testset "Test adding acute accents to vowels" begin
     @test PolytonicGreek.addacute("α") == "ά"
