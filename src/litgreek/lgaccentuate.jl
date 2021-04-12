@@ -345,7 +345,7 @@ false
 
 """
 function shortsyllable(syll::AbstractString)
-    ! (longsyllable(syll))
+    ! occursin(syll, "^")  && ! (longsyllable(syll))
 end
 
 """

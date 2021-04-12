@@ -30,3 +30,8 @@ end
 @testset "Test adding accents to words with long vowels" begin
     @test accentword("γνωμα_ς", :PENULT) == nfkc("γνώμα_ς")
 end
+
+
+@testset "Test adding accents to words with explicitly short vowels " begin
+    @test accentword("πολεω^ς", :RECESSIVE) == nfkc("πόλεω^ς")
+end

@@ -41,6 +41,8 @@ end
 @testset "Test adding accents to words" begin
     @test accentword("ἀνθρωπος", :RECESSIVE) == "ἄνθρωπος"
     @test accentword("ἀνθρωπους", :RECESSIVE) == "ἀνθρώπους"
+    @test accentword("ἀνθρωποι", :RECESSIVE) == nfkc("ἄνθρωποι")
+    @test accentword("θεραπαιναι", :RECESSIVE) == nfkc("θεράπαιναι")
     @test accentword("δωρον", :PENULT) == "δῶρον"
     @test accentword("δωρῳ", :PENULT) == "δώρῳ"
 end
