@@ -1,0 +1,21 @@
+```@meta
+CurrentModule = PolytonicGreek
+```
+
+# Orthography and accentuation of the `LiteraryGreekOrthography` type
+
+Algorithmic accentuation of Greek words is complicated. First, the word has to be correctly divided into syllables (illustrated in the preceding section).  Then the quantity of the syllable has to be evaluated.  
+
+Written literary Greek does not encode sufficient information to do this.
+
+- the characters *α, ι, υ* may be either long or short by nature
+- due to quantitative metathesis, in some circumstances the inherently long vowel ω may count as short for accent (e.g., genitive singular of πόλις, πόλεως)
+
+The `LiteraryGreekOrthography` supports including explicit indications of vowel quantity to disambiguate these cases as follows:;
+
+- α, ε, ι, ο, υ  are treated as short by default
+- η, ω are treated as long by default
+- an underscore following α, ι, or υ indicates that the preceding vowel is long (e.g., γνώμα_ς)
+- a hat following ω indicates that the preceding vowel is short (e.g., πόλεω^ς)
+
+The underscore and hat characters are not considered valid characters:  `validchar` will return `false` for strings containing those characters.  However, accentuation functions will work properly with those metacharacters, which can be stripped out after the fact to arrive at a valid, accented string.

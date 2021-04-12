@@ -13,13 +13,16 @@ makedocs(
     sitename = "PolytonicGreek.jl",
     pages = [
         "Home" => "index.md",
-        "Manual" => Any[
+        "Greek orthography" => Any[
             "guide/orthography.md",
             "guide/orthography-details.md",
             "guide/sorting.md",
             "guide/accents.md",
             "guide/syllabification.md",
             "utilities.md"
+        ],
+        "The LiteraryGreek implementation" => Any[
+              "litgreek/ortho.md"
         ],
         "API documentation" => "api/index.md"
     ]

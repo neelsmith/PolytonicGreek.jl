@@ -20,7 +20,7 @@ const LG_LONGVOWELS = nfkc("ηῃωῳᾳἡᾑὡᾡᾁἠᾐὠᾠᾀ")
 const LG_AMBIGUOUSVOWELS = nfkc("αιυἀἰὐἁἱὑϊϋ")
 
 """Compose a list of all possible vowels with breathing or diaeresis that could
-be qualified by a vowel length marker.
+be qualified by a long-vowel marker.
 
 $(SIGNATURES)
 """
@@ -31,6 +31,7 @@ function lglongbynature()
     end
     macra
 end
+
 
 # diphthongs:
 # this is a Regex disjunction for diphthongs:
