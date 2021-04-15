@@ -3,8 +3,6 @@ struct LiteraryGreekOrthography <: GreekOrthography
     codepoints
     tokencategories
     tokenizer
-    vowels
-    consonants
 end
 
 
@@ -35,11 +33,27 @@ function literaryGreek()
         Orthography.LexicalToken,
         Orthography.PunctuationToken
     ]
-    LiteraryGreekOrthography(cps, ttypes, tokenizeLiteraryGreek, lgvowels, lgconsonants)
+    LiteraryGreekOrthography(cps, ttypes, tokenizeLiteraryGreek)
+    
   
 end
 
 
+"""Implement vowels function of GreekOrthography interface.
+
+$(SIGNATURES)
+"""
+function vowels(ortho::LiteraryGreekOrthography)
+    LG_VOWELS
+end
+
+"""Implement consonants function of GreekOrthography interface.
+
+$(SIGNATURES)
+"""
+function consonants(ortho::LiteraryGreekOrthography)
+    LG_CONSONANTS
+end
 
 """Compose a string with all alphabetic characters.
 
