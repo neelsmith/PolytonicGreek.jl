@@ -16,17 +16,17 @@ $(SIGNATURES)
 - `s` is a Greek string
 - `ortho` is an implementation of `GreekOrthography`
 """
-function rmaccents(s::AbstractString; ortho::T = literaryGreek()) where {T <: GreekOrthography}
-    stripped = []
-    dict = accentstripdict(ortho)
-    for c in nfkc(s)
-        if c in keys(dict)
-            push!(stripped, dict[c])
-        else
-            push!(stripped,c)
-        end
-    end
-    join(stripped,"")
+function rmaccents(s::AbstractString, ortho::T) where {T <: GreekOrthography}
+    @warn "No impelmentation of rmaccents function for orthography $(typeof(ortho))"
+    nothing
+end
+
+"""Default to using literary Greek orthography.
+
+$(SIGNATURES)
+"""
+function rmaccents(s::AbstractString)
+    rmaccents(s, literaryGreek())
 end
 
 #=

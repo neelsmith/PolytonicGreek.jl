@@ -1,6 +1,24 @@
 # Functions for manipulating accents.
 
 
+"""Implement GreekOrthography's rmaccents function for LiteraryGreekOrthography.
+
+$(SIGNATURES)
+"""
+function rmaccents(s::AbstractString, ortho::LiteraryGreekOrthography)
+    stripped = []
+    dict = accentstripdict(ortho)
+    for c in nfkc(s)
+        if c in keys(dict)
+            push!(stripped, dict[c])
+        else
+            push!(stripped,c)
+        end
+    end
+    join(stripped,"")
+end
+
+
 """
 Add an acute accent to a single vowel or diphthong.
 
