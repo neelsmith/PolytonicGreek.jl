@@ -12,7 +12,7 @@ end
     s = "πολλά"
     expected = "πολλα"
     lg = literaryGreek()
-    @test rmaccents(s, ortho = lg) == expected
+    @test rmaccents(s, lg) == expected
 end
 
 
