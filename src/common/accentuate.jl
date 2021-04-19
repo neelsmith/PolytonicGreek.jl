@@ -17,11 +17,11 @@ $(SIGNATURES)
 - `ortho` is an implementation of `GreekOrthography`
 """
 function rmaccents(s::AbstractString, ortho::T) where {T <: GreekOrthography}
-    @warn "No impelmentation of rmaccents function for orthography $(typeof(ortho))"
+    @warn "No implementation of rmaccents function for orthography $(typeof(ortho))"
     nothing
 end
 
-"""Default to using literary Greek orthography.
+"""Default to using literary Greek orthography for rmaccents.
 
 $(SIGNATURES)
 """
@@ -29,7 +29,25 @@ function rmaccents(s::AbstractString)
     rmaccents(s, literaryGreek())
 end
 
-#=
-function accentword(s::AbstractString)
+"""Count accents in `s`.
+
+$(SIGNATURES)
+
+
+# Parameters
+
+- `s` is a Greek string
+- `ortho` is an implementation of `GreekOrthography`
+"""
+function countaccents(s::AbstractString, ortho::T) where {T <: GreekOrthography}
+    @warn "No implementation of countaccents function for orthography $(typeof(ortho))"
+    nothing
 end
-=#
+
+"""Default to using literary Greek orthography for countaccents.
+
+$(SIGNATURES)
+"""
+function countaccents(s::AbstractString)
+    countaccents(s, literaryGreek())
+end

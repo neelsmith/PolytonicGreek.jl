@@ -445,7 +445,7 @@ end
 
 
 """
-function countaccents(s::AbstractString)
+function countaccents(s::AbstractString, ortho::LiteraryGreekOrthography = literaryGreek())
     normed = Unicode.normalize(s, :NFKC)
     accents = 0
     repertoire = allaccents()
