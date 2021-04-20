@@ -88,3 +88,7 @@ end
     @test accentword("ἀνθρωποι", :RECESSIVE) == nfkc("ἄνθρωποι")
     @test accentword("γνωμα_ς", :PENULT) == nfkc("γνώμα_ς")
 end
+
+@testset "Test recognizing non-final οι/αι as long" begin
+    @test PolytonicGreek.finallong("οις") 
+end
