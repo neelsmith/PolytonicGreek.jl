@@ -28,7 +28,8 @@ export GreekOrthography, vowels, consonants
 export LiteraryGreekOrthography, literaryGreek
 export tokentypes, codepoints
 export tokenizeLiteraryGreek
-export rmaccents, countaccents, accentword
+export rmaccents, countaccents
+export accentword, accentpenult, accentultima
 export syllabify
 
 
