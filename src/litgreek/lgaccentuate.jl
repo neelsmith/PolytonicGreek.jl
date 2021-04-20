@@ -324,16 +324,19 @@ function finallong(syll::AbstractString)
     if (length(sylls) > 1)
         @warn("finallong: string $syll includes more than syllable.")
         nothing
+
+    elseif endswith(syll, "οι") || endswith(syll, "αι")
+        false
     else
         vowels = vowelsonly(syll)
         diphlist = split(LG_DIPHTHONGS, "|") 
         longies = split(LG_LONGVOWELS,"")
-        
+        #=
         if vowels in LG_FINALSHORT
             false
-        else 
-            vowels in diphlist || vowels in longies || vowels in lglongbynature()
-        end
+        else =#
+        vowels in diphlist || vowels in longies || vowels in lglongbynature()
+        #end
     end
 end
 
