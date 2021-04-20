@@ -101,7 +101,7 @@ julia> PolytonicGreek.accentsyllable("ᾀ", :ACUTE)
 "ᾄ"
 ```
 """
-function accentsyllable(syll::AbstractString, accent::Symbol)
+function accentsyllable(syll::AbstractString, accent::Symbol, ortho::LiteraryGreekOrthography = literaryGreek())
     # Check that syll is only one syllable
     sylls = syllabify(syll)
     if length(sylls) > 1
@@ -140,7 +140,7 @@ end
 
 $(SIGNATURES)
 """
-function accentultima(wrd::AbstractString, accent::Symbol)
+function accentultima(wrd::AbstractString, accent::Symbol, ortho::LiteraryGreekOrthography = literaryGreek())
     sylls = syllabify(wrd)
     sylls[end] = accentsyllable(ultima(wrd), accent)
     join(sylls,"")
@@ -150,7 +150,7 @@ end
 
 $(SIGNATURES)
 """
-function accentpenult(wrd::AbstractString, accent::Symbol)
+function accentpenult(wrd::AbstractString, accent::Symbol, ortho::LiteraryGreekOrthography = literaryGreek())
     sylls = syllabify(wrd)
     if length(sylls) < 2
         @warn("accentpenult: can't accent word with fewer than two syllables $wrd")
@@ -161,7 +161,7 @@ function accentpenult(wrd::AbstractString, accent::Symbol)
     end
 end
 
-"""Place accent on antepenult.
+"""Place default accent(:ACUTE) on antepenult.
 
 $(SIGNATURES)
 """
@@ -191,7 +191,7 @@ or `:PENULT` for persistent accent on the penultimate syllable.
 Note that it is not possible to accent the ultima correctly without
 additional morphological information beyond the string value of the token.
 """
-function  accentword(wrd::AbstractString, placement::Symbol)
+function  accentword(wrd::AbstractString, placement::Symbol, ortho::LiteraryGreekOrthography = literaryGreek())
     sylls = syllabify(wrd)
     ult = ultima(wrd)
     if placement == :PENULT    

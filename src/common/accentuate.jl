@@ -7,6 +7,56 @@ function stripquant(s::AbstractString)
 end
 
 """
+Accent final syllable of `wrd`.
+
+$(SIGNATURES)
+
+# Parameters
+
+- `s` is a Greek string
+- `accent` is `:ACUTE`,  or `:CIRCUMFLEX`
+- `ortho` is an implementation of `GreekOrthography`
+"""
+function accentultima(wrd::AbstractString, accent::Symbol, ortho::T ) where {T <: GreekOrthography}
+    @warn "No implementation of accentultima function for orthography $(typeof(ortho))"
+    nothing
+end
+
+"""
+Accent penultimate syllable of `wrd`.
+
+$(SIGNATURES)
+
+# Parameters
+
+- `s` is a Greek string
+- `accent` is `:ACUTE`,  or `:CIRCUMFLEX`
+- `ortho` is an implementation of `GreekOrthography`
+"""
+function accentpenult(wrd::AbstractString, accent::Symbol, ortho::T) where {T <: GreekOrthography}
+    @warn "No implementation of accentpenult function for orthography $(typeof(ortho))"
+    nothing
+end
+
+
+"""
+Accent word `s`.
+
+$(SIGNATURES)
+
+# Parameters
+
+- `s` is a Greek string
+- `placement` is `:RECESSIVE`,  or `:PENULT`
+- `ortho` is an implementation of `GreekOrthography`
+"""
+function accentword(s, placement::Symbol, ortho::T) where {T <: GreekOrthography}
+    @warn "No implementation of accentword function for orthography $(typeof(ortho))"
+    nothing
+end
+
+
+"""
 Remove all accent characters from `s`.
 
 $(SIGNATURES)
