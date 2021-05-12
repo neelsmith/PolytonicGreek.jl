@@ -17,7 +17,8 @@ join(unicodesort, " ")
 
 ```jldoctest loaded
 using PolytonicGreek
-rationalsort = PolytonicGreek.sortWords(wordlist)
+lg = literaryGreek()
+rationalsort = PolytonicGreek.sortWords(wordlist,lg)
 join(rationalsort, " ")
 
 # output

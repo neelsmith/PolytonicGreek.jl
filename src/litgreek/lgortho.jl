@@ -127,7 +127,7 @@ Alphabetically sort a list of words in Unicode Greek.
 
 $(SIGNATURES)
 """
-function sortWords(words)
+function sortWords(words, ortho::LiteraryGreekOrthography)
     strippedpairs = map(wd -> ( lowercase(Unicode.normalize(wd, stripmark=true)), wd),words)
 	sorted = sort(strippedpairs)
 	map(pr -> pr[2], sorted)

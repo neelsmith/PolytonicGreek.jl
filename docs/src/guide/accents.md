@@ -14,7 +14,8 @@ Overview:  two exported functions allows you to remove accents from a string, or
 
 ```jldoctest accented
 using PolytonicGreek 
-rmaccents("πολλά")
+lg = literaryGreek()
+rmaccents("πολλά", lg)
 
 # output
 
@@ -22,7 +23,7 @@ rmaccents("πολλά")
 ```
 
 ```jldoctest accented
-accentword("ἀνθρωπος", :RECESSIVE)
+accentword("ἀνθρωπος", :RECESSIVE, lg)
 
 # output
 
