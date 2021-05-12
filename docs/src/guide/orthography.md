@@ -102,23 +102,27 @@ The following functions allow you to specify a `GreekOrthography` to apply, but 
 Strip accents from a string according to a specified implementation of `GreekOrthography`.
 
 ```@example loaded
-rmaccents("πολλά", ortho = lg)
+rmaccents("πολλά", lg)
 ```
 
-Equivalently:
+
+You can add accents to an unaccented word by specifying the accent pattern as `:RECESSIVE`
 
 ```@example loaded
-rmaccents("πολλά")
+accentword("ἀνθρωποι", :RECESSIVE, lg) 
 ```
-
-You can add accents to an unaccented word by ....
-
-accentword("ἀνθρωποι", :RECESSIVE) 
-
 #### Syllabification
 
-syllabify
+```@example loaded
+syllabify("ἄνθρωποι", lg) 
+```
+
+(See more extensive examples on the following page.)
 
 #### Sorting
 
-sortWords
+
+```@example loaded
+wordlist = split("μῆνιν ἄειδε θεά")
+sortWords(wordlist, lg)
+```

@@ -30,7 +30,7 @@ end
 
 @testset "Test sorting" begin
     s = "Μῆνιν ἄειδε, θεά, Πηληϊάδεω Ἀχιλῆος,"
-    res = PolytonicGreek.sortWords(split(s," "))
+    res = PolytonicGreek.sortWords(split(s," "), literaryGreek())
     @test res == ["ἄειδε,", "Ἀχιλῆος,", "θεά,", "Μῆνιν", "Πηληϊάδεω"]
 end
 

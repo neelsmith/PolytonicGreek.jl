@@ -32,7 +32,7 @@ export tokenizeLiteraryGreek
 export rmaccents, countaccents
 export accentword, accentpenult, accentultima
 export syllabify
-
+export sortWords
 
 end # module
 
