@@ -11,7 +11,8 @@ The following examples illustrate correct division of a variety of consonant and
 
 ```jldoctest syllables
 using PolytonicGreek 
-syllables = syllabify("ἄνδρασι")
+lg = literaryGreek()
+syllables = syllabify("ἄνδρασι",lg)
 join(syllables, "-")
 
 # output
@@ -19,7 +20,7 @@ join(syllables, "-")
 "ἀν-δρα-σι"
 ```
 ```jldoctest syllables
-syllables = syllabify("προΐστημι")
+syllables = syllabify("προΐστημι",lg)
 join(syllables, "-")
 
 # output
@@ -27,7 +28,7 @@ join(syllables, "-")
 "προ-ϊ-στη-μι"
 ```
 ```jldoctest syllables
-syllables = syllabify("ἀναμιμνησκόμενος")
+syllables = syllabify("ἀναμιμνησκόμενος",lg)
 join(syllables, "-")
 
 # output
@@ -36,7 +37,7 @@ join(syllables, "-")
 ```
 
 ```jldoctest syllables
-syllables = syllabify("καταβάλλω")
+syllables = syllabify("καταβάλλω",lg)
 join(syllables, "-")
 
 # output
@@ -46,7 +47,7 @@ join(syllables, "-")
 
 
 ```jldoctest syllables
-syllables = syllabify("δέομαι")
+syllables = syllabify("δέομαι",lg)
 join(syllables, "-")
 
 # output
@@ -57,7 +58,7 @@ join(syllables, "-")
 
 
 ```jldoctest syllables
-syllables = syllabify("ὀΐω")
+syllables = syllabify("ὀΐω",lg)
 join(syllables, "-")
 
 # output
@@ -68,7 +69,7 @@ join(syllables, "-")
 
 
 ```jldoctest syllables
-syllables = syllabify("ὀίω")
+syllables = syllabify("ὀίω",lg)
 join(syllables, "-")
 
 # output
@@ -78,7 +79,7 @@ join(syllables, "-")
 
 
 ```jldoctest syllables
-syllables = syllabify("ἑωρακυῖα")
+syllables = syllabify("ἑωρακυῖα",lg)
 join(syllables, "-")
 
 # output
@@ -90,7 +91,7 @@ join(syllables, "-")
 
 
 ```jldoctest syllables
-syllables = syllabify("δεδιέναι")
+syllables = syllabify("δεδιέναι",lg)
 join(syllables, "-")
 
 # output
@@ -101,7 +102,7 @@ join(syllables, "-")
 
 
 ```jldoctest syllables
-syllables = syllabify("ἔργμα")
+syllables = syllabify("ἔργμα",lg)
 join(syllables, "-")
 
 # output
@@ -112,7 +113,7 @@ join(syllables, "-")
 
 
 ```jldoctest syllables
-syllables = syllabify("οὐδέποτε")
+syllables = syllabify("οὐδέποτε",lg)
 join(syllables, "-")
 
 # output
@@ -123,7 +124,7 @@ join(syllables, "-")
 
 
 ```jldoctest syllables
-syllables = syllabify("κελεύει")
+syllables = syllabify("κελεύει",lg)
 join(syllables, "-")
 
 # output
@@ -133,7 +134,7 @@ join(syllables, "-")
 
 
 ```jldoctest syllables
-syllables = syllabify("οἰκίαις")
+syllables = syllabify("οἰκίαις",lg)
 join(syllables, "-")
 
 # output
@@ -144,7 +145,7 @@ join(syllables, "-")
    
 
 ```jldoctest syllables
-syllables = syllabify("θύειν")
+syllables = syllabify("θύειν", lg)
 join(syllables, "-")
 
 # output
@@ -154,7 +155,7 @@ join(syllables, "-")
 
   
  ```jldoctest syllables
-syllables = syllabify("ποιησαίμην")
+syllables = syllabify("ποιησαίμην",lg)
 join(syllables, "-")
 
 # output
@@ -165,7 +166,7 @@ join(syllables, "-")
 
     
 ```jldoctest syllables
-syllables = syllabify("ποῖος")
+syllables = syllabify("ποῖος", lg)
 join(syllables, "-")
 
 # output
@@ -175,7 +176,7 @@ join(syllables, "-")
 
     
 ```jldoctest syllables
-syllables = syllabify("γνώμην")
+syllables = syllabify("γνώμην", lg)
 join(syllables, "-")
 
 # output

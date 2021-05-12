@@ -106,14 +106,23 @@ rmaccents("πολλά", lg)
 ```
 
 
-You can add accents to an unaccented word by ....
+You can add accents to an unaccented word by specifying the accent pattern as `:RECESSIVE`
 
+```@example loaded
 accentword("ἀνθρωποι", :RECESSIVE, lg) 
-
+```
 #### Syllabification
 
-syllabify
+```@example loaded
+syllabify("ἄνθρωποι", lg) 
+```
+
+(See more extensive examples on the following page.)
 
 #### Sorting
 
-sortWords
+
+```@example loaded
+ wordlist = split("μῆνιν ἄειδε θεά")
+sortWords(wordlist)
+```
