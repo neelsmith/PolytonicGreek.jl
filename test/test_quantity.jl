@@ -6,32 +6,39 @@ end
 
 
 @testset "Test removing accents from long syllables" begin
-    @test rmaccents(nfkc("πᾶ_σι")) == nfkc("πα_σι")
+    lg = literaryGreek()
+    @test rmaccents(nfkc("πᾶ_σι"), lg) == nfkc("πα_σι")
 end
 
 @testset "Test adding acute to long vowel" begin
-    @test PolytonicGreek.addacute("α_") == nfkc("ά_")
+    lg = literaryGreek()
+    @test PolytonicGreek.addacute("α_", lg) == nfkc("ά_")
 end
 
 
 @testset "Test adding circumflex to long vowel" begin
-    @test PolytonicGreek.addcircumflex("α_") == nfkc("ᾶ_")
+    lg = literaryGreek()
+    @test PolytonicGreek.addcircumflex("α_", lg) == nfkc("ᾶ_")
 end
 
 @testset "Test flipping barytone with long vowel" begin
-    @test PolytonicGreek.flipaccent(nfkc("ὰ_")) == nfkc("ά_")
+    lg = literaryGreek()
+    @test PolytonicGreek.flipaccent(nfkc("ὰ_"), lg) == nfkc("ά_")
 end
 
 @testset "Test adding accents to syllables with long vowels" begin
-    @test PolytonicGreek.accentsyllable("τα_ν", :CIRCUMFLEX) == "τᾶ_ν"
-    @test PolytonicGreek.accentsyllable("τα_", :ACUTE) == "τά_"
+    lg = literaryGreek()
+    @test PolytonicGreek.accentsyllable("τα_ν", :CIRCUMFLEX, lg) == "τᾶ_ν"
+    @test PolytonicGreek.accentsyllable("τα_", :ACUTE, lg) == "τά_"
 end
 
 @testset "Test adding accents to words with long vowels" begin
-    @test accentword("γνωμα_ς", :PENULT) == nfkc("γνώμα_ς")
+    lg = literaryGreek()
+    @test accentword("γνωμα_ς", :PENULT, lg) == nfkc("γνώμα_ς")
 end
 
 
 @testset "Test adding accents to words with explicitly short vowels " begin
-    @test accentword("πολεω^ς", :RECESSIVE) == nfkc("πόλεω^ς")
+    lg = literaryGreek()
+    @test accentword("πολεω^ς", :RECESSIVE, lg) == nfkc("πόλεω^ς")
 end
