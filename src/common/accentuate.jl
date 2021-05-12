@@ -3,7 +3,7 @@
 $(SIGNATURES)
 """
 function stripquant(s::AbstractString)
-    replace(s, "_" => "")
+    replace(s, r"[_^]" => "")
 end
 
 """

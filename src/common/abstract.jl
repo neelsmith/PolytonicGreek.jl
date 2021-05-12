@@ -27,3 +27,24 @@ function consonants(ortho::T) where {T <: GreekOrthography}
     @warn "Function consonants not defined for orthography $(typeof(ortho))"
     nothing
 end
+
+
+
+"""List proclitics in this orthography.
+
+$(SIGNATURES)
+"""
+function proclitics(ortho::T) where {T <: GreekOrthography}
+    @warn "Function proclitics not defined for orthography $(typeof(ortho))"
+    nothing
+end
+
+
+"""List enclitics in this orthography.
+
+$(SIGNATURES)
+"""
+function enclitics(ortho::T) where {T <: GreekOrthography}
+    @warn "Function enclitics not defined for orthography $(typeof(ortho))"
+    nothing
+end

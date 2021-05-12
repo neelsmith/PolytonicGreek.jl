@@ -39,56 +39,66 @@ end
 end
 
 @testset "Test adding accents to words" begin
-    @test accentword("ἀνθρωπος", :RECESSIVE) == "ἄνθρωπος"
-    @test accentword("ἀνθρωπους", :RECESSIVE) == "ἀνθρώπους"
-    @test accentword("ἀνθρωποι", :RECESSIVE) == nfkc("ἄνθρωποι")
-    @test accentword("θεραπαιναι", :RECESSIVE) == nfkc("θεράπαιναι")
-    @test accentword("δωρον", :PENULT) == "δῶρον"
-    @test accentword("δωρῳ", :PENULT) == "δώρῳ"
+    lg = literaryGreek()
+    @test accentword("ἀνθρωπος", :RECESSIVE, lg) == "ἄνθρωπος"
+    @test accentword("ἀνθρωπους", :RECESSIVE, lg) == "ἀνθρώπους"
+    @test accentword("ἀνθρωποι", :RECESSIVE, lg) == nfkc("ἄνθρωποι")
+    @test accentword("θεραπαιναι", :RECESSIVE,lg) == nfkc("θεράπαιναι")
+    @test accentword("δωρον", :PENULT, lg) == "δῶρον"
+    @test accentword("δωρῳ", :PENULT, lg) == "δώρῳ"
 end
 
 @testset "Test extracting syllables from words" begin
-    @test PolytonicGreek.antepenult("ἄνθρωπος") == "ἀν"
-    @test PolytonicGreek.penult("ἄνθρωπος") ==  "θρω"
+    lg = literaryGreek()
+    @test PolytonicGreek.antepenult("ἄνθρωπος", lg) == "ἀν"
+    @test PolytonicGreek.penult("ἄνθρωπος", lg) ==  "θρω"
 end
 
 @testset "Test adding accent to specified syllable of word" begin
-    @test PolytonicGreek.accentpenult("γνωμη", :ACUTE) == "γνώμη"
-    @test PolytonicGreek.accentultima("γνωμων", :CIRCUMFLEX) == "γνωμῶν"
-    @test PolytonicGreek.accentantepenult("ἐκελευον") == "ἐκέλευον"
+    lg = literaryGreek()
+    @test PolytonicGreek.accentpenult("γνωμη", :ACUTE, lg) == "γνώμη"
+    @test PolytonicGreek.accentultima("γνωμων", :CIRCUMFLEX, lg) == "γνωμῶν"
+    @test PolytonicGreek.accentantepenult("ἐκελευον", lg) == "ἐκέλευον"
 end
 
 @testset "Test flipping grave to acute" begin
-    @test PolytonicGreek.flipaccent("τὰ") == nfkc("τά")
-    @test PolytonicGreek.flipaccent("τῶν") == nfkc("τῶν")
-    @test PolytonicGreek.flipaccent("τά") == nfkc("τά")
+    lg = literaryGreek()
+    @test PolytonicGreek.flipaccent("τὰ", lg) == nfkc("τά")
+    @test PolytonicGreek.flipaccent("τῶν", lg) == nfkc("τῶν")
+    @test PolytonicGreek.flipaccent("τά", lg) == nfkc("τά")
 end
 
 @testset "Test stripping consonants" begin
-    @test PolytonicGreek.vowelsonly("τῶν") == "ῶ"
+    lg = literaryGreek()
+    @test PolytonicGreek.vowelsonly("τῶν", lg) == "ῶ"
 end
 
 @testset "Test counting accents" begin
-    @test PolytonicGreek.countaccents("ό") == 1
-    @test PolytonicGreek.countaccents("ἄνθρωπός") == 2
+    lg = literaryGreek()
+    @test PolytonicGreek.countaccents("ό", lg) == 1
+    @test PolytonicGreek.countaccents("ἄνθρωπός", lg) == 2
 end
 
 @testset "Test stripping enclitic" begin
-    @test PolytonicGreek.stripenclitic("ἄνθρωπός") == "ἄνθρωπος"
+    lg = literaryGreek()
+    @test PolytonicGreek.stripenclitic("ἄνθρωπός", lg) == "ἄνθρωπος"
 end
 
 @testset "Test normalizing word string to morphologically normal form" begin
-    @test PolytonicGreek.tokenform("ἄνθρωπός") == nfkc("ἄνθρωπος")
-    @test PolytonicGreek.tokenform("ὁδὸν") == nfkc("ὁδόν")
+    lg = literaryGreek()
+    @test PolytonicGreek.tokenform("ἄνθρωπός", lg) == nfkc("ἄνθρωπος")
+    @test PolytonicGreek.tokenform("ὁδὸν", lg) == nfkc("ὁδόν")
 end
 
 
 @testset "Test recognizing final οι/αι as short" begin
-    @test PolytonicGreek.finallong("οι") == false
-    @test accentword("ἀνθρωποι", :RECESSIVE) == nfkc("ἄνθρωποι")
-    @test accentword("γνωμα_ς", :PENULT) == nfkc("γνώμα_ς")
+    lg = literaryGreek()
+    @test PolytonicGreek.finallong("οι", lg) == false
+    @test accentword("ἀνθρωποι", :RECESSIVE, lg) == nfkc("ἄνθρωποι")
+    @test accentword("γνωμα_ς", :PENULT, lg) == nfkc("γνώμα_ς")
 end
 
 @testset "Test recognizing non-final οι/αι as long" begin
-    @test PolytonicGreek.finallong("οις") 
+    lg = literaryGreek()
+    @test PolytonicGreek.finallong("οις", lg) 
 end

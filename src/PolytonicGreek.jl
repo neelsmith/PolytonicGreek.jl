@@ -21,6 +21,7 @@ include("litgreek/lgaccentdicts.jl")
 include("litgreek/lgaccentuate.jl")
 include("litgreek/lgsyllabify.jl")
 include("litgreek/ucodeutils.jl")
+include("litgreek/lgclitics.jl")
 
 
 

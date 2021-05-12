@@ -32,7 +32,7 @@ julia> PolytonicGreek.addacute("τα")
 ┌ Warning: addacute: can't add acute accent to vowel τα
 ```
 """
-function addacute(vowel::AbstractString; ortho::OrthographicSystem=literaryGreek())
+function addacute(vowel::AbstractString, ortho::OrthographicSystem=literaryGreek())
     bare = stripquant(vowel)
     dict = acutedict(ortho)
     if bare in keys(dict)
@@ -63,7 +63,7 @@ julia> PolytonicGreek.addcircumflex("τα")
 ┌ Warning: addcircumflex: can't add circumflex accent to vowel τα
 ```
 """
-function addcircumflex(vowel::AbstractString; ortho::OrthographicSystem=literaryGreek())
+function addcircumflex(vowel::AbstractString, ortho::OrthographicSystem=literaryGreek())
     bare = stripquant(vowel)
     dict = circumflexdict(ortho) 
     if bare in keys(dict)
@@ -103,16 +103,16 @@ julia> PolytonicGreek.accentsyllable("ᾀ", :ACUTE)
 """
 function accentsyllable(syll::AbstractString, accent::Symbol, ortho::LiteraryGreekOrthography = literaryGreek())
     # Check that syll is only one syllable
-    sylls = syllabify(syll)
+    sylls = syllabify(syll, ortho)
     if length(sylls) > 1
         @warn("accentsyllable: string $syll is more than one syllable.")
         nothing
     else
-        vowels = vowelsonly(syll)
+        vowels = vowelsonly(syll, ortho)
         barevowels = stripquant(vowels)
 
         if accent == :ACUTE
-            accentedvowel = addacute(barevowels)
+            accentedvowel = addacute(barevowels, ortho)
             if occursin("_", vowels)
                 rplcmnt = string(accentedvowel,"_")
                 replace(syll, string(barevowels,"_") => rplcmnt)
@@ -121,7 +121,7 @@ function accentsyllable(syll::AbstractString, accent::Symbol, ortho::LiteraryGre
             end
 
         elseif accent == :CIRCUMFLEX
-            accentedvowel = addcircumflex(barevowels)
+            accentedvowel = addcircumflex(barevowels, ortho)
             if occursin("_", vowels)
                 rplcmnt = string(accentedvowel,"_")
                 replace(syll, string(barevowels,"_") => rplcmnt)
@@ -141,8 +141,8 @@ end
 $(SIGNATURES)
 """
 function accentultima(wrd::AbstractString, accent::Symbol, ortho::LiteraryGreekOrthography = literaryGreek())
-    sylls = syllabify(wrd)
-    sylls[end] = accentsyllable(ultima(wrd), accent)
+    sylls = syllabify(wrd, ortho)
+    sylls[end] = accentsyllable(ultima(wrd, ortho), accent)
     join(sylls,"")
 end
 
@@ -151,12 +151,12 @@ end
 $(SIGNATURES)
 """
 function accentpenult(wrd::AbstractString, accent::Symbol, ortho::LiteraryGreekOrthography = literaryGreek())
-    sylls = syllabify(wrd)
+    sylls = syllabify(wrd, ortho)
     if length(sylls) < 2
         @warn("accentpenult: can't accent word with fewer than two syllables $wrd")
         nothing
     else
-        sylls[end - 1] = accentsyllable(penult(wrd), accent)
+        sylls[end - 1] = accentsyllable(penult(wrd, ortho), accent)
         join(sylls,"")
     end
 end
@@ -165,13 +165,13 @@ end
 
 $(SIGNATURES)
 """
-function accentantepenult(wrd::AbstractString)
+function accentantepenult(wrd::AbstractString, ortho::LiteraryGreekOrthography)
     sylls = syllabify(wrd)
     if length(sylls) < 3
         @warn("accentantepenult: can't accent word with fewer than three syllables $wrd")
         nothing
     else
-        sylls[end - 2] = accentsyllable(antepenult(wrd), :ACUTE)
+        sylls[end - 2] = accentsyllable(antepenult(wrd, ortho), :ACUTE)
         join(sylls,"")
     end
 end
@@ -192,18 +192,18 @@ Note that it is not possible to accent the ultima correctly without
 additional morphological information beyond the string value of the token.
 """
 function  accentword(wrd::AbstractString, placement::Symbol, ortho::LiteraryGreekOrthography = literaryGreek())
-    sylls = syllabify(wrd)
-    ult = ultima(wrd)
+    sylls = syllabify(wrd, ortho)
+    ult = ultima(wrd, ortho)
     if placement == :PENULT    
         if length(sylls) < 2
             @warn("accentword: cannot accent $wrd on penult since it does not have two syllables.")
             nothing
         else
-            pnlt = penult(wrd)
-            if longsyllable(pnlt) && finalshort(ult)
-                accentpenult(wrd, :CIRCUMFLEX)
+            pnlt = penult(wrd, ortho)
+            if longsyllable(pnlt, ortho) && finalshort(ult, ortho)
+                accentpenult(wrd, :CIRCUMFLEX, ortho)
             else
-                accentpenult(wrd, :ACUTE)
+                accentpenult(wrd, :ACUTE, ortho)
             end
         end
          
@@ -215,11 +215,11 @@ function  accentword(wrd::AbstractString, placement::Symbol, ortho::LiteraryGree
             if length(sylls) == 2
                 accentword(wrd, :PENULT)
 
-            elseif finallong(ult)
+            elseif finallong(ult, ortho)
                 accentpenult(wrd, :ACUTE)
 
             else
-                accentantepenult(wrd)
+                accentantepenult(wrd, ortho)
             end
         end
      
@@ -234,8 +234,8 @@ end
 
 $(SIGNATURES)
 """
-function ultima(s)
-    sylls = syllabify(s)
+function ultima(s, ortho::LiteraryGreekOrthography)
+    sylls = syllabify(s, ortho)
     if isempty(sylls)
         @warn("ultima: no syllables in string $s")
         nothing
@@ -249,8 +249,8 @@ end
 
 $(SIGNATURES)
 """
-function penult(s)
-    sylls = syllabify(s)
+function penult(s, ortho::LiteraryGreekOrthography)
+    sylls = syllabify(s, ortho)
     if length(sylls) < 2
         @warn("penult: cannot extract penult from word with < 2 syllables: $s")
         nothing
@@ -265,8 +265,8 @@ $(SIGNATURES)
 
 NB: Rms accent since they're not relevant to syllables.
 """
-function antepenult(s)
-    sylls = syllabify(s)
+function antepenult(s, ortho::LiteraryGreekOrthography)
+    sylls = syllabify(s, ortho)
     if length(sylls) < 3
         @warn("penult: cannot extract antepenult from word with < 3 syllables: $s")
         nothing
@@ -294,15 +294,16 @@ julia> PolytonicGreek.longsyllable("τε")
 false
 ```
 """
-function longsyllable(syll::AbstractString)
+function longsyllable(syll::AbstractString, ortho::LiteraryGreekOrthography)
     # Sanity check:
-    sylls = syllabify(syll)
+    sylls = syllabify(syll, ortho)
     
     if (length(sylls) > 1)
         @warn("longsyllable: string $syll includes more than syllable.")
         nothing
     else
-        vowels = rmaccents(syll) |> vowelsonly
+        noaccs = rmaccents(syll, ortho)
+        vowels = vowelsonly(noaccs, ortho)
         diphlist = split(LG_DIPHTHONGS, "|") 
         longies = split(LG_LONGVOWELS,"")
         
@@ -317,9 +318,9 @@ True if `syll` counts as long for accent in ultima.
 
 $(SIGNATURES)
 """
-function finallong(syll::AbstractString)
+function finallong(syll::AbstractString, ortho::LiteraryGreekOrthography)
     # Sanity check:
-    sylls = syllabify(syll)
+    sylls = syllabify(syll, ortho)
     
     if (length(sylls) > 1)
         @warn("finallong: string $syll includes more than syllable.")
@@ -328,7 +329,7 @@ function finallong(syll::AbstractString)
     elseif endswith(syll, "οι") || endswith(syll, "αι")
         false
     else
-        vowels = vowelsonly(syll)
+        vowels = vowelsonly(syll, ortho)
         diphlist = split(LG_DIPHTHONGS, "|") 
         longies = split(LG_LONGVOWELS,"")
         #=
@@ -346,8 +347,8 @@ True if `syll` counts as short for accent in ultima.
 
 $(SIGNATURES)
 """
-function finalshort(syll::AbstractString)
-    ! finallong(syll)
+function finalshort(syll::AbstractString, ortho::LiteraryGreekOrthography)
+    ! finallong(syll, ortho)
 end
 
 """
@@ -365,8 +366,8 @@ false
 ```
 
 """
-function shortsyllable(syll::AbstractString)
-    ! occursin(syll, "^")  && ! (longsyllable(syll))
+function shortsyllable(syll::AbstractString, ortho::LiteraryGreekOrthography)
+    ! occursin(syll, "^")  && ! (longsyllable(syll, ortho))
 end
 
 """
@@ -399,9 +400,9 @@ Convert grave accent to acute.
 
 $(SIGNATURES)
 """
-function flipaccent(s)
+function flipaccent(s, ortho::LiteraryGreekOrthography)
     bare = stripquant(s)
-    dict = flipdict()
+    dict = flipdict(ortho)
     modified = []
     for c in nfkc(bare)
         if string(c) in keys(dict)
@@ -432,7 +433,7 @@ julia> PolytonicGreek.vowelsonly("τῶν")
 "ῶ"
 ```
 """
-function vowelsonly(s::AbstractString)
+function vowelsonly(s::AbstractString, ortho::LiteraryGreekOrthography)
     re = Regex("[$LG_CONSONANTS]")
     replace(s, re => "")
 end
@@ -440,8 +441,9 @@ end
 """
     tokenaccent(s::AbstractString)
 """
-function tokenform(s::AbstractString)
-    stripenclitic(s) |> flipaccent
+function tokenform(s::AbstractString, ortho::LiteraryGreekOrthography)
+    stripped = stripenclitic(s, ortho) 
+    flipaccent(stripped, ortho)
 end
 
 """
@@ -451,7 +453,7 @@ end
 function countaccents(s::AbstractString, ortho::LiteraryGreekOrthography = literaryGreek())
     normed = Unicode.normalize(s, :NFKC)
     accents = 0
-    repertoire = allaccents()
+    repertoire = allaccents(ortho)
     for c in normed
         if string(c) in repertoire
             accents = accents + 1
@@ -464,9 +466,9 @@ end
 """
 Remove any second enclitic accent from `s`.
 """
-function stripenclitic(s::AbstractString)
+function stripenclitic(s::AbstractString, ortho::LiteraryGreekOrthography)
     normed = Unicode.normalize(s, :NFKC)
-    dict = accentstripdict()
+    dict = accentstripdict(ortho)
     seen = 0
     repertoire = allaccents()
     modified = []
