@@ -123,6 +123,6 @@ syllabify("ἄνθρωποι", lg)
 
 
 ```@example loaded
- wordlist = split("μῆνιν ἄειδε θεά")
-sortWords(wordlist)
+wordlist = split("μῆνιν ἄειδε θεά")
+sortWords(wordlist, lg)
 ```
