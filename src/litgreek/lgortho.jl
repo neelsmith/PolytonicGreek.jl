@@ -129,7 +129,7 @@ $(SIGNATURES)
 """
 function sortWords(words, ortho::LiteraryGreekOrthography)
     strippedpairs = map(wd -> ( lowercase(Unicode.normalize(wd, stripmark=true)), wd),words)
-	sorted = sort(strippedpairs, ortho)
+	sorted = sort(strippedpairs)
 	map(pr -> pr[2], sorted)
 end
 

@@ -30,8 +30,8 @@ end
 
 @testset "Test sorting" begin
     s = "Μῆνιν ἄειδε, θεά, Πηληϊάδεω Ἀχιλῆος,"
-    #res = PolytonicGreek.sortWords(split(s," "), literaryGreek())
-    @test_broken res == ["ἄειδε,", "Ἀχιλῆος,", "θεά,", "Μῆνιν", "Πηληϊάδεω"]
+    res = PolytonicGreek.sortWords(split(s," "), literaryGreek())
+    @test res == ["ἄειδε,", "Ἀχιλῆος,", "θεά,", "Μῆνιν", "Πηληϊάδεω"]
 end
 
 @testset "Test orthographic validation" begin

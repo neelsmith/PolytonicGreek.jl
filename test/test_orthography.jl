@@ -27,7 +27,7 @@ end
 @testset "Test alphabetic sorting" begin
     wordlist = split("μῆνιν ἄειδε θεά")
     expected = ["ἄειδε", "θεά", "μῆνιν"]
-    @test_broken PolytonicGreek.sortWords(wordlist, literaryGreek()) == expected
+    @test PolytonicGreek.sortWords(wordlist, literaryGreek()) == expected
 end
 
 @testset "Test creating token from string value" begin
