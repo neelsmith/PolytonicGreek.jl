@@ -1,7 +1,35 @@
 
-"""Implementatoin of GreekOrthography's augment function for literary Greek.
+function augmentdiphthong(s)
+    augmented = s
+    augmentdict = lgdiphaugments()
+    for k in keys(augmentdict)
+        re = Regex("^$(k)")
+        augmented = replace(augmented, re => augmentdict[k])
+    end
+    augmented
+end
+
+function augmentvowel(s)
+    if startswith(s, "ἱ_") || startswith(s, "ἰ_") || startswith(s, "ὑ_") || startswith(s, "ὐ_")
+        s
+        
+    else 
+        augmented = s
+        augmentdict = lgsimpleaugments()
+        for k in keys(augmentdict)
+            re = Regex("^$(k)")
+            augmented = replace(augmented, re => augmentdict[k])
+        end
+        augmented
+    end
+end
+
+"""Implementatiοn of GreekOrthography's augment function for literary Greek.
 
 $(SIGNATURES)    
+
+NB: `augment` removes all accents  from the resulting string.
+
 
 # Parameters
 
@@ -13,25 +41,28 @@ a default augment string that can be applied to verb forms starting with a conso
 function augment(ortho::LiteraryGreekOrthography; s = nothing)
     if isnothing(s)
         nfkc("ἐ")
+
     else
-        normalized = nfkc(s)
-        codepts = graphemes(normalized) |> collect
-        stripped = Unicode.normalize(s; stripmark=true)
+        normalized = nfkc(s) |> rmaccents
+        codepts =  graphemes(normalized) |> collect
         if normalized[1] == 'ῥ'
-            string("ἐρρ", join(codepts[2:end], "")) |> nfkc
+            normalized = string("ἐρρ", join(codepts[2:end], "")) |> nfkc
 
         elseif normalized[1] in PolytonicGreek.LG_CONSONANTS
-            string("ἐ", join(codepts, "")) |> nfkc
+            normalized =  string("ἐ", join(codepts, "")) |> nfkc
 
-        #elseif startswith(stripped, "αι")
+        else # not a consonant, so must be a vowel! 
+            # check first for multi-char diphthongs
+            diphthongs = augmentdiphthong(normalized)
+            if diphthongs != normalized
+                @info "Normalized changed to $normalized"
+                normalized = diphthongs
 
-
-        elseif stripped[1] == "α"
-            string("ἠ", join(codepts[2:end], "")) |> nfkc
-
-        else
-            @warn "Don't know how to augment string $s yet."
-            nothing
+            else  # not a diphthong, so:
+                normalized = augmentvowel(normalized)   
+            
+            end
         end
+        normalized
     end
 end

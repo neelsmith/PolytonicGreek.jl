@@ -107,8 +107,6 @@ function accentstripdict(ortho::LiteraryGreekOrthography)
 end
 
 
-
-
 """Dictionary of circumflexes for `LiteraryGreekOrthography`.
 
 $(SIGNATURES)
@@ -315,6 +313,48 @@ function flipdict(ortho::LiteraryGreekOrthography)
             "ῒ" => "ΐ" ,
             "ῢ" => "ΰ" ,
         ]
+    )
+end
+
+
+function lgdiphaugments()
+    Dict(
+        nfkc("εἰ") => nfkc("ᾐ"),
+        nfkc("εἱ") => nfkc("ᾑ"),
+
+        nfkc("οἰ") => nfkc("ᾠ"),
+        nfkc("οἱ") => nfkc("ᾡ"),
+
+        nfkc("αἰ") => nfkc("ᾐ"),
+        nfkc("αἱ") => nfkc("ᾑ"),
+
+        nfkc("αὐ") => nfkc("ηὐ"),
+        nfkc("αὑ") => nfkc("ηὑ"),
+
+        nfkc("εὐ") => nfkc("ηὐ"),
+        nfkc("εὑ") => nfkc("ηὑ"),
+    )
+end
+
+function lgsimpleaugments()
+    Dict(
+        nfkc("ἀ") => nfkc("ἠ"),
+        nfkc("ἁ") => nfkc("ἡ"),
+        nfkc("ᾀ") => nfkc("ᾐ"),
+        nfkc("ᾁ") => nfkc("ᾑ"),
+
+        nfkc("ἐ") => nfkc("ἠ"),
+        nfkc("ἑ") => nfkc("ἡ"),
+     
+        nfkc("ὀ") => nfkc("ὠ"),
+        nfkc("ὁ") => nfkc("ὡ"),
+
+        nfkc("ἰ") => nfkc("ἰ_"),
+        nfkc("ἱ") => nfkc("ἱ_"),
+
+        nfkc("ὐ") => nfkc("ὐ_"),
+        nfkc("ὑ") => nfkc("ὑ_"),
+
     )
 end
 
