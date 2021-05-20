@@ -191,7 +191,7 @@ or `:PENULT` for persistent accent on the penultimate syllable.
 Note that it is not possible to accent the ultima correctly without
 additional morphological information beyond the string value of the token.
 """
-function  accentword(wrd::AbstractString, placement::Symbol, ortho::LiteraryGreekOrthography = literaryGreek())
+function accentword(wrd::AbstractString, placement::Symbol, ortho::LiteraryGreekOrthography = literaryGreek())
     sylls = syllabify(wrd, ortho)
     ult = ultima(wrd, ortho)
     if placement == :PENULT    
