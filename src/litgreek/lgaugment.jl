@@ -30,7 +30,7 @@ function augment(ortho::LiteraryGreekOrthography; s = nothing)
             string("ἠ", join(codepts[2:end], "")) |> nfkc
 
         else
-            @warn "Augment of specific string not yet implemented."
+            @warn "Don't know how to augment string $s yet."
             nothing
         end
     end
