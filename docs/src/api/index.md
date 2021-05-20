@@ -71,6 +71,7 @@ PolytonicGreek.splitPunctuation
 
 ## Syllabification
 
+
 ### Exported function
 
 ```@docs
@@ -89,3 +90,10 @@ PolytonicGreek.splitliqcons
 PolytonicGreek.splitdiphthongvowel
 PolytonicGreek.splitvoweldiphthong
 ```
+
+## Augment
+
+```@docs
+augment
+```
+

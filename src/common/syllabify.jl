@@ -1,15 +1,4 @@
 
-"""Split string `s` into an Array of strings representing syllables.
-
-$(SIGNATURES)
-
-Default to using `LiteraryGreekOrthography`.
-```
-
-"""
-function Xsyllabify(s)
-    syllabify(s, literaryGreek())
-end
 
 
 
