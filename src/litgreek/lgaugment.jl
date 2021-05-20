@@ -16,15 +16,17 @@ function augment(ortho::LiteraryGreekOrthography; s = nothing)
     else
         normalized = nfkc(s)
         codepts = graphemes(normalized) |> collect
+        stripped = Unicode.normalize(s; stripmark=true)
         if normalized[1] == 'ῥ'
             string("ἐρρ", join(codepts[2:end], "")) |> nfkc
 
         elseif normalized[1] in PolytonicGreek.LG_CONSONANTS
             string("ἐ", join(codepts, "")) |> nfkc
 
-        elseif startswith(normalized, "")
+        #elseif startswith(stripped, "αι")
 
-        elseif alpha(normalized[1])
+
+        elseif stripped[1] == "α"
             string("ἠ", join(codepts[2:end], "")) |> nfkc
 
         else

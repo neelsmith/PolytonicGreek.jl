@@ -37,21 +37,3 @@ end
 # this is a Regex disjunction for diphthongs:
 const LG_DIPHTHONGS = "αι|ει|οι|υι|αυ|ευ|ου|ηυ|ωυ|υἰ|αἰ|εἰ|οἰ|αὐ|εὐ|οὐ|ηὐ|ωὐ|υἰ|αἱ|εἱ|οἱ|αὑ|εὑ|οὑ|ηὑ|ωὑ|υἱ"  
 const LG_FINALSHORT = ["αι", "οι"]
-
-"""True if `s` is a string representing the vowel alpha.
-
-$(SIGNATURES)
-"""
-function alpha(s::AbstractString) 
-     s in ["α", "ἁ",  "ἀ",  "ᾳ"]
-end
-
-
-"""True if `c` is a Char representing the vowel alpha.
-
-$(SIGNATURES)
-"""
-function alpha(c::Char)
-    alpha(string(c))
-end
-
