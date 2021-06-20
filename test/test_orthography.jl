@@ -6,7 +6,7 @@ end
 
 @testset "Test generating alphabetic characters" begin
     alphas = PolytonicGreek.alphabetic()
-    expectedcount = 267
+    expectedcount = 270
     @test length(alphas) == expectedcount
 end
 
@@ -47,4 +47,10 @@ end
     tokens = PolytonicGreek.tokenizeLiteraryGreek("μῆνιν ἄειδε,")
     @test length(tokens) == 3
     @test tokens[end].text == ","
+end
+
+
+@testset "Test problem letters" begin
+    @test validstring(literaryGreek(), "νόμος.")
+    @test validstring(literaryGreek(), "νόμῳ")
 end
