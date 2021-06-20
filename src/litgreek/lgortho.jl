@@ -28,7 +28,7 @@ Instantiate a LiteraryGreekOrthography with correct code points and token types.
 $(SIGNATURES)
 """
 function literaryGreek()
-    cps = alphabetic() * " \t\n"
+    cps = alphabetic() * " \t\n" * punctuation()
     ttypes = [
         Orthography.LexicalToken,
         Orthography.PunctuationToken
@@ -75,13 +75,13 @@ function alphabetic()
     '\u1fd2':'\u1fd3'; '\u1fd6':'\u1fdb';
     '\u1fe2':'\u1fe7';
     '\u1fea':'\u1fec';
-    '\uf1f2':'\u1ff4'; '\u1ff6':'\u1ffc'
+    '\u1ff2':'\u1ff4'; '\u1ff6':'\u1ffc'
     ]
     join(ranges,"")
 end
 
 
-"""Compose a string with all alphabetic characters.
+"""Compose a string with all punctuation characters.
 
 $(SIGNATURES)
 """
