@@ -8,7 +8,7 @@ const LG_LIQUIDS = "μνρλ"
 # these are strings that can be used in a Regex
 # class (in square brackets) to define a set of
 # Characters
-const LG_SIMPLEVOWELS =  "αεηιουω"
+const LG_SIMPLEVOWELS =  "αεηιουω'" # Include elision mark as a vowel
 const LG_DIAERESES = nfkc("ϊϋ")
 const LG_ROUGHVOWELS = nfkc("ἁἑἡἱὁὑὡ")
 const LG_SMOOTHVOWELS = nfkc("ἀἐἠἰὀὐὠ")
