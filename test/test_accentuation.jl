@@ -5,9 +5,6 @@
     @test rmaccents(s) == expected
 end
 
-
-
-
 @testset "Test stripping accents with specified orthography" begin
     s = "πολλά"
     expected = "πολλα"
