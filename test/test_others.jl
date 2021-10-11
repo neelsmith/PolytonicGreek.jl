@@ -39,13 +39,13 @@ end
     s2 = "οὐλομένην· ἡ μυρί' Ἀχαιοῖς ἄλγε' ἔθηκεν"
     ortho = literaryGreek()
     
-    @test validstring(ortho, s1)
-    @test validstring(ortho, s2) == false
+    @test validstring(s1, ortho )
+    @test validstring(s2, ortho ) == false
     tkns = tokenizeLiteraryGreek(s2)
     # High stop is wrong, rest is OK.
-    @test validstring(ortho, tkns[1].text) == false
+    @test validstring(tkns[1].text, ortho) == false
     for i in 2:length(tkns)
-        @test validstring(ortho, tkns[i].text)
+        @test validstring(tkns[i].text, ortho)
     end
 
     s3 = "κόσμηθεν ἅμ ̓ ἡγεμόνεσσιν"
@@ -53,7 +53,7 @@ end
     s3tkns = tokenizeLiteraryGreek(s3)
 
     for t in s3tkns
-        println(t.text, " Valid? ", validstring(ortho,t.text))
+        println(t.text, " Valid? ", validstring(t.text, ortho))
     end
     # Curly quote is wrong, rest is OK.
     #@test validstring(ortho, s3tkns[1].text)

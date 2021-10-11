@@ -46,23 +46,23 @@ typeof(lg) |> supertype |> supertype
 ```@example loaded
 using Orthography
 omicron = "ο"
-validchar(lg, omicron)
+validcp(omicron, lg)
 ```
 
 ```@example loaded
 latinO = "o"
-validchar(lg, latinO)
+validcp(latinO, lg)
 ```
 
 
 ```@example loaded
 greek = "μῆνιν ἄειδε"
-validstring(lg, greek)
+validstring(greek, lg)
 ```
 
 ```@example loaded
 notgreek = "μῆνιν?"
-validstring(lg, notgreek)
+validstring(notgreek, lg)
 ```
 
 
@@ -71,7 +71,7 @@ validstring(lg, notgreek)
 Subtypes of `Orthography.OrthographicSystem` include a `tokenizer` function that analyzes a string encoded in this orthographic system into an Array of `OrthographicToken`s, which are classified string values.  For example, the string *μῆνιν ἄειδε,* is analyzed as three tokens, two of type `LexicalToken`, and one of type `PunctuationToken`
 
 ```@example loaded
-tokenized = lg.tokenizer("μῆνιν ἄειδε,")
+tokenized = tokenize("μῆνιν ἄειδε,", lg)
 length(tokenized)
 ```
 

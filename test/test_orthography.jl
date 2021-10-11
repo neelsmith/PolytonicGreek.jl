@@ -51,6 +51,6 @@ end
 
 
 @testset "Test problem letters" begin
-    @test validstring(literaryGreek(), "νόμος.")
-    @test validstring(literaryGreek(), "νόμῳ")
+    @test validstring("νόμος.", literaryGreek() )
+    @test validstring("νόμῳ", literaryGreek())
 end
