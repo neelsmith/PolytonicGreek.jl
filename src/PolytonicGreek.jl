@@ -5,8 +5,11 @@ using Documenter, DocStringExtensions
 using Unicode
 using Orthography
 
+
+import Orthography: OrthographyTrait
 import Orthography: tokentypes 
 import Orthography: codepoints 
+import Orthography: tokenize
 
 
 include("common/abstract.jl")
