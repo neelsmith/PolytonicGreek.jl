@@ -1,3 +1,6 @@
+![build](https://github.com/neelsmith/PolytonicGreek.jl/actions/workflows/Documentation.yml/badge.svg)
+
+
 # PolytonicGreek.jl
 
 A Julia module for working with polytonic ancient Greek.
