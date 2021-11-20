@@ -17,16 +17,19 @@ makedocs(
     sitename = "PolytonicGreek.jl",
     pages = [
         "Home" => "index.md",
-        "Greek orthography" => Any[
-            "guide/orthography.md",
-            "guide/orthography-details.md",
+        "String manipulation" => Any[
             "guide/sorting.md",
-            "guide/accents.md",
             "guide/syllabification.md",
-            "utilities.md"
+            "guide/accents.md"
+            
+        ],
+        "Greek orthography" => Any[
+            "guide/orthography.md"
         ],
         "The LiteraryGreek implementation" => Any[
-              "litgreek/ortho.md"
+            "litgreek/lgstrings.md",
+            "litgreek/lgortho.md",
+            "litgreek/orthodetails.md"
         ],
         "API documentation" => "api/index.md"
     ]

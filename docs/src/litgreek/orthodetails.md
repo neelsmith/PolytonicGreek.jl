@@ -2,7 +2,7 @@
 CurrentModule = PolytonicGreek
 ```
 
-# Orthography and accentuation of the `LiteraryGreekOrthography` type
+# `LiteraryGreekOrthography`: details of character set and accentuation
 
 Algorithmic accentuation of Greek words is complicated. First, the word has to be correctly divided into syllables (illustrated in the preceding section).  Then the quantity of the syllable has to be evaluated.  
 
