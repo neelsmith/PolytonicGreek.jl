@@ -1,11 +1,6 @@
 # API documentation
 
 
-```@contents
-Pages = ["index.md"]
-Depth = 3
-```
-
 ## Accentuation
 
 ### Exported functions
