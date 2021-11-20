@@ -7,7 +7,7 @@ end
 
 OrthographyTrait(::Type{LiteraryGreekOrthography}) = IsOrthographicSystem()
 
-"""Implement Orthography's codepoints functions for LiteraryGreekOrthography.
+"""Implement Orthography's tokenize function for LiteraryGreekOrthography.
 
 $(SIGNATURES)    
 """    
