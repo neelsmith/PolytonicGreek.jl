@@ -6,7 +6,7 @@ $(SIGNATURES)
 
 - `ortho` An instance of a `GreekOrthography`
 """
-function augment(ortho::T, s::AbstractString) where {T <: GreekOrthography}
+function augment(ortho::T; s::AbstractString) where {T <: GreekOrthography}
     @warn "No `augment`` function defined for orthography $(typeof(ortho))"
     nothing
 end
