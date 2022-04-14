@@ -31,6 +31,7 @@ include("litgreek/lgaugment.jl")
 
 
 export GreekOrthography, vowels, consonants
+export augment, augment_initial, augment_medial
 export LiteraryGreekOrthography, literaryGreek
 export tokentypes, codepoints
 export tokenizeLiteraryGreek
@@ -38,7 +39,7 @@ export rmaccents, countaccents
 export accentword, accentpenult, accentultima
 export syllabify
 export sortWords
-export augment
+
 
 end # module
 

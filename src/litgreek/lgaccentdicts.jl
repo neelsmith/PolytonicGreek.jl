@@ -317,44 +317,64 @@ function flipdict(ortho::LiteraryGreekOrthography)
 end
 
 
+"""Mapping of diphthong strings that change when augmented to their
+augmented value.
+$(SIGNATURES)
+"""
 function lgdiphaugments()
     Dict(
         nfkc("εἰ") => nfkc("ᾐ"),
         nfkc("εἱ") => nfkc("ᾑ"),
+        "ει" => nfkc("ῃ"),
 
         nfkc("οἰ") => nfkc("ᾠ"),
         nfkc("οἱ") => nfkc("ᾡ"),
+        "οι" => nfkc("ῳ"),
 
         nfkc("αἰ") => nfkc("ᾐ"),
         nfkc("αἱ") => nfkc("ᾑ"),
+        "αι" => nfkc("ῃ"),
 
         nfkc("αὐ") => nfkc("ηὐ"),
         nfkc("αὑ") => nfkc("ηὑ"),
+        "αυ" => "ηυ",
 
         nfkc("εὐ") => nfkc("ηὐ"),
         nfkc("εὑ") => nfkc("ηὑ"),
+        "ευ" => "ηυ"
     )
 end
 
+
+
+"""Mapping of strings for vowels that change when augmented to their
+augmented value.
+$(SIGNATURES)
+"""
 function lgsimpleaugments()
     Dict(
         nfkc("ἀ") => nfkc("ἠ"),
         nfkc("ἁ") => nfkc("ἡ"),
         nfkc("ᾀ") => nfkc("ᾐ"),
         nfkc("ᾁ") => nfkc("ᾑ"),
+        "α" => "η", 
 
         nfkc("ἐ") => nfkc("ἠ"),
         nfkc("ἑ") => nfkc("ἡ"),
+        "ε" => "η",
      
         nfkc("ὀ") => nfkc("ὠ"),
         nfkc("ὁ") => nfkc("ὡ"),
+        "ο" => "ω",
 
         nfkc("ἰ") => nfkc("ἰ_"),
         nfkc("ἱ") => nfkc("ἱ_"),
+        "ι" => "ι_",
+
 
         nfkc("ὐ") => nfkc("ὐ_"),
         nfkc("ὑ") => nfkc("ὑ_"),
-
+        "υ" => "υ_",
     )
 end
 

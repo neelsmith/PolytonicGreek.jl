@@ -1,6 +1,8 @@
-
-function augmentdiphthong(s)
-    augmented = s
+"""Add temporal augment to diphthong `d`.
+$(SIGNATURES)
+"""
+function augmentdiphthong(d)
+    augmented = d
     augmentdict = lgdiphaugments()
     for k in keys(augmentdict)
         re = Regex("^$(k)")
@@ -9,12 +11,15 @@ function augmentdiphthong(s)
     augmented
 end
 
-function augmentvowel(s)
-    if startswith(s, "ἱ_") || startswith(s, "ἰ_") || startswith(s, "ὑ_") || startswith(s, "ὐ_")
-        s
+"""Add temporal augment to vowel `v`.
+$(SIGNATURES)
+"""
+function augmentvowel(v)
+    if startswith(v, "ἱ_") || startswith(v, "ἰ_") || startswith(v, "ὑ_") || startswith(v, "ὐ_")
+        v
         
     else 
-        augmented = s
+        augmented = v
         augmentdict = lgsimpleaugments()
         for k in keys(augmentdict)
             re = Regex("^$(k)")
@@ -39,7 +44,7 @@ a default augment string that can be applied to verb forms starting with a conso
 (except note that ρ doubles after augment in standard literary Greek orthography).
 """
 function augment(ortho::LiteraryGreekOrthography; s = nothing)
-    if isnothing(s)
+    if isnothing(s) || isempty(s)
         nfkc("ἐ")
 
     else
@@ -55,7 +60,7 @@ function augment(ortho::LiteraryGreekOrthography; s = nothing)
             # check first for multi-char diphthongs
             diphthongs = augmentdiphthong(normalized)
             if diphthongs != normalized
-                @info "Normalized changed to $normalized"
+                @debug "Normalized changed to $normalized"
                 normalized = diphthongs
 
             else  # not a diphthong, so:
@@ -66,3 +71,27 @@ function augment(ortho::LiteraryGreekOrthography; s = nothing)
         normalized
     end
 end
+
+
+"""Identify string to use for syllabic augment in word-initial position.
+$(SIGNATURES)
+"""
+function augment_initial(ortho::LiteraryGreekOrthography)
+    nfkc("ἐ")
+end
+
+"""Identify string to use for syllabic augment in compound verb.
+$(SIGNATURES)
+"""
+function augment_medial(ortho::LiteraryGreekOrthography)
+    "ε"
+end
+
+#= Smyth 435: table of temporal augment
+α, ε => η (αυ, ευ => ηυ)
+αι, ει => ῃ
+οι => ῳ
+ι => ι
+ο => ω
+υ => υ
+=#
