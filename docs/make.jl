@@ -20,7 +20,8 @@ makedocs(
         "String manipulation" => Any[
             "guide/sorting.md",
             "guide/syllabification.md",
-            "guide/accents.md"
+            "guide/accents.md",
+            "guide/augment.md"
             
         ],
         "Greek orthography" => Any[

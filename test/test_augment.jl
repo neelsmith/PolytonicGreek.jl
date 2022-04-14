@@ -19,6 +19,11 @@
 
     @test augment(lg; s = "ἱκετευε") == nfkc("ἱ_κετευε")
     @test augment(lg; s = "ὑβριζε") == nfkc("ὑ_βριζε")
+
+    @test augment(lg; s = "") == nfkc("ἐ")
+
+    @test augment_initial(lg) == nfkc("ἐ")
+    @test augment_medial(lg) == "ε"
    
     
 end

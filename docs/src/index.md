@@ -14,6 +14,7 @@ The `PolytonicGreek` package supports working with accented ancient Greek encode
 - sort Unicode Greek strings by the logic of the Greek alphabet
 - syllabify Greek strings
 -  work with accents, including correct placement for recessive and persistent accent patterns
+- support temporal and syllabic augment
 - implement the `OrthographicSystem` interface (from the HCMID [Orthography package](https://hcmid.github.io/Orthography.jl/stable/)), with semantic tokenization of text in polytonic Greek
 
 
@@ -31,8 +32,8 @@ Other implementations are possible. Examples are:
 ## String manipulation
 
 ```@contents
-Pages = ["guide/sorting.md", "guide/accents.md", "guide/syllabification.md"]
-Depth = 3
+Pages = ["guide/sorting.md", "guide/accents.md", "guide/syllabification.md", "guide/augment.md"]
+Depth = 2
 ```
 
 
