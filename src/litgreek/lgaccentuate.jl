@@ -489,3 +489,11 @@ function stripenclitic(s::AbstractString, ortho::LiteraryGreekOrthography)
     end
     join(modified,"")
 end
+
+
+"""True if `s` has at least one accent.
+$(SIGNATURES)
+"""
+function accented(s::AbstractString)
+    countaccents(s) > 0
+end
