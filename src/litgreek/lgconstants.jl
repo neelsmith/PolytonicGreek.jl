@@ -36,4 +36,10 @@ end
 # diphthongs:
 # this is a Regex disjunction for diphthongs:
 const LG_DIPHTHONGS = "αι|ει|οι|υι|αυ|ευ|ου|ηυ|ωυ|υἰ|αἰ|εἰ|οἰ|αὐ|εὐ|οὐ|ηὐ|ωὐ|υἰ|αἱ|εἱ|οἱ|αὑ|εὑ|οὑ|ηὑ|ωὑ|υἱ"  
+const LG_DIPHTHONGS_ACUTE = 
+"αί|εί|οί|υί|αύ|εύ|ού|ηύ|ωύ|υἴ|αἴ|εἴ|οἴ|αὔ|εὔ|οὔ|ηὔ|ωὔ|υἴ|αἵ|εἵ|οἵ|αὕ|εὕ|οὕ|ηὕ|ωὕ|υἵ" 
+const LG_DIPHTHONGS_CIRCUMFLEX = 
+"αῖ|εῖ|οῖ|υῖ|αῦ|εῦ|οῦ|ηῦ|ωῦ|υἶ|αἶ|εἶ|οἶ|αὖ|εὖ|οὖ|ηὖ|ωὖ|υἶ|αἷ|εἷ|οἷ|αὗ|εὗ|οὗ|ηὗ|ωὗ|υἷ" 
 const LG_FINALSHORT = ["αι", "οι"]
+
+

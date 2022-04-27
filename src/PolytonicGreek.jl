@@ -27,6 +27,7 @@ include("litgreek/lgsyllabify.jl")
 include("litgreek/ucodeutils.jl")
 include("litgreek/lgclitics.jl")
 include("litgreek/lgaugment.jl")
+include("litgreek/lgsyllaccent.jl")
 
 
 
@@ -39,7 +40,7 @@ export rmaccents, countaccents
 export accentword, accentpenult, accentultima
 export syllabify
 export sortWords
-
+export vocalic, consonantal, accented, lg_accentedsyll
 
 end # module
 
