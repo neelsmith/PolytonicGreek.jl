@@ -8,13 +8,12 @@ The `PolytonicGreek` package supports working with accented ancient Greek encode
 
 ## An abstract interface
 
-`GreekOrthography` is an abstract  type for functions that:
-
+`GreekOrthography` is an abstract  type for functions that understand the phonology of ancient Greek as it is represented in specific orthographic systems, and can therefore:
 
 - sort Unicode Greek strings by the logic of the Greek alphabet
 - syllabify Greek strings
--  work with accents, including correct placement for recessive and persistent accent patterns
-- support temporal and syllabic augment
+- work with accents, including correct placement for recessive and persistent accent patterns, respecting morpheme boundaries in compound verbs
+- support reduplication and augment (both temporal and syllabic) of verbal stems
 - implement the `OrthographicSystem` interface (from the HCMID [Orthography package](https://hcmid.github.io/Orthography.jl/stable/)), with semantic tokenization of text in polytonic Greek
 
 
@@ -32,7 +31,8 @@ Other implementations are possible. Examples are:
 ## String manipulation
 
 ```@contents
-Pages = ["guide/sorting.md", "guide/accents.md", "guide/syllabification.md", "guide/augment.md"]
+Pages = ["guide/strcat.md",
+"guide/sorting.md", "guide/accents.md", "guide/syllabification.md", "guide/augment.md"]
 Depth = 2
 ```
 

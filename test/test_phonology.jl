@@ -1,14 +1,10 @@
-@testset "Test literary Greek phonology" begin
+@testset "Test literary Greek phonological classes" begin
     ortho = literaryGreek()
-    @test_broken liquids(ortho) = ["λ","μ","ν","ρ"]
-#=
-   
-#=
-liquids = split("λρμν","")
-labials = split("βπφ","")
-dentals = split("δτθ","")
-palatals = split("γκχ","")
-stops = vcat(labials, dentals, palatals)
-=#
-    =#
+    @test liquids(ortho) == ["λ","μ","ν","ρ"]
+    @test dentals(ortho) == ["τ", "δ", "θ"]
+    @test labials(ortho) == ["π", "β", "φ"]
+    @test palatals(ortho) == ["κ", "γ", "χ"]
+
+    allstops = stops(ortho)
+    @test length(allstops) == 9
 end

@@ -18,6 +18,7 @@ makedocs(
     pages = [
         "Home" => "index.md",
         "String manipulation" => Any[
+            "guide/strcat.md",
             "guide/sorting.md",
             "guide/syllabification.md",
             "guide/accents.md",

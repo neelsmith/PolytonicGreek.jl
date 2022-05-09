@@ -26,6 +26,8 @@ end
 $(SIGNATURES)
 """
 function liquids(ortho::T) where {T <: GreekOrthography}
+    @warn "Function liquids not defined for orthography $(typeof(ortho))"
+    nothing
 end
 
 """Identify code points representing labial consonants.
@@ -33,6 +35,8 @@ end
 $(SIGNATURES)
 """
 function labials(ortho::T) where {T <: GreekOrthography}
+    @warn "Function labials not defined for orthography $(typeof(ortho))"
+    nothing
 end
 
 """Identify code points representing dental consonants.
@@ -40,6 +44,8 @@ end
 $(SIGNATURES)
 """
 function dentals(ortho::T) where {T <: GreekOrthography}
+    @warn "Function dentals not defined for orthography $(typeof(ortho))"
+    nothing
 end
 
 """Identify code points representing palatal consonants.
@@ -47,6 +53,8 @@ end
 $(SIGNATURES)
 """
 function palatals(ortho::T) where {T <: GreekOrthography}
+    @warn "Function palatals not defined for orthography $(typeof(ortho))"
+    nothing
 end
 
 

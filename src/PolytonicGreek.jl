@@ -48,6 +48,7 @@ export accentword, accentpenult, accentultima
 export augment, augment_initial, augment_medial
 
 export vocalic, consonantal, accented
+export strcat
 export reduplicate
 
 export syllabify
