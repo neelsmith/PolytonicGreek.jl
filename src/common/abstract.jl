@@ -5,31 +5,6 @@ orthography, in addition to the requires of the Orthography.jl package's Orthogr
 abstract type GreekOrthography <: OrthographicSystem end
     
 
-"""Identify code points representing simple vowels.
-
-$(SIGNATURES)
-
-This does not include code points representing vowels combined 
-with accents. It does include any code points representing
-vowels plus breathing or vowels with subscript.
-"""
-function vowels(ortho::T) where {T <: GreekOrthography}
-    @warn "Function vowels not defined for orthography $(typeof(ortho))"
-    nothing
-end
-
-
-"""Identify code points representing consonants.
-
-$(SIGNATURES)
-"""
-function consonants(ortho::T) where {T <: GreekOrthography}
-    @warn "Function consonants not defined for orthography $(typeof(ortho))"
-    nothing
-end
-
-
-
 """List proclitics in this orthography.
 
 $(SIGNATURES)
@@ -48,3 +23,25 @@ function enclitics(ortho::T) where {T <: GreekOrthography}
     @warn "Function enclitics not defined for orthography $(typeof(ortho))"
     nothing
 end
+
+
+"""Concatenate `s1` and `s2` d, taking account of any phonological
+modifications required by orthography `ortho`.
+
+$(SIGNATURES)
+"""
+function strcat(s1::AbstractString,s2::AbstractString,ortho::T) where {T <: GreekOrthography}
+    @warn "Function strcat not defined for orthography $(typeof(ortho))"
+    nothing
+end
+
+"""Add reduplications to `s`, taking account of any phonological
+modifications required by orthography `ortho`.
+
+$(SIGNATURES)
+"""
+function reduplicate(s::AbstractString, ortho::T) where {T <: GreekOrthography}
+    @warn "Function reduplicate not defined for orthography $(typeof(ortho))"
+    nothing
+end
+  
