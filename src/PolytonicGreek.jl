@@ -34,6 +34,7 @@ include("litgreek/lgclitics.jl")
 include("litgreek/lgaugment.jl")
 include("litgreek/lgsyllaccent.jl")
 include("litgreek/lgphonology.jl")
+include("litgreek/lgstrcat.jl")
 
 
 export GreekOrthography
