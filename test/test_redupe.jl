@@ -14,7 +14,7 @@
 
     @test reduplicate("φονευ",lg) == "πεφονευ"
     @test reduplicate("θυ",lg) == "τεθυ"
-    @test reduplicate("χορευ",lg) == "κεχωρευ"
+    @test reduplicate("χορευ",lg) == "κεχορευ"
 
     @test reduplicate("λυ",lg) == "λελυ"
     @test reduplicate("γραφ",lg) == "γεγραφ"

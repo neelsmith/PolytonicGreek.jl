@@ -5,7 +5,7 @@
 
 Several functions simplify composing a string.  
 
-**Example**: composte a perfect active verb form from a stem and ending:
+**Example**: compose a perfect active verb form from a stem and ending:
 
 ```@example str
 using PolytonicGreek
@@ -13,11 +13,11 @@ ortho = literaryGreek()
 s = strcat("γραφ", "ται", ortho)
 ```
 ```@example str
-augmented = augment(s, ortho)
+reduped = reduplicate(s, ortho)
 ```
 
 ```@example str
-accentword(augmented, :RECESSIVE, ortho)
+accentword(reduped, :RECESSIVE, ortho)
 ```
 
 

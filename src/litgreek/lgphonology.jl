@@ -1,4 +1,3 @@
-
  """List code points for liquid consonants in literary Greek.
 
  $(SIGNATURES)
@@ -6,7 +5,6 @@
  function liquids(ortho::LiteraryGreekOrthography) 
     split("λμνρ","")
  end  
-
 
  """List code points for labial consonants in literary Greek.
 
@@ -31,12 +29,3 @@
  function palatals(ortho::LiteraryGreekOrthography) 
     split("κγχ","")
  end 
-
-
-#=
-
-labials = split("βπφ","")
-dentals = split("δτθ","")
-palatals = split("γκχ","")
-stops = vcat(labials, dentals, palatals)
-=#
