@@ -94,12 +94,14 @@ end
     @test syllabify("ποιησαίμην") == ["ποι","η","σαι","μην"]
     @test syllabify("ἔργμα") == ["ἐρ", "γμα"]
     @test syllabify("ποῖος") == ["ποι", "ος"]
-    @test syllabify("αἴει") == ["αἰ"    ,"ει"]
+    @test syllabify("αἴει") == ["αἰ","ει"]
     @test syllabify("ὀίω") == ["ὀι", "ω" ]
     @test syllabify("#γνώμην") == ["γνω", "μην"]
     @test syllabify("δεδιέναι") == ["δε","δι","ε","ναι"]
     @test syllabify("ὀΐω") == ["ὀ", "ϊ", "ω" ]
     @test syllabify("ἑωρακυῖα") == ["ἑ", "ω", "ρα", "κυι", "α"]
+
+    @test syllabify("τόρνους") == ["τορ", "νους"]
 end
 
 @testset "Support addition of morphological boundary markers in syllabification" begin

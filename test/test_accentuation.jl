@@ -33,6 +33,7 @@ end
     @test PolytonicGreek.accentsyllable("των", :CIRCUMFLEX) == "τῶν"
     @test PolytonicGreek.accentsyllable("τα", :ACUTE) == "τά"
     @test PolytonicGreek.accentsyllable("ᾀ", :ACUTE) == "ᾄ"
+    @test PolytonicGreek.accentsyllable(nfkc("ῥα"), :ACUTE) == nfkc("ῥά")
 end
 
 @testset "Test adding accents to words" begin

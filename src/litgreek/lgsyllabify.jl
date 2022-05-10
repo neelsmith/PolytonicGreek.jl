@@ -38,8 +38,10 @@ end
 
 """Split between a liquid and non-liquid consonant."""
 function splitliqcons(s)
+    rho = Regex("(ρ)([$LG_LIQUIDS])")
+    splitrho = replace(s, rho => s"\1 \2")
     re = Regex("([$LG_LIQUIDS])([$LG_NONLIQUIDS])")
-    replace(s, re => s"\1 \2")
+    replace(splitrho, re => s"\1 \2")
 end
 
 

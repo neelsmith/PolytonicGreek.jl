@@ -30,7 +30,6 @@ function reduplicate(s::AbstractString, ortho::LiteraryGreekOrthography)
         "τε" * normalized
 
     else
-        @info("LOOK at consonant start", normalized)
         consonlist = consonants(ortho)
         multiconson = Regex("^[$consonlist][$consonlist]+")
         if occursin(multiconson, normalized)
