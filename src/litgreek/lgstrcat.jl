@@ -1,6 +1,3 @@
-
-
-
 """Concatenate `s1` and `s2` d, taking account of necessary phonological modifications.
 
 $(SIGNATURES)
@@ -18,12 +15,29 @@ function strcat(s1::AbstractString,s2::AbstractString,ortho::LiteraryGreekOrthog
     elseif endswith(s1, "ν")
         lg_appendtonu(s1,s2)
 
+    #elseif startswith(s2, "σ")
+        #lg_prependtosigma(s1,s2)
+
     else
         s1 * s2
     end
 end
 
+#=
+"""Prepend string `s1` to a string beginning with σ, `s1`.
+$(SIGNATURES)
+"""
+function lg_prependtosigma(s1::AbstractString, s2::AbstractString)
+    if ! occursin(r"[πβφψκγχξμλρσ]$", s1)
+        s1 * s2
+    elseif occursin(r"[πβφ]$", s1)
+        indices = collect(eachindex(s1))
+        quit = indices[end - 1]
+        string(s1[1:quit],"μ", s2)
 
+    end
+end
+=#
 """Append string `s2` to a string ending in ν, `s1`.
 $(SIGNATURES)
 """
