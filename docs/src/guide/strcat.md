@@ -30,7 +30,11 @@ s = strcat("γραφ","ει", ortho)
 reduped = reduplicate(s, ortho)
 ```
 ```@example str
-augment(reduped, ortho)
+withaug = augment(reduped, ortho)
+```
+
+```@example str
+accentword(withaug, :RECESSIVE, ortho)
 ```
 
 ## Testing strings
