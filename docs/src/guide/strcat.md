@@ -27,10 +27,10 @@ accentword(augmented, :RECESSIVE, ortho)
 s = strcat("γραφ","ει", ortho)
 ```
 ```@example str
-reduplicate(s, ortho)
+reduped = reduplicate(s, ortho)
 ```
 ```@example str
-augment(s, ortho)
+augment(reduped, ortho)
 ```
 
 ## Testing strings

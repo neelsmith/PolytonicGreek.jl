@@ -34,6 +34,7 @@ include("litgreek/lgclitics.jl")
 include("litgreek/lgaugment.jl")
 include("litgreek/lgsyllaccent.jl")
 include("litgreek/lgphonology.jl")
+include("litgreek/lgredupe.jl")
 include("litgreek/lgstrcat.jl")
 
 
@@ -59,6 +60,7 @@ export sortWords
 export LiteraryGreekOrthography, literaryGreek
 export tokentypes, codepoints
 
+export nfkc
 
 
 end # module
