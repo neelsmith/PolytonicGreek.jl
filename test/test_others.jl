@@ -23,7 +23,7 @@ end
 
 @testset "Test tokenization of literary Greek" begin
     s = "Μῆνιν ἄειδε, θεά, Πηληϊάδεω Ἀχιλῆος,"
-    tkns = tokenizeLiteraryGreek(s)
+    tkns = PolytonicGreek.tokenizeLiteraryGreek(s)
     @test length(tkns) == 8
     @test tkns[end] == OrthographicToken(",", PunctuationToken())
 end
@@ -41,7 +41,7 @@ end
     
     @test validstring(s1, ortho )
     @test validstring(s2, ortho ) == false
-    tkns = tokenizeLiteraryGreek(s2)
+    tkns = PolytonicGreek.tokenizeLiteraryGreek(s2)
     # High stop is wrong, rest is OK.
     @test validstring(tkns[1].text, ortho) == false
     for i in 2:length(tkns)
@@ -50,7 +50,7 @@ end
 
     s3 = "κόσμηθεν ἅμ ̓ ἡγεμόνεσσιν"
 
-    s3tkns = tokenizeLiteraryGreek(s3)
+    s3tkns = PolytonicGreek.tokenizeLiteraryGreek(s3)
 
     for t in s3tkns
         println(t.text, " Valid? ", validstring(t.text, ortho))

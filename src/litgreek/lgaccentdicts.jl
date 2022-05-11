@@ -124,7 +124,7 @@ function circumflexdict(ortho::LiteraryGreekOrthography)
             "ἰ" => "ἶ",
             "ὐ" => "ὖ",
             "ἠ" => "ἦ",
-            "ὤ" => "ὦ",
+            "ὠ" => "ὦ",
     
             "ἁ" => "ἇ",
             "ἱ" => "ἷ",
@@ -204,7 +204,7 @@ function acutedict(ortho::LiteraryGreekOrthography)
             "ὀ" => "ὄ",
             "ὐ" => "ὔ",
             "ἠ" => "ἤ",
-            "ὤ" => "ὤ",
+            "ὠ" => "ὤ",
     
             "ἁ" => "ἅ",
             "ἑ" => "ἕ",

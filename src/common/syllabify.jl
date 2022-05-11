@@ -1,7 +1,3 @@
-
-
-
-
 """Generic method of GreekOrthography's syllabify function.
 
 $(SIGNATURES)    

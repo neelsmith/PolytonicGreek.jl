@@ -43,33 +43,29 @@ NB: `augment` removes all accents  from the resulting string.
 a default augment string that can be applied to verb forms starting with a consonant
 (except note that ρ doubles after augment in standard literary Greek orthography).
 """
-function augment(ortho::LiteraryGreekOrthography; s = nothing)
-    if isnothing(s) || isempty(s)
-        nfkc("ἐ")
+function augment(s::AbstractString, ortho::LiteraryGreekOrthography)
+    normalized = nfkc(s) |> rmaccents
+    codepts =  graphemes(normalized) |> collect
+    if normalized[1] == 'ῥ'
+        normalized = string("ἐρρ", join(codepts[2:end], "")) |> nfkc
 
-    else
-        normalized = nfkc(s) |> rmaccents
-        codepts =  graphemes(normalized) |> collect
-        if normalized[1] == 'ῥ'
-            normalized = string("ἐρρ", join(codepts[2:end], "")) |> nfkc
+    elseif normalized[1] in PolytonicGreek.LG_CONSONANTS
+        normalized =  string("ἐ", join(codepts, "")) |> nfkc
 
-        elseif normalized[1] in PolytonicGreek.LG_CONSONANTS
-            normalized =  string("ἐ", join(codepts, "")) |> nfkc
+    else # not a consonant, so must be a vowel! 
+        # check first for multi-char diphthongs
+        diphthongs = augmentdiphthong(normalized)
+        if diphthongs != normalized
+            @debug "Normalized changed to $normalized"
+            normalized = diphthongs
 
-        else # not a consonant, so must be a vowel! 
-            # check first for multi-char diphthongs
-            diphthongs = augmentdiphthong(normalized)
-            if diphthongs != normalized
-                @debug "Normalized changed to $normalized"
-                normalized = diphthongs
-
-            else  # not a diphthong, so:
-                normalized = augmentvowel(normalized)   
-            
-            end
+        else  # not a diphthong, so:
+            normalized = augmentvowel(normalized)   
+        
         end
-        normalized
     end
+    normalized
+    
 end
 
 

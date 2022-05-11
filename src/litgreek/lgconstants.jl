@@ -3,6 +3,7 @@
 const LG_CONSONANTS= "βγδζθκλμνξπρστφχψς"
 const LG_NONLIQUIDS = "βγδζθκλξπστφχψς"
 const LG_LIQUIDS = "μνρλ"
+const LG_INITIALRHO = nfkc("ῥ")
 
 # Vowel classes:
 # these are strings that can be used in a Regex

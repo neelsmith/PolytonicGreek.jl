@@ -434,8 +434,9 @@ julia> PolytonicGreek.vowelsonly("τῶν")
 ```
 """
 function vowelsonly(s::AbstractString, ortho::LiteraryGreekOrthography)
+    norho =  replace(s, LG_INITIALRHO => "")
     re = Regex("[$LG_CONSONANTS]")
-    replace(s, re => "")
+    replace(norho, re => "")
 end
 
 """
