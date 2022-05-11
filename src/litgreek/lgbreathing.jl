@@ -53,7 +53,9 @@ function rmbreathing(s::AbstractString, ortho::LiteraryGreekOrthography)
     stripped
 end
 
-
+"""Map diphthongs to code points for diphthong + rough breathing.
+$(SIGNATURES)
+"""
 function lgroughdiphdict()
     Dict(
          "αι" => nfkc("αἱ"),
@@ -89,6 +91,11 @@ function lgroughdiphdict()
     )
 end
 
+
+
+"""Map vowels to code points for vowel + rough breathing.
+$(SIGNATURES)
+"""
 function lgroughdict()
     Dict(
     
@@ -99,6 +106,9 @@ function lgroughdict()
          "υ" => nfkc("ὑ"),
          "η" => nfkc("ἡ"),
          "ω" => nfkc("ὡ"),
+         nfkc("ᾳ") => nfkc("ᾁ"),
+         nfkc("ῃ") => nfkc("ᾑ"),
+         nfkc("ῳ") => nfkc("ᾡ"),
 
 
          nfkc("ά") => nfkc("ἅ"),
@@ -108,15 +118,26 @@ function lgroughdict()
          nfkc("ύ") => nfkc("ὕ"),
          nfkc("ή") => nfkc("ἥ"),
          nfkc("ώ") => nfkc("ὥ"),
+         nfkc("ᾴ") => nfkc("ᾅ"),
+         nfkc("ῄ") => nfkc("ᾕ"),
+         nfkc("ῴ") => nfkc("ᾥ"),
+
 
          nfkc("ᾶ") => nfkc("ἇ"),
          nfkc("ῖ") => nfkc("ἷ"),
          nfkc("ῦ") => nfkc("ὗ"),
          nfkc("ῆ") => nfkc("ἧ"),
          nfkc("ῶ") => nfkc("ὧ"),
+         nfkc("ᾷ") => nfkc("ᾇ"),
+         nfkc("ῇ") => nfkc("ᾗ"),
+         nfkc("ῷ") => nfkc("ᾧ"),
     )
 end
 
+
+"""Map diphthongs to code points for diphthong + smooth breathing.
+$(SIGNATURES)
+"""
 function lgsmoothdiphdict()
     Dict(
         
@@ -152,7 +173,9 @@ function lgsmoothdiphdict()
     )
 end
 
-
+"""Map vowels to code points for vowel + smooth breathing.
+$(SIGNATURES)
+"""
 function lgsmoothdict()
     Dict(
          "α" => nfkc("ἀ"),
@@ -162,6 +185,9 @@ function lgsmoothdict()
          "υ" => nfkc("ὐ"),
          "η" => nfkc("ἠ"),
          "ω" => nfkc("ὠ"),
+         nfkc("ᾳ") => nfkc("ᾀ"),
+         nfkc("ῃ") => nfkc("ᾐ"),
+         nfkc("ῳ") => nfkc("ᾠ"),
          
          nfkc("ά") => nfkc("ἄ"),
          nfkc("έ") => nfkc("ἔ"),
@@ -170,16 +196,25 @@ function lgsmoothdict()
          nfkc("ύ") => nfkc("ὔ"),
          nfkc("ή") => nfkc("ἤ"),
          nfkc("ώ") => nfkc("ὤ"),
+         nfkc("ᾴ") => nfkc("ᾄ"),
+         nfkc("ῄ") => nfkc("ᾔ"),
+         nfkc("ῴ") => nfkc("ᾤ"),
 
          nfkc("ᾶ") => nfkc("ἆ"),
          nfkc("ῖ") => nfkc("ἶ"),
          nfkc("ῦ") => nfkc("ὖ"),
          nfkc("ῆ") => nfkc("ἦ"),
          nfkc("ῶ") => nfkc("ὦ"),
+         nfkc("ᾷ") => nfkc("ᾆ"),
+         nfkc("ῇ") => nfkc("ᾖ"),
+         nfkc("ῷ") => nfkc("ᾦ"),
     )
 end
 
 
+"""Replace character plus breathing with bare character.
+$(SIGNATURES)
+"""
 function lgbreathstripdict()
     Dict(
         nfkc("ἀ") => "α",
@@ -189,6 +224,10 @@ function lgbreathstripdict()
         nfkc("ὐ") => "υ",
         nfkc("ἠ") => "η",
         nfkc("ὠ") => "ω",
+        nfkc("ᾀ") => nfkc("ᾳ"),
+        nfkc("ᾐ") => nfkc("ῃ"),
+        nfkc("ᾠ") => nfkc("ῳ"),
+ 
 
         nfkc("ἁ") => "α",
         nfkc("ἑ") => "ε",
@@ -197,6 +236,9 @@ function lgbreathstripdict()
         nfkc("ὑ") => "υ",
         nfkc("ἡ") => "η",
         nfkc("ὡ") => "ω",
+        nfkc("ᾁ") => nfkc("ᾳ"),
+        nfkc("ᾑ") => nfkc("ῃ"),
+        nfkc("ᾡ") => nfkc("ῳ"),
 
 
         nfkc("αἰ") => "αι",
@@ -221,58 +263,64 @@ function lgbreathstripdict()
 
 
 
-         nfkc("ἄ") => nfkc("ά"),
-         nfkc("ἔ") => nfkc("έ"),
-         nfkc("ἴ") => nfkc("ί"),
-         nfkc("ὄ") => nfkc("ό"),
-         nfkc("ὔ") => nfkc("ύ"),
-         nfkc("ἤ") => nfkc("ή"),
-         nfkc("ὤ") => nfkc("ώ"),
+        nfkc("ἄ") => nfkc("ά"),
+        nfkc("ἔ") => nfkc("έ"),
+        nfkc("ἴ") => nfkc("ί"),
+        nfkc("ὄ") => nfkc("ό"),
+        nfkc("ὔ") => nfkc("ύ"),
+        nfkc("ἤ") => nfkc("ή"),
+        nfkc("ὤ") => nfkc("ώ"),
+        nfkc("ᾄ") => nfkc("ᾴ"),
+        nfkc("ᾔ") => nfkc("ῄ"),
+        nfkc("ᾤ") => nfkc("ῴ"),
 
-         nfkc("ἆ") => nfkc("ᾶ"),
-         nfkc("ἶ") => nfkc("ῖ"),
-         nfkc("ὖ") => nfkc("ῦ"),
-         nfkc("ἦ") => nfkc("ῆ"),
-         nfkc("ὦ") => nfkc("ῶ"),
+        nfkc("ἆ") => nfkc("ᾶ"),
+        nfkc("ἶ") => nfkc("ῖ"),
+        nfkc("ὖ") => nfkc("ῦ"),
+        nfkc("ἦ") => nfkc("ῆ"),
+        nfkc("ὦ") => nfkc("ῶ"),
+        nfkc("ᾆ") => nfkc("ᾷ"),
+        nfkc("ᾖ") => nfkc("ῇ"),
+        nfkc("ᾦ") => nfkc("ῷ"),
 
-          nfkc("αἷ") => nfkc("αῖ"),
-          nfkc("εἷ") => nfkc("εῖ"),
-          nfkc("οἷ") => nfkc("οῖ"),
-          nfkc("υἷ") => nfkc("υῖ"),
-          nfkc("αὗ") => nfkc("αῦ"),
-          nfkc("εὗ") => nfkc("εῦ"),
-          nfkc("οὗ") => nfkc("οῦ"),
-          nfkc("ηὗ") => nfkc("ηῦ"),
-          nfkc("ωὗ") => nfkc("ωῦ"),
+        nfkc("αἷ") => nfkc("αῖ"),
+        nfkc("εἷ") => nfkc("εῖ"),
+        nfkc("οἷ") => nfkc("οῖ"),
+        nfkc("υἷ") => nfkc("υῖ"),
+        nfkc("αὗ") => nfkc("αῦ"),
+        nfkc("εὗ") => nfkc("εῦ"),
+        nfkc("οὗ") => nfkc("οῦ"),
+        nfkc("ηὗ") => nfkc("ηῦ"),
+        nfkc("ωὗ") => nfkc("ωῦ"),
 
-          nfkc("αἵ") => nfkc("αί"),
-          nfkc("εἵ") => nfkc("εί"),
-          nfkc("οἵ") => nfkc("οί"),
-          nfkc("υἵ") => nfkc("υί"),
-          nfkc("αὕ") => nfkc("αύ"),
-         nfkc("εὕ") => nfkc("εύ"),
-          nfkc("οὕ") => nfkc("ού"),
-          nfkc("ηὕ") => nfkc("ηύ"),
-          nfkc("ωὕ") => nfkc("ωύ"),
+        nfkc("αἵ") => nfkc("αί"),
+        nfkc("εἵ") => nfkc("εί"),
+        nfkc("οἵ") => nfkc("οί"),
+        nfkc("υἵ") => nfkc("υί"),
+        nfkc("αὕ") => nfkc("αύ"),
+        nfkc("εὕ") => nfkc("εύ"),
+        nfkc("οὕ") => nfkc("ού"),
+        nfkc("ηὕ") => nfkc("ηύ"),
+        nfkc("ωὕ") => nfkc("ωύ"),
 
-          nfkc("αἶ") => nfkc("αῖ"),
-          nfkc("εἶ") => nfkc("εῖ"),
-          nfkc("οἶ") => nfkc("οῖ"),
-          nfkc("υἶ") => nfkc("υῖ"),
-          nfkc("αὖ") => nfkc("αῦ"),
-          nfkc("εὖ") => nfkc("εῦ"),
-          nfkc("οὖ") => nfkc("οῦ"),
-          nfkc("ηὖ") => nfkc("ηῦ"),
-          nfkc("ωὖ") => nfkc("ωῦ"),
+        nfkc("αἶ") => nfkc("αῖ"),
+        nfkc("εἶ") => nfkc("εῖ"),
+        nfkc("οἶ") => nfkc("οῖ"),
+        nfkc("υἶ") => nfkc("υῖ"),
+        nfkc("αὖ") => nfkc("αῦ"),
+        nfkc("εὖ") => nfkc("εῦ"),
+        nfkc("οὖ") => nfkc("οῦ"),
+        nfkc("ηὖ") => nfkc("ηῦ"),
+        nfkc("ωὖ") => nfkc("ωῦ"),
 
-          nfkc("αἴ") => nfkc("αί"),
-          nfkc("εἴ") => nfkc("εί"),
-          nfkc("οἴ") => nfkc("οί"),
-          nfkc("υἴ") => nfkc("υί"),
-          nfkc("αὔ") => nfkc("αύ"),
-         nfkc("εὔ") => nfkc("εύ"),
-          nfkc("οὔ") => nfkc("ού"),
-          nfkc("ηὔ") => nfkc("ηύ"),
-          nfkc("ωὔ") => nfkc("ω")
+        nfkc("αἴ") => nfkc("αί"),
+        nfkc("εἴ") => nfkc("εί"),
+        nfkc("οἴ") => nfkc("οί"),
+        nfkc("υἴ") => nfkc("υί"),
+        nfkc("αὔ") => nfkc("αύ"),
+        nfkc("εὔ") => nfkc("εύ"),
+        nfkc("οὔ") => nfkc("ού"),
+        nfkc("ηὔ") => nfkc("ηύ"),
+        nfkc("ωὔ") => nfkc("ω")
     )
 end
