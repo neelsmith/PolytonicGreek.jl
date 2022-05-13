@@ -49,4 +49,6 @@
     @test strcat("συν","λογος", ortho) == "συλλογος"
     @test strcat("συν","ρεω", ortho) == "συρρεω"
 
+
+    @test strcat("δεικ","σ", ortho) == "δειξ"
 end
