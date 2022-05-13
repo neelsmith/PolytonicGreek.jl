@@ -23,21 +23,6 @@ function strcat(s1::AbstractString,s2::AbstractString,ortho::LiteraryGreekOrthog
     end
 end
 
-#=
-"""Prepend string `s1` to a string beginning with σ, `s1`.
-$(SIGNATURES)
-"""
-function lg_prependtosigma(s1::AbstractString, s2::AbstractString)
-    if ! occursin(r"[πβφψκγχξμλρσ]$", s1)
-        s1 * s2
-    elseif occursin(r"[πβφ]$", s1)
-        indices = collect(eachindex(s1))
-        quit = indices[end - 1]
-        string(s1[1:quit],"μ", s2)
-
-    end
-end
-=#
 """Append string `s2` to a string ending in ν, `s1`.
 $(SIGNATURES)
 """
@@ -89,9 +74,14 @@ function lg_appendtopalatal(s1::AbstractString, s2::AbstractString)
     elseif startswith(s2, "σ")
         indices1 = collect(eachindex(s1))
         quit1 = indices1[end - 1]
-        indices2 = collect(eachindex(s2))
-        start2 = indices2[2]
-        string(s1[1:quit1],"ξ", s2[start2:end])        
+
+        if length(s2) == 1
+            string(s1[1:quit1],"ξ")
+        else
+            indices2 = collect(eachindex(s2))
+            start2 = indices2[2]
+            string(s1[1:quit1],"ξ", s2[start2:end])        
+        end
 
     elseif startswith(s2, "τ")
         indices = collect(eachindex(s1))
@@ -145,9 +135,13 @@ function lg_appendtolabial(s1::AbstractString, s2::AbstractString)
     elseif startswith(s2, "σ")
         indices1 = collect(eachindex(s1))
         quit1 = indices1[end - 1]
-        indices2 = collect(eachindex(s2))
-        start2 = indices2[2]
-        string(s1[1:quit1],"ψ", s2[start2:end])        
+        if length(s2) == 1
+            string(s1[1:quit1],"ψ")
+        else
+            indices2 = collect(eachindex(s2))
+            start2 = indices2[2]
+            string(s1[1:quit1],"ψ", s2[start2:end])        
+        end
 
     elseif startswith(s2, "τ")
         indices = collect(eachindex(s1))
