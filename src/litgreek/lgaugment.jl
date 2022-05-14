@@ -80,7 +80,7 @@ function applyaugment(s,ortho)
             s = diphthongs
 
         else  # not a diphthong, so:
-            @info("AUGMENT VOWEL")
+            @debug("AUGMENT VOWEL")
             s = augmentvowel(s)   
         
         end

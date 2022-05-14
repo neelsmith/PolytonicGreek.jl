@@ -15,12 +15,12 @@ end
 @testset "Test honoring morpheme boundaries in reduplication" begin
     ortho = literaryGreek()
 
-    a1 = reduplicate("ἐν#κελευκε", ortho)
-    @test a1 == nfkc("ἐγκεκελευκε")
+    r1 = reduplicate("ἐν#κελευκε", ortho)
+    @test r1 == nfkc("ἐγκεκελευκε")
 
-    a2 = augment("ἐν#αγγελκε", ortho)
-    @test a2 == nfkc("ἐνηγγελκε")
+    r2 = reduplicate("ἐν#αγγελκε", ortho)
+    @test r2 == nfkc("ἐνηγγελκε")
 
-    a3 = augment("κελευκε", ortho)
-    @test a3 == nfkc("ἐκεκελευκε")
+    r3 = reduplicate("κελευκε", ortho)
+    @test r3 == nfkc("κεκελευκε")
 end
