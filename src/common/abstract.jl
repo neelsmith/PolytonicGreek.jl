@@ -25,7 +25,21 @@ function enclitics(ortho::T) where {T <: GreekOrthography}
 end
 
 
-"""Concatenate `s1` and `s2` d, taking account of any phonological
+function strcat(ortho::T, s1::AbstractString,slist...) where {T <: GreekOrthography}
+    if isempty(slist)
+        s1
+    elseif length(slist) == 1
+        strcat(s1,slist[1],ortho)
+    else
+        @info("s1 is ", s1)
+        @info("slist[1] is ", slist[1])
+        pair1 =  strcat(s1, slist[1],ortho)
+        @info("pair 1", pair1)
+        strcat(ortho, pair1, slist[2:end]...)
+    end
+end
+
+"""Concatenate the pair of strings `s1` and `s2` d, taking account of any phonological
 modifications required by orthography `ortho`.
 
 $(SIGNATURES)
