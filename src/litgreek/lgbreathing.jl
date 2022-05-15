@@ -59,7 +59,8 @@ first syllable.
 $(SIGNATURES)
 """
 function lginitialrough(s::AbstractString)
-    if s[1] in values(lgroughdict())
+    @info("INitial rough: ", s[1])
+    if string(s[1]) in values(lgroughdict())
         true
     
     else
@@ -79,7 +80,7 @@ first syllable.
 $(SIGNATURES)
 """
 function lginitialsmooth(s::AbstractString)
-    if s[1] in values(lgsmoothdict())
+    if string(s[1]) in values(lgsmoothdict())
         true
     
     else

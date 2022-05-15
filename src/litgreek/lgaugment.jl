@@ -52,15 +52,19 @@ function augment(s::AbstractString, ortho::LiteraryGreekOrthography)
 
     if length(morphemes) > 1
         @debug("$(s) has multiple morphemes")
-        augpiece = applyaugment(morphemes[end], ortho)
+        augpiece = rmbreathing(applyaugment(morphemes[end], ortho), ortho)
         @debug("Last pieces augmented", augpiece)
-        strcat(join(morphemes[1:end-1]), rmbreathing(augpiece,ortho), ortho)
+        
+        prepend = join(morphemes[1:end-1])
+        if endswith(prepend,"εκ") || endswith(prepend,nfkc("ἐκ"))
+            prepend = replace(prepend, r"κ$" => "ξ")
+            strcat(prepend, augpiece, ortho)
+        else
+            strcat(prepend, augpiece, ortho)
+        end
     else
         applyaugment(s, ortho)
     end
-
-    
-    
 end
 
 function applyaugment(s,ortho)

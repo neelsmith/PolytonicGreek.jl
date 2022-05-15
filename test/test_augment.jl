@@ -23,5 +23,5 @@
     @test augment_initial(lg) == nfkc("ἐ")
     @test augment_medial(lg) == "ε"
    
-    
+    @test augment(nfkc("ἐκ#φερε"), lg) == nfkc("ἐξεφερε")
 end
