@@ -51,4 +51,16 @@
 
 
     @test strcat("δεικ","σ", ortho) == "δειξ"
+
+    @test strcat("συν","οἰσω", ortho) == "συνοισω"
+
+    @test strcat("περι","οἰσω", ortho) == "περιοισω"
+
+    @test strcat("προ","ἠγγελλε", ortho) == "προηγγελλε"
+
+    @test strcat("κατα","ἀγγελλω", ortho) == "καταγγελλω"
+
+
+    @test strcat("κατα","αἱρεω", ortho) == "καθαιρεω"
+
 end

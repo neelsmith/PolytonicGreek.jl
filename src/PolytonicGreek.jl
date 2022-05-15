@@ -37,6 +37,7 @@ include("litgreek/lgphonology.jl")
 include("litgreek/lgredupe.jl")
 include("litgreek/lgstrcat.jl")
 include("litgreek/lgbreathing.jl")
+include("litgreek/lgelision.jl")
 
 
 export GreekOrthography
@@ -48,11 +49,12 @@ export rmbreathing, addbreathing
 export rmaccents, countaccents
 export accentword, accentpenult, accentultima
 
-export augment, augment_initial, augment_medial
-
 export vocalic, consonantal, accented
+
 export strcat
 export reduplicate
+export augment, augment_initial, augment_medial
+export elide
 
 export syllabify
 export sortWords

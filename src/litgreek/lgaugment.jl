@@ -21,10 +21,13 @@ function augmentvowel(v)
     else 
         augmented = v
         augmentdict = lgsimpleaugments()
+        @debug("Looking for augment in ", join(keys(augmentdict), "-"))
         for k in keys(augmentdict)
             re = Regex("^$(k)")
             augmented = replace(augmented, re => augmentdict[k])
+            @debug(augmented)
         end
+        @debug("RETURN", augmented)
         augmented
     end
 end
@@ -45,28 +48,51 @@ a default augment string that can be applied to verb forms starting with a conso
 """
 function augment(s::AbstractString, ortho::LiteraryGreekOrthography)
     normalized = nfkc(s) |> rmaccents
-    codepts =  graphemes(normalized) |> collect
-    if normalized[1] == 'ῥ'
-        normalized = string("ἐρρ", join(codepts[2:end], "")) |> nfkc
+    morphemes = split(normalized,"#")
 
-    elseif normalized[1] in PolytonicGreek.LG_CONSONANTS
-        normalized =  string("ἐ", join(codepts, "")) |> nfkc
+    if length(morphemes) > 1
+        @debug("$(s) has multiple morphemes")
+        augpiece = rmbreathing(applyaugment(morphemes[end], ortho), ortho)
+        @debug("Last pieces augmented", augpiece)
+        
+        prepend = join(morphemes[1:end-1])
+        if endswith(prepend,"εκ") || endswith(prepend,nfkc("ἐκ"))
+            prepend = replace(prepend, r"κ$" => "ξ")
+            strcat(prepend, augpiece, ortho)
+        else
+            strcat(prepend, augpiece, ortho)
+        end
+    else
+        applyaugment(s, ortho)
+    end
+end
 
-    else # not a consonant, so must be a vowel! 
+function applyaugment(s,ortho)
+    codepts =  graphemes(s) |> collect
+    if s[1] == 'ῥ'
+        s = string("ἐρρ", join(codepts[2:end], "")) |> nfkc
+
+    elseif s[1] in PolytonicGreek.LG_CONSONANTS
+        s =  string("ἐ", join(codepts, "")) |> nfkc
+
+    else 
+        # not a consonant, so must be a vowel.
         # check first for multi-char diphthongs
-        diphthongs = augmentdiphthong(normalized)
-        if diphthongs != normalized
-            @debug "Normalized changed to $normalized"
-            normalized = diphthongs
+        diphthongs = augmentdiphthong(s)
+        if diphthongs != s
+            @debug "Normalized changed to $s"
+            s = diphthongs
 
         else  # not a diphthong, so:
-            normalized = augmentvowel(normalized)   
+            @debug("AUGMENT VOWEL")
+            s = augmentvowel(s)   
         
         end
     end
-    normalized
-    
+    s
 end
+
+
 
 
 """Identify string to use for syllabic augment in word-initial position.
