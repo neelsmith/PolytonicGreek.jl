@@ -3,7 +3,7 @@
 $(SIGNATURES)
 """
 function strcat(s1::AbstractString,s2::AbstractString,ortho::LiteraryGreekOrthography)
-    @debug("Catting",s1, s2)
+    s1 = elide(s1, s2, ortho)
     if occursin(r"[πβφ]$", s1)
         lg_appendtolabial(s1,s2)
 
@@ -65,6 +65,12 @@ end
 $(SIGNATURES)
 """
 function lg_appendtopalatal(s1::AbstractString, s2::AbstractString)
+    #=if lginitialrough(s2)
+        indices = collect(eachindex(s1))
+        quit = indices[end - 1]
+        string(s1[1:quit],"χ", s2)
+
+    else=#
     if ! occursin(r"^[μστδθ]", s2)
         s1 * s2
         
@@ -98,8 +104,6 @@ function lg_appendtopalatal(s1::AbstractString, s2::AbstractString)
         indices = collect(eachindex(s1))
         quit = indices[end - 1]
         string(s1[1:quit],"χ", s2)
-
-
     end
 end
 
@@ -109,11 +113,14 @@ end
 $(SIGNATURES)
 """
 function lg_appendtodental(s1::AbstractString, s2::AbstractString)
-    if ! occursin(r"^[τδθ]", s2)
+    if lginitialrough(s2)
+        indices = collect(eachindex(s1))
+        quit = indices[end - 1]
+        @info("Reducing s1 to ",string(s1[1:quit],"θ"))
+        string(s1[1:quit],"θ", s2)
+
+    elseif ! occursin(r"^[τδθ]", s2)
         s1 * s2
-
-
-
     else
         indices = collect(eachindex(s1))
         quit = indices[end - 1]
@@ -126,7 +133,13 @@ end
 $(SIGNATURES)
 """
 function lg_appendtolabial(s1::AbstractString, s2::AbstractString)
-    if ! occursin(r"^[μστδθ]", s2)
+    if lginitialrough(s2)
+        indices = collect(eachindex(s1))
+        quit = indices[end - 1]
+        @debug("Reducing s1 to ",string(s1[1:quit],"θ"))
+        string(s1[1:quit],"φ", s2)
+
+    elseif ! occursin(r"^[μστδθ]", s2)
         s1 * s2
 
     elseif startswith(s2, "μ")

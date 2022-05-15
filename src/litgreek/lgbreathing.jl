@@ -53,6 +53,46 @@ function rmbreathing(s::AbstractString, ortho::LiteraryGreekOrthography)
     stripped
 end
 
+
+"""True is `s` has a rough breathing on the 
+first syllable.
+$(SIGNATURES)
+"""
+function lginitialrough(s::AbstractString)
+    if s[1] in values(lgroughdict())
+        true
+    
+    else
+        rough = false
+        for d in values(lgroughdiphdict())
+            if startswith(s, d)
+                rough = true
+            end
+        end
+        rough
+    end
+end
+
+
+"""True is `s` has a smooth breathing on the 
+first syllable.
+$(SIGNATURES)
+"""
+function lginitialsmooth(s::AbstractString)
+    if s[1] in values(lgsmoothdict())
+        true
+    
+    else
+        smooth = false
+        for d in values(lgsmoothdiphdict())
+            if startswith(s, d)
+                smooth = true
+            end
+        end
+        smooth
+    end
+end
+
 """Map diphthongs to code points for diphthong + rough breathing.
 $(SIGNATURES)
 """
