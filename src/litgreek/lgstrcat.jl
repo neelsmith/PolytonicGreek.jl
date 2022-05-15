@@ -3,7 +3,7 @@
 $(SIGNATURES)
 """
 function strcat(s1::AbstractString,s2::AbstractString,ortho::LiteraryGreekOrthography)
-    @info("Catting",s1, s2)
+    @debug("Catting",s1, s2)
     if occursin(r"[πβφ]$", s1)
         lg_appendtolabial(s1,s2)
 
@@ -14,7 +14,7 @@ function strcat(s1::AbstractString,s2::AbstractString,ortho::LiteraryGreekOrthog
         lg_appendtopalatal(s1,s2)
 
     elseif endswith(s1, "ν")
-        @info("Append to nu")
+        @debug("Append to nu")
         lg_appendtonu(s1,s2)
 
     #elseif startswith(s2, "σ")

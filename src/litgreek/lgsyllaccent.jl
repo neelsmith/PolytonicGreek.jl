@@ -15,6 +15,14 @@ function vocalic(s::AbstractString)
 end
 
 
+"""True if `c` is a vowel or diphthong.
+$(SIGNATURES)
+"""
+function vocalic(c::Char)
+    vocalic(string(c))
+end
+
+
 """True if `s` is a consonant.
 $(SIGNATURES)
 """
