@@ -115,7 +115,7 @@ function lg_appendtodental(s1::AbstractString, s2::AbstractString)
     if lginitialrough(s2)
         indices = collect(eachindex(s1))
         quit = indices[end - 1]
-        @info("Reducing s1 to ",string(s1[1:quit],"θ"))
+        @debug("Reducing s1 to ",string(s1[1:quit],"θ"))
         string(s1[1:quit],"θ",  rmbreathing(s2,literaryGreek()))
 
     elseif ! occursin(r"^[τδθ]", s2)
@@ -132,7 +132,7 @@ end
 $(SIGNATURES)
 """
 function lg_appendtolabial(s1::AbstractString, s2::AbstractString)
-    @info("Appending to labial: look at ", s2)
+    @debug("Appending to labial: look at ", s2)
     if lginitialrough(s2)
         indices = collect(eachindex(s1))
         quit = indices[end - 1]

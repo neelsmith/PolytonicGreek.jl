@@ -11,7 +11,7 @@ function reduplicate(s::AbstractString, ortho::LiteraryGreekOrthography)
     morphemes = split(normalized,"#")
 
     if length(morphemes) > 1
-        @info("More than one morpheme")
+        @debug("More than one morpheme")
         dupepiece = applyreduplication(morphemes[end], ortho)
         strcat(join(morphemes[1:end-1]), rmbreathing(dupepiece,ortho), ortho)
     else
