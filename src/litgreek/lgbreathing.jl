@@ -59,7 +59,7 @@ first syllable.
 $(SIGNATURES)
 """
 function lginitialrough(s::AbstractString)
-    @info("INitial rough: ", s[1])
+    @debug("INitial rough: ", s[1])
     if string(s[1]) in values(lgroughdict())
         true
     
