@@ -6,23 +6,23 @@ function strcat(s1::AbstractString,s2::AbstractString,ortho::LiteraryGreekOrthog
     s1 = elide(s1, s2, ortho)
     @debug("After elision, s1 is ", s1)
     if occursin(r"[πβφ]$", s1)
-        lg_appendtolabial(s1,s2)
+        lg_appendtolabial(s1,s2) |> nfkc
 
     elseif occursin(r"[τδθ]$", s1)
-        lg_appendtodental(s1,s2)
+        lg_appendtodental(s1,s2) |> nfkc
 
     elseif occursin(r"[κγχ]$", s1)
-        lg_appendtopalatal(s1,s2)
+        lg_appendtopalatal(s1,s2) |> nfkc
 
     elseif endswith(s1, "ν")
         @debug("Append to nu")
-        lg_appendtonu(s1,s2)
+        lg_appendtonu(s1,s2) |> nfkc
 
     #elseif startswith(s2, "σ")
         #lg_prependtosigma(s1,s2)
 
     else
-        s1 * s2
+        (s1 * s2) |> nfkc
     end
 end
 

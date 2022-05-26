@@ -64,3 +64,9 @@
     @test strcat("κατα","αἱρεω", ortho) == "καθαιρεω"
 
 end
+
+
+@testset "Test working with compounds" begin
+    pieces = split("παρα#ἐκ#εν#φέρω","#")
+    @test_broken strcat(literaryGreek(), pieces...) == nfkc("παρεξεμφέρω")
+end
