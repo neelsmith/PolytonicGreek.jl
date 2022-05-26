@@ -25,7 +25,7 @@ function elide(s1::AbstractString, s2::AbstractString, ortho::LiteraryGreekOrtho
 
 
         elseif s1 == "ἐκ" && vocalic(s2[1])
-            @info("s1, s2", s1, s2)
+            @debug("s1, s2", s1, s2)
             "ἐξ" |> nfkc
 
         else
