@@ -19,6 +19,15 @@ function elide(s1::AbstractString, s2::AbstractString, ortho::LiteraryGreekOrtho
             ! (endswith(s1, "προ"))
 
             join(codepts[1:end-1])
+
+        elseif s1 == "εκ" && vocalic(s2[1])
+            "εξ"
+
+
+        elseif s1 == "ἐκ" && vocalic(s2[1])
+            @info("s1, s2", s1, s2)
+            "ἐξ" |> nfkc
+
         else
             s1
         end
