@@ -6,7 +6,7 @@ function strcat(s1::AbstractString,s2::AbstractString,ortho::LiteraryGreekOrthog
     part2 = rmbreathing(s2, ortho)
     s1 = elide(s1, part2, ortho)
 
-    @info("After elision, s1 is ", s1)
+    @debug("After elision, s1 is ", s1)
     if occursin(r"[πβφ]$", s1)
         lg_appendtolabial(s1,part2) |> nfkc
 
