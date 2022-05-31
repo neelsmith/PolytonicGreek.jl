@@ -43,7 +43,7 @@ function addacute(vowel::AbstractString, ortho::OrthographicSystem=literaryGreek
             accented
         end
     else
-        @warn("addacute: can't add acute accent to string $vowel")
+        @warn("addacute: can't add acute accent to vowel $vowel")
         nothing
     end
 end
@@ -440,7 +440,7 @@ function vowelsonly(s::AbstractString, ortho::LiteraryGreekOrthography)
 end
 
 """
-    tokenaccent(s::AbstractString)
+
 """
 function tokenform(s::AbstractString, ortho::LiteraryGreekOrthography)
     stripped = stripenclitic(s, ortho) 
@@ -448,8 +448,6 @@ function tokenform(s::AbstractString, ortho::LiteraryGreekOrthography)
 end
 
 """
-
-
 """
 function countaccents(s::AbstractString, ortho::LiteraryGreekOrthography)
     normed = Unicode.normalize(s, :NFKC)
