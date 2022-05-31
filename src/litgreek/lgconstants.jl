@@ -16,7 +16,7 @@ const LG_SMOOTHVOWELS = nfkc("ἀἐἠἰὀὐὠ")
 const LG_IOTASUBS = nfkc("ᾳῃῳᾁᾑᾡᾀᾐᾠ")
 const LG_VOWELS = "$(LG_SIMPLEVOWELS)$(LG_SMOOTHVOWELS)$(LG_ROUGHVOWELS)$(LG_DIAERESES)$(LG_IOTASUBS)"
 const LG_SHORTVOWELS = nfkc("εοἑἐὁὀ")
-const LG_POSSIBLESHORT = nfkc("αιἀἰἁἱϊ")
+const LG_POSSIBLESHORT = nfkc("αιἀἰἁἱὑϊϋ")
 const LG_LONGVOWELS = nfkc("ηῃωῳᾳἡᾑὡᾡᾁἠᾐὠᾠᾀ")
 const LG_AMBIGUOUSVOWELS = nfkc("αιυἀἰὐἁἱὑϊϋ")
 
