@@ -70,7 +70,11 @@ end
 function applyaugment(s,ortho)
     codepts =  graphemes(s) |> collect
     if s[1] == 'ῥ'
-        s = string("ἐρρ", join(codepts[2:end], "")) |> nfkc
+        if length(codepts) < 2
+            s = "ἐρρ" |> nfkc
+        else    
+            s = string("ἐρρ", join(codepts[2:end], "")) |> nfkc
+        end
 
     elseif s[1] in PolytonicGreek.LG_CONSONANTS
         s =  string("ἐ", join(codepts, "")) |> nfkc
