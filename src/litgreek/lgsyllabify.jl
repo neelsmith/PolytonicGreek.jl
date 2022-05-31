@@ -146,8 +146,8 @@ function syllabify(s, ortho::LiteraryGreekOrthography)
     splitliqcons |> 
     splitdiphthongvowel |> 
     splitvoweldiphthong |>  
-    splitshortvowelvowel |> 
-    splitlongvowelvowel |> 
+    splitshortvowelvowel |>  splitshortvowelvowel |>  # catch overlap
+    splitlongvowelvowel |> splitlongvowelvowel |>  # catch overlap
     splitupsilonvowel |> 
     splitdoubleconsonants |> 
     splitconsonantcluster |>
