@@ -208,7 +208,10 @@ function accentword(wrd::AbstractString, placement::Symbol, ortho::LiteraryGreek
         end
          
     elseif placement == :RECESSIVE
-        if length(sylls) < 2
+        if length(sylls) == 1
+            accentultima(wrd, :ACUTE)
+            
+        elseif length(sylls) < 2
             @warn("accentword: string $wrd has fewer than 2 syllables.")
             nothing
         else
