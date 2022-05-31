@@ -77,7 +77,7 @@ end
 
 """
 function splitshortvowelvowel(s)
-    re = Regex("([$LG_POSSIBLESHORT$LG_SHORTVOWELS])([αεηοωᾳῃῳ])")
+    re = Regex("([$LG_AMBIGUOUSVOWELS$LG_SHORTVOWELS])([αεηοωᾳῃῳ])")
     replace(s, re => s"\1 \2")
 end
 
