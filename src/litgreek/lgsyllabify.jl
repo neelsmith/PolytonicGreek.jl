@@ -66,7 +66,7 @@ end
 
 """
 function splitvoweldiphthong(s)
-    re = Regex("([$LG_VOWELS])($LG_DIPHTHONGS)")
+    re = Regex("([$LG_VOWELS]|$LG_MACRA)($LG_DIPHTHONGS)")
     replace(s, re => s"\1 \2")
     
 end
@@ -87,7 +87,7 @@ end
 
 """
 function splitlongvowelvowel(s)
-    re = Regex("([$LG_LONGVOWELS])([$LG_VOWELS])")
+    re = Regex("([$LG_LONGVOWELS]|$LG_MACRA)([$LG_VOWELS])")
     replace(s, re => s"\1 \2")
 end
 
@@ -113,7 +113,7 @@ end
 
 
 function splitconsonantcluster(s)
-    re = Regex("([$LG_VOWELS])([βγδζθκπξστφχψ][μνβγδζθκλξπρστφχψ])")
+    re = Regex("([$LG_VOWELS]|$LG_MACRA)([βγδζθκπξστφχψ][μνβγδζθκλξπρστφχψ])")
     replace(s, re => s"\1 \2")
 end
 
@@ -121,7 +121,7 @@ end
 
 """Consonant between two vowels goes with second vowel."""
 function splitvcv(s)
-    re = Regex("([$LG_VOWELS])([$LG_CONSONANTS])([$LG_VOWELS])")
+    re = Regex("([$LG_VOWELS]|$LG_MACRA)([$LG_CONSONANTS])([$LG_VOWELS])")
     replace(s, re => s"\1 \2\3")
 end
 

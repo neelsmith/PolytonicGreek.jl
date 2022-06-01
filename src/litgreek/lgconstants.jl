@@ -20,6 +20,7 @@ const LG_AMBIGUOUSVOWELS = nfkc("αιυἀἰὐἁἱὑϊϋ")
 const LG_LONGVOWELS = nfkc("ηῃωῳᾳἡᾑὡᾡᾁἠᾐὠᾠᾀ")
 
 
+
 """Compose a list of all possible vowels with breathing or diaeresis that could
 be qualified by a long-vowel marker.
 
@@ -44,3 +45,12 @@ const LG_DIPHTHONGS_CIRCUMFLEX =
 const LG_FINALSHORT = ["αι", "οι"]
 
 
+
+function lgmacra()
+    addmarks = map(v -> v * "_", split(LG_AMBIGUOUSVOWELS,""))
+    join(addmarks,"|")
+end
+
+# this is a Regex disjunction for two-character strings of 
+# ambiguous vowel plus explicit macron:
+const LG_MACRA = lgmacra()
