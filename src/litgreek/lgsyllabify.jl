@@ -78,7 +78,8 @@ end
 """
 function splitshortvowelvowel(s)
     re = Regex("([$LG_AMBIGUOUSVOWELS$LG_SHORTVOWELS])([αεηοωᾳῃῳ])")
-    replace(s, re => s"\1 \2")
+    split1 = replace(s, re => s"\1 \2")
+    replace(split1, r"([ιἰἱ])υ" => s"\1 υ")
 end
 
 """Split between a long vowel and a following vowel.
