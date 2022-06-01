@@ -97,6 +97,7 @@ function lg_appendtopalatal(s1::AbstractString, s2::AbstractString)
         string(s1[1:quit],"κ", s2)
 
     elseif startswith(s2, "δ")
+        indices = collect(eachindex(s1))
         quit = indices[end - 1]
         string(s1[1:quit],"γ", s2)
 
