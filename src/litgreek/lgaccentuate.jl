@@ -108,7 +108,7 @@ function accentsyllable(syll::AbstractString, accent::Symbol, ortho::LiteraryGre
         @warn("accentsyllable: string $syll is more than one syllable.")
         nothing
     else
-        vowels = vowelsonly(syll, ortho)
+        vowels = vowelsonly(lowercase(syll), ortho)
         barevowels = stripquant(vowels)
 
         if accent == :ACUTE
@@ -450,7 +450,8 @@ function tokenform(s::AbstractString, ortho::LiteraryGreekOrthography)
     flipaccent(stripped, ortho)
 end
 
-"""
+"""Counts number of accents in `s`.
+$(SIGNATURES)
 """
 function countaccents(s::AbstractString, ortho::LiteraryGreekOrthography)
     normed = Unicode.normalize(s, :NFKC)
