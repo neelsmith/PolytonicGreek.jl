@@ -38,10 +38,10 @@ end
 
 """Split between a liquid and non-liquid consonant."""
 function splitliqcons(s)
-    rho = Regex("(ρ)([$LG_LIQUIDS])")
-    splitrho = replace(s, rho => s"\1 \2")
+    rholambda = Regex("([ρλ])([$LG_LIQUIDS])")
+    splitrholambda = replace(s, rholambda => s"\1 \2")
     re = Regex("([$LG_LIQUIDS])([$LG_NONLIQUIDS])")
-    replace(splitrho, re => s"\1 \2")
+    replace(splitrholambda, re => s"\1 \2")
 end
 
 
@@ -117,6 +117,7 @@ end
 function splitconsonantcluster(s)
     re = Regex("([$LG_VOWELS]|$LG_MACRA)([βγδζθκπξστφχψ][μνβγδζθκλξπρστφχψ])")
     replace(s, re => s"\1 \2")
+
 end
 
 
