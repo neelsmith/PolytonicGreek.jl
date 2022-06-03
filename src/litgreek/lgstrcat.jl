@@ -2,9 +2,9 @@
 
 $(SIGNATURES)
 """
-function strcat(s1::AbstractString,s2::AbstractString,ortho::LiteraryGreekOrthography)
+function strcat(s1::AbstractString,s2::AbstractString,ortho::LiteraryGreekOrthography; elision = false)
     part2 = rmbreathing(s2, ortho)
-    s1 = elide(s1, part2, ortho)
+    s1 = elision ? elide(s1, part2, ortho) : s1
 
     @debug("After elision, s1 is ", s1)
     if occursin(r"[πβφ]$", s1)

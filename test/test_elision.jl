@@ -12,3 +12,8 @@
     e5 = elide("κατα","οισω",ortho)
     @test e5 == "κατ"
 end
+
+@testset "Test string concatenation with elision" begin
+    @test strcat("παρα","οισω", ortho) == "παραοισω"
+    @test strcat("παρα","οισω", ortho, elision = true) == "παροισω"
+end
