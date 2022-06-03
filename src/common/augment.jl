@@ -6,10 +6,11 @@ $(SIGNATURES)
 
 - `ortho` An instance of a `GreekOrthography`
 """
-function augment(ortho::T; s::AbstractString) where {T <: GreekOrthography}
+function augment(s::AbstractString, ortho::T) where {T <: GreekOrthography}
     @warn "No `augment`` function defined for orthography $(typeof(ortho))"
     nothing
 end
+
 
 """Generic method of function to identify string for syllabic augment in initial position.
 
