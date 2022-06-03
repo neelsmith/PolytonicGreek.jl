@@ -7,7 +7,7 @@ The `augment` function adds appropriate syllabic or temporal augment to a string
 ```jldoctest augment
 using PolytonicGreek 
 lg = literaryGreek()
-augment(lg, s = "βαλε")
+augment("βαλε", lg)
 
 # output
 
@@ -15,7 +15,7 @@ augment(lg, s = "βαλε")
 ```
 
 ```jldoctest augment
-augment(lg; s = "αἱρει")
+augment("αἱρει", lg)
 
 # output
 
@@ -24,7 +24,7 @@ augment(lg; s = "αἱρει")
 
 
 ```jldoctest augment
- augment(lg; s = "ὑβριζε") 
+ augment("ὑβριζε", lg) 
 
 # output
 
@@ -59,7 +59,7 @@ augment_medial(lg)
 You can always find appropriate values for temporal augment in a given orthography by using the `augment` function with a verb form's initial vowel or diphthong.
 
 ```jldoctest augment
-augment(lg, s = "αἱ")
+augment("αἱ", lg)
 
 # output
 
@@ -68,7 +68,7 @@ augment(lg, s = "αἱ")
 
 
 ```jldoctest augment
-augment(lg, s = "ε")
+augment("ε", lg)
 
 # output
 
