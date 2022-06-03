@@ -87,7 +87,6 @@ PolytonicGreek.alphabetic
 PolytonicGreek.punctuation
 PolytonicGreek.isAlphabetic
 PolytonicGreek.isPunctuation
-PolytonicGreek.sortWords
 PolytonicGreek.tokenforstring
 PolytonicGreek.splitPunctuation
 ```
@@ -105,8 +104,6 @@ PolytonicGreek.circumflexdict
 PolytonicGreek.addacute
 PolytonicGreek.addcircumflex
 PolytonicGreek.accentsyllable
-PolytonicGreek.accentultima
-PolytonicGreek.accentpenult
 PolytonicGreek.accentantepenult
 PolytonicGreek.ultima
 PolytonicGreek.penult
@@ -116,7 +113,6 @@ PolytonicGreek.includesdiphthong
 PolytonicGreek.flipaccent
 PolytonicGreek.vowelsonly
 PolytonicGreek.tokenform
-PolytonicGreek.countaccents
 PolytonicGreek.stripenclitic
 PolytonicGreek.normalizediaresis
 PolytonicGreek.normalizeaccentcombos
