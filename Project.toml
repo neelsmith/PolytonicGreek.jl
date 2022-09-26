@@ -1,7 +1,7 @@
 name = "PolytonicGreek"
 uuid = "72b824a7-2b4a-40fa-944c-ac4f345dc63a"
 authors = ["Neel Smith <dnsmith.neel@gmail.com>"]
-version = "0.17.20"
+version = "0.17.21"
 
 [deps]
 Compat = "34da2185-b29b-5c13-b0c7-acf172513d20"
@@ -13,9 +13,9 @@ TestSetExtensions = "98d24dd4-01ad-11ea-1b02-c9a08f80db04"
 Unicode = "4ec0a83e-493e-50e2-b9ac-8f72acf5a8f5"
 
 [compat]
-Compat = "3"
-DocStringExtensions = "0.8"
+Compat = "4"
+DocStringExtensions = "0.9"
 Documenter = "0.27"
-Orthography = "0.16, 0.17"
-TestSetExtensions  = "2"
+Orthography = "0.17"
+TestSetExtensions = "2"
 julia = "1"
