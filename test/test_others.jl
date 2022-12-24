@@ -19,6 +19,8 @@ end
     @test length(PolytonicGreek.splitPunctuation(s2)) == 1
     s3 = ";"
     #@test length(PolytonicGreek.splitPunctuation(s3)) == 1
+    @test PolytonicGreek.splitPunctuation("(μῆνιν)") == [ "(", "μῆνιν", ")"]
+
 end
 
 @testset "Test tokenization of literary Greek" begin

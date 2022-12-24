@@ -96,7 +96,7 @@ end
 $(SIGNATURES)
 """
 function prefixpunctuation()
-    "—(“\""
+    "(\""
 end
 
 """Compose a string with all punctuation characters that can follow a token.
@@ -104,7 +104,7 @@ end
 $(SIGNATURES)
 """
 function postfixpunctuation()
-    ".,;:—)”\""
+    ".,;:)\""
 end
 
 """Compose a string with all punctuation characters.
@@ -183,9 +183,13 @@ Split off any trailing punctuation and return an Array of leading string + trail
 $(SIGNATURES)  
 """
 function splitPunctuation(s::AbstractString)
-    punct = Orthography.collecttail(s, PolytonicGreek.punctuation())
-    trimmed = Orthography.trimtail(s, PolytonicGreek.punctuation())
-    filter(s -> ! isempty(s), [trimmed, punct])
+    trailingpunct = Orthography.collecttail(s, PolytonicGreek.postfixpunctuation())
+    leadingpunct = Orthography.collecthead(s, PolytonicGreek.prefixpunctuation())
+
+    posttrimmed = Orthography.trimtail(s, PolytonicGreek.postfixpunctuation())
+
+    trimmed = Orthography.trimhead(posttrimmed, PolytonicGreek.prefixpunctuation())
+    filter(s -> ! isempty(s), [leadingpunct, trimmed, trailingpunct])
 end
 
 """
