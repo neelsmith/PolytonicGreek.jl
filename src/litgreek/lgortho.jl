@@ -91,15 +91,29 @@ function alphabetic()
     join(ranges,"")
 end
 
+"""Compose a string with all punctuation characters that can precede a token.
+
+$(SIGNATURES)
+"""
+function prefixpunctuation()
+    "(\""
+end
+
+"""Compose a string with all punctuation characters that can follow a token.
+
+$(SIGNATURES)
+"""
+function postfixpunctuation()
+    ".,;:)\""
+end
 
 """Compose a string with all punctuation characters.
 
 $(SIGNATURES)
 """
 function punctuation()
-    ".,;:"
+    prefixpunctuation() * postfixpunctuation() |> unique |> String
 end
-
 
 """
 True if all characters in s are alphabetic.
@@ -169,9 +183,13 @@ Split off any trailing punctuation and return an Array of leading string + trail
 $(SIGNATURES)  
 """
 function splitPunctuation(s::AbstractString)
-    punct = Orthography.collecttail(s, PolytonicGreek.punctuation())
-    trimmed = Orthography.trimtail(s, PolytonicGreek.punctuation())
-    filter(s -> ! isempty(s), [trimmed, punct])
+    trailingpunct = Orthography.collecttail(s, PolytonicGreek.postfixpunctuation())
+    leadingpunct = Orthography.collecthead(s, PolytonicGreek.prefixpunctuation())
+
+    posttrimmed = Orthography.trimtail(s, PolytonicGreek.postfixpunctuation())
+
+    trimmed = Orthography.trimhead(posttrimmed, PolytonicGreek.prefixpunctuation())
+    filter(s -> ! isempty(s), [leadingpunct, trimmed, trailingpunct])
 end
 
 """

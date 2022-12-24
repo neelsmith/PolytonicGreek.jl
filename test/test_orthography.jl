@@ -13,7 +13,7 @@ end
 
 @testset "Test generating puncutation characters" begin
     puncts = PolytonicGreek.punctuation()
-    @test puncts == ".,;:"
+    @test puncts == "(\".,;:)"
 end
 
 @testset "Test recognizing alphabetic tokens" begin
