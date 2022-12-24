@@ -91,15 +91,29 @@ function alphabetic()
     join(ranges,"")
 end
 
+"""Compose a string with all punctuation characters that can precede a token.
+
+$(SIGNATURES)
+"""
+function prefixpunctuation()
+    "—(“\""
+end
+
+"""Compose a string with all punctuation characters that can follow a token.
+
+$(SIGNATURES)
+"""
+function postfixpunctuation()
+    ".,;:—)”\""
+end
 
 """Compose a string with all punctuation characters.
 
 $(SIGNATURES)
 """
 function punctuation()
-    ".,;:"
+    prefixpunctuation() * postfixpunctuation() |> unique |> String
 end
-
 
 """
 True if all characters in s are alphabetic.
