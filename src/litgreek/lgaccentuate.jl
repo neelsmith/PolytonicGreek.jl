@@ -404,10 +404,9 @@ Convert grave accent to acute.
 $(SIGNATURES)
 """
 function flipaccent(s, ortho::LiteraryGreekOrthography)
-    bare = stripquant(s)
     dict = flipdict(ortho)
     modified = []
-    for c in nfkc(bare)
+    for c in nfkc(s)
         if string(c) in keys(dict)
             flipped = dict[string(c)]
             push!(modified, flipped)
@@ -416,11 +415,6 @@ function flipaccent(s, ortho::LiteraryGreekOrthography)
         end
     end
     accented = join(modified,"")
-    if occursin("_", s)
-        string(accented, "_")
-    else
-        accented
-    end
 end 
 
 

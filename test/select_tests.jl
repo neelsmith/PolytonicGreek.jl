@@ -4,7 +4,7 @@ Pkg.activate("..")
 using PolytonicGreek
 using Orthography
 using Unicode
-using Compat.Test
+using Test
 using TestSetExtensions
 
 @testset "All the tests" begin
