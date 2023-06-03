@@ -14,6 +14,7 @@
 end
 
 @testset "Test string concatenation with elision" begin
+    ortho = literaryGreek()
     @test strcat("παρα","οισω", ortho) == "παραοισω"
     @test strcat("παρα","οισω", ortho, elision = true) == "παροισω"
 end

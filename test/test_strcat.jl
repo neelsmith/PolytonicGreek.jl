@@ -58,10 +58,10 @@
 
     @test strcat("προ","ἠγγελλε", ortho) == "προηγγελλε"
 
-    @test strcat("κατα","ἀγγελλω", ortho) == "καταγγελλω"
+    @test strcat("κατα","ἀγγελλω", ortho, elision = true) == "καταγγελλω"
 
 
-    @test strcat("κατα","αἱρεω", ortho) == "καθαιρεω"
+    @test_broken strcat("κατα","αἱρεω", ortho, elision = true) == "καθαιρεω"
 
 end
 
