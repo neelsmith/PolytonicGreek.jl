@@ -42,3 +42,9 @@ end
     lg = literaryGreek()
     @test accentword("πολεω^ς", :RECESSIVE, lg) == nfkc("πόλεω^ς")
 end
+
+
+@testset "Test flipping accent on words with explicitly short vowels " begin
+    lg = literaryGreek()
+    @test  PolytonicGreek.flipaccent("πόλεω^ς", lg) == nfkc("πόλεω^ς")
+end
