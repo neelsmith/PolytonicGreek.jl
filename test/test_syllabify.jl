@@ -76,6 +76,10 @@ end
     diph = Unicode.normalize("εἰσῄα", :NFKC) |> rmaccents
     divideddiph = PolytonicGreek.splitvcv(diph)
     #@test divideddiph == []
+
+
+    divs = syllabify(nfkc("ἔχοιτο"))
+    @test length(divs) == 3
 end
 
 
