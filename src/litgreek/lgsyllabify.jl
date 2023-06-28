@@ -125,7 +125,6 @@ end
 """Consonant between two vowels goes with second vowel."""
 function splitvcv(s)
     re = Regex("([$LG_VOWELS]|$LG_MACRA)([$LG_CONSONANTS])([$LG_VOWELS])")
-    @info("RE IS ", re)
     replace(s, re => s"\1 \2\3")
 end
 
