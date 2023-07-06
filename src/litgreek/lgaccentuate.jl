@@ -1,4 +1,26 @@
 # Functions for manipulating accents.
+"""Implement GreekOrthography's dropsecondaccent function for LiteraryGreekOrthography.
+
+    $(SIGNATURES)
+    """
+function dropsecondaccent(s::AbstractString, ortho::LiteraryGreekOrthography)
+    stripped = []
+    accentseen = false
+    reply = if countaccents(s,ortho) > 1
+        dict = accentstripdict(ortho)
+        for c in reverse(nfkc(s))
+            if accentseen == false && c in keys(dict)
+                push!(stripped, dict[c])
+                accentseen = true
+            else
+                push!(stripped,c)
+            end
+        end
+        join(reverse(stripped),"")
+    else
+        s
+    end
+end
 
 
 """Implement GreekOrthography's rmaccents function for LiteraryGreekOrthography.

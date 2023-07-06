@@ -46,7 +46,7 @@ export liquids, labials, dentals, palatals, stops
 export proclitics, enclitics
 export rmbreathing, addbreathing
 
-export rmaccents, countaccents
+export rmaccents, countaccents, dropsecondaccent
 export accentword, accentpenult, accentultima
 
 export vocalic, consonantal, accented
