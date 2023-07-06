@@ -55,6 +55,20 @@ function accentword(s, placement::Symbol, ortho::T) where {T <: GreekOrthography
     nothing
 end
 
+"""
+Remove any second accent character from `s`.
+
+$(SIGNATURES)
+
+# Parameters
+
+- `s` is a Greek string
+- `ortho` is an implementation of `GreekOrthography`
+"""
+function dropsecondaccent(s::AbstractString, ortho::T) where {T <: GreekOrthography}
+    @warn "No implementation of dropsecondaccent function for orthography $(typeof(ortho))"
+    nothing
+end
 
 """
 Remove all accent characters from `s`.
