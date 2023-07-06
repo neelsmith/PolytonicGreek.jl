@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Syllabification · PolytonicGreek.jl</title><script data-outdated-warner src="../../assets/warner.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.045/juliamono.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.24/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL="../.."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../../assets/documenter.js"></script><script src="../../siteinfo.js"></script><script src="../../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../../assets/themeswap.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><div class="docs-package-name"><span class="docs-autofit"><a href="../../">PolytonicGreek.jl</a></span></div><form class="docs-search" action="../../search/"><input class="docs-search-query" id="documenter-search-query" name="q" type="text" placeholder="Search docs"/></form><ul class="docs-menu"><li><a class="tocitem" href="../../">Home</a></li><li><span class="tocitem">String manipulation</span><ul><li><a class="tocitem" href="../strcat/">Testing and composing strings</a></li><li><a class="tocitem" href="../sorting/">Sorting strings</a></li><li class="is-active"><a class="tocitem" href>Syllabification</a></li><li><a class="tocitem" href="../accents/">Accentuation</a></li><li><a class="tocitem" href="../augment/">Augment</a></li></ul></li><li><span class="tocitem">Greek orthography</span><ul><li><a class="tocitem" href="../orthography/">The <code>GreekOrthography</code> abstraction</a></li></ul></li><li><span class="tocitem">The LiteraryGreek implementation</span><ul><li><a class="tocitem" href="../../litgreek/lgstrings/">Features of a Greek orthography</a></li><li><a class="tocitem" href="../../litgreek/lgortho/">Generic features of an orthographic system</a></li><li><a class="tocitem" href="../../litgreek/orthodetails/"><code>LiteraryGreekOrthography</code>: details of character set and accentuation</a></li></ul></li><li><a class="tocitem" href="../../api/">API documentation</a></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><nav class="breadcrumb"><ul class="is-hidden-mobile"><li><a class="is-disabled">String manipulation</a></li><li class="is-active"><a href>Syllabification</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>Syllabification</a></li></ul></nav><div class="docs-right"><a class="docs-edit-link" href="https://github.com/neelsmith/PolytonicGreek.jl/blob/main/docs/src/guide/syllabification.md" title="Edit on GitHub"><span class="docs-icon fab"></span><span class="docs-label is-hidden-touch">Edit on GitHub</span></a><a class="docs-settings-button fas fa-cog" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a></div></header><article class="content" id="documenter-page"><h1 id="Syllabification"><a class="docs-heading-anchor" href="#Syllabification">Syllabification</a><a id="Syllabification-1"></a><a class="docs-heading-anchor-permalink" href="#Syllabification" title="Permalink"></a></h1><p>The <code>syllabify</code> functions handles the complex task of dividing Greek words into syllables, and returns an Array of string values.  Accents are removed from the result since accents are only meaning as parts of a complete lexical token or phrase.</p><p>The following examples illustrate correct division of a variety of consonant and vowel patterns.</p><pre><code class="language-julia hljs">using PolytonicGreek 
+lg = literaryGreek()
+syllables = syllabify(&quot;ἄνδρασι&quot;,lg)
+join(syllables, &quot;-&quot;)
+
+# output
+
+&quot;ἀν-δρα-σι&quot;</code></pre><pre><code class="language-julia hljs">syllables = syllabify(&quot;προΐστημι&quot;,lg)
+join(syllables, &quot;-&quot;)
+
+# output
+
+&quot;προ-ϊ-στη-μι&quot;</code></pre><pre><code class="language-julia hljs">syllables = syllabify(&quot;ἀναμιμνησκόμενος&quot;,lg)
+join(syllables, &quot;-&quot;)
+
+# output
+
+&quot;ἀ-να-μι-μνη-σκο-με-νος&quot;</code></pre><pre><code class="language-julia hljs">syllables = syllabify(&quot;καταβάλλω&quot;,lg)
+join(syllables, &quot;-&quot;)
+
+# output
+
+&quot;κα-τα-βαλ-λω&quot;</code></pre><pre><code class="language-julia hljs">syllables = syllabify(&quot;δέομαι&quot;,lg)
+join(syllables, &quot;-&quot;)
+
+# output
+
+&quot;δε-ο-μαι&quot;</code></pre><pre><code class="language-julia hljs">syllables = syllabify(&quot;ὀΐω&quot;,lg)
+join(syllables, &quot;-&quot;)
+
+# output
+
+&quot;ὀ-ϊ-ω&quot;</code></pre><pre><code class="language-julia hljs">syllables = syllabify(&quot;ὀίω&quot;,lg)
+join(syllables, &quot;-&quot;)
+
+# output
+
+&quot;ὀι-ω&quot;</code></pre><pre><code class="language-julia hljs">syllables = syllabify(&quot;ἑωρακυῖα&quot;,lg)
+join(syllables, &quot;-&quot;)
+
+# output
+
+&quot;ἑ-ω-ρα-κυι-α&quot;</code></pre><pre><code class="language-julia hljs">syllables = syllabify(&quot;δεδιέναι&quot;,lg)
+join(syllables, &quot;-&quot;)
+
+# output
+
+&quot;δε-δι-ε-ναι&quot;</code></pre><pre><code class="language-julia hljs">syllables = syllabify(&quot;ἔργμα&quot;,lg)
+join(syllables, &quot;-&quot;)
+
+# output
+
+&quot;ἐρ-γμα&quot;</code></pre><pre><code class="language-julia hljs">syllables = syllabify(&quot;οὐδέποτε&quot;,lg)
+join(syllables, &quot;-&quot;)
+
+# output
+
+&quot;οὐ-δε-πο-τε&quot;</code></pre><pre><code class="language-julia hljs">syllables = syllabify(&quot;κελεύει&quot;,lg)
+join(syllables, &quot;-&quot;)
+
+# output
+
+&quot;κε-λευ-ει&quot;</code></pre><pre><code class="language-julia hljs">syllables = syllabify(&quot;οἰκίαις&quot;,lg)
+join(syllables, &quot;-&quot;)
+
+# output
+
+&quot;οἰ-κι-αις&quot;</code></pre><pre><code class="language-julia hljs">syllables = syllabify(&quot;θύειν&quot;, lg)
+join(syllables, &quot;-&quot;)
+
+# output
+
+&quot;θυ-ειν&quot;</code></pre><pre><code class="language-julia hljs">syllables = syllabify(&quot;ποιησαίμην&quot;,lg)
+join(syllables, &quot;-&quot;)
+
+# output
+
+&quot;ποι-η-σαι-μην&quot;</code></pre><pre><code class="language-julia hljs">syllables = syllabify(&quot;ποῖος&quot;, lg)
+join(syllables, &quot;-&quot;)
+
+# output
+
+&quot;ποι-ος&quot;</code></pre><pre><code class="language-julia hljs">syllables = syllabify(&quot;γνώμην&quot;, lg)
+join(syllables, &quot;-&quot;)
+
+# output
+
+&quot;γνω-μην&quot;</code></pre></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../sorting/">« Sorting strings</a><a class="docs-footer-nextpage" href="../accents/">Accentuation »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 0.27.25 on <span class="colophon-date" title="Thursday 6 July 2023 20:07">Thursday 6 July 2023</span>. Using Julia version 1.8.5.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
