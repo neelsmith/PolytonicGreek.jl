@@ -51,13 +51,13 @@ function augment(s::AbstractString, ortho::LiteraryGreekOrthography)
     morphemes = split(normalized,"#")
 
     if length(morphemes) > 1
-        @info("$(s) has multiple morphemes")
+        @debug("$(s) has multiple morphemes")
         augpiece = rmbreathing(applyaugment(morphemes[end], ortho), ortho)
-        @info("Last pieces augmented", augpiece)
+        @debug("Last pieces augmented", augpiece)
         
         
         prepend = join(morphemes[1:end-1])
-        @info("Prepend $(prepend)")
+        @debug("Prepend $(prepend)")
         cplist = collect(graphemes(prepend))
         if occursin(cplist[end], vowels(ortho))
             prepend = join(cplist[1:end-1])
