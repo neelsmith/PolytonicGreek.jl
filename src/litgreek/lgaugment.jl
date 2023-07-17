@@ -51,11 +51,18 @@ function augment(s::AbstractString, ortho::LiteraryGreekOrthography)
     morphemes = split(normalized,"#")
 
     if length(morphemes) > 1
-        @debug("$(s) has multiple morphemes")
+        @info("$(s) has multiple morphemes")
         augpiece = rmbreathing(applyaugment(morphemes[end], ortho), ortho)
-        @debug("Last pieces augmented", augpiece)
+        @info("Last pieces augmented", augpiece)
+        
         
         prepend = join(morphemes[1:end-1])
+        @info("Prepend $(prepend)")
+        cplist = collect(graphemes(prepend))
+        if occursin(cplist[end], vowels(ortho))
+            prepend = join(cplist[1:end-1])
+        end
+        
         if endswith(prepend,"εκ") || endswith(prepend,nfkc("ἐκ"))
             prepend = replace(prepend, r"κ$" => "ξ")
             strcat(prepend, augpiece, ortho)
