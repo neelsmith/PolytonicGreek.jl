@@ -70,3 +70,20 @@ end
     pieces = split("παρα#ἐκ#εν#φέρω","#")
     @test_broken strcat(literaryGreek(), pieces...) == nfkc("παρεξεμφέρω")
 end
+
+@testset "Test phonology of perfect active consonants" begin
+    @test strcat("γεγραπ", "μαι", ortho) == "γεγραμμαι"
+    @test strcat("γεγραπ", "σαι", ortho) == "γεγραψαι"
+    @test strcat("γεγραπ", "ται", ortho) == "γεγραπται"
+
+    @test strcat("γεγραμ", "μεθα", ortho) == "γεγραμμεθα"
+    @test strcat("γεγραμ", "φθ", ortho) == "γεγραφθε"
+
+    @test strcat("πεπγραγ", "μαι", ortho) == "πεπγραγμαι"
+    @test strcat("πεπγραγ", "σαι", ortho) == "πεπγραξαι"
+    @test strcat("πεπγραγ", "ται", ortho) == "πεπρακται"
+
+    @test strcat("πεπγραγ", "μεθα", ortho) == "πεπγραγμεθα"
+    @test strcat("πεπγραγ", "φθ", ortho) == "πεπραχθε"
+    
+end
