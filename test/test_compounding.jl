@@ -15,15 +15,22 @@
     s6 = "ἀπο#δοιτο" # -> ἀποδοῖτο
     # Compound subjunctives are treated both ways in MSS
     s7 = "ἐπι#θηται" # ->  Both ἐπίθηται and ἐπιθῆται  are found
+
+
+
+    s8 = "ἀνα#βητε" # -> ἀνάβητε
 end
 
 
 @testset "Test breathings of compounds" begin
     s1 = "ἀπ#ἰεναι" # -> ἀπιέναι
     s2 = "ἀπο#οἰσω" # -> ἀποίσω
-
+    s3 = "ἀπο#ἱημι" # -> ἀφίημι
+    s4 = "παρα#ἀγγελλω" # -> παραγγελλω
+    s5 = "μετα#ελθειν" # -> μετελθειν
+    s6 = "ἐπι#ἐθυμουν" # -> ἐπεθυμουν
+    
 end
 
-@testset "Test consonant phonology" begin
-    s1 = "ἀπο#ἱημι" # -> ἀφίημι
-end
+
+
