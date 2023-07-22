@@ -72,6 +72,8 @@ end
 end
 
 @testset "Test phonology of perfect active consonants" begin
+    ortho = literaryGreek()
+    
     @test strcat("γεγραπ", "μαι", ortho) == "γεγραμμαι"
     @test strcat("γεγραπ", "σαι", ortho) == "γεγραψαι"
     @test strcat("γεγραπ", "ται", ortho) == "γεγραπται"
@@ -85,5 +87,7 @@ end
 
     @test strcat("πεπγραγ", "μεθα", ortho) == "πεπγραγμεθα"
     @test strcat("πεπγραγ", "φθ", ortho) == "πεπραχθε"
-    
+
+
+   @test strcat("ἀπο", "ἱκνεομαι", ortho) == "ἀφικνεομαι" 
 end

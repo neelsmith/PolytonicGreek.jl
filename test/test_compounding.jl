@@ -7,7 +7,7 @@
     s2 = "περι#θες" # -> περίθες
     s3 = "συν#εκ#δος" # -> συνέκδος 
     # Accent on 2nd aor imptv retains accent with monosyllabic prefix
-    s4 = "προ#δου" ->  # προδο
+    s4 = "προ#δου" #->  # προδο
     # But recedes with polysyllabic prefix
     s5 = "ἀπο#δου" # -> ἀπόδου
     # Compound optatives retain accent of simplex.
