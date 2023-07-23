@@ -48,7 +48,7 @@ a default augment string that can be applied to verb forms starting with a conso
 """
 function augment(s::AbstractString, ortho::LiteraryGreekOrthography)
     normalized = nfkc(s) |> rmaccents
-    morphemes = split(normalized,"#")
+    morphemes = splitmorphemeboundary(normalized)
 
     if length(morphemes) > 1
         @debug("$(s) has multiple morphemes")
