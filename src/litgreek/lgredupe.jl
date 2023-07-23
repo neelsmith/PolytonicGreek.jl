@@ -8,7 +8,7 @@ $(SIGNATURES)
 """
 function reduplicate(s::AbstractString, ortho::LiteraryGreekOrthography)
     normalized = nfkc(s) |> rmaccents
-    morphemes = splitmorphemeboundary(normalized)
+    morphemes = splitmorphemes(normalized)
 
     if length(morphemes) > 1
         @debug("More than one morpheme")

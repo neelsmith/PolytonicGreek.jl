@@ -29,3 +29,11 @@
  function palatals(ortho::LiteraryGreekOrthography) 
     split("κγχ","")
  end 
+
+
+ """True if token has a vowel with rough breathing.
+ $SIGNATURES.
+ """
+ function rough(s, ortho::LiteraryGreekOrthography)
+   sylls = syllabify(s,ortho)
+ end

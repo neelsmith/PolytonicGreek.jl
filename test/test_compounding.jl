@@ -23,6 +23,8 @@ end
 
 
 @testset "Test breathings of compounds" begin
+    ortho = literaryGreek()
+
     s1 = "ἀπ#ἰεναι" # -> ἀπιέναι
     s2 = "ἀπο#οἰσω" # -> ἀποίσω
     s3 = "ἀπο#ἱημι" # -> ἀφίημι
@@ -31,7 +33,12 @@ end
     s6 = "ἐπι#ἐθυμουν" # -> ἐπεθυμουν
 
     s7 = "ἀντ#αἰρ" # -> ἀνταιρ
-    s8 = "ἀνθ#αἱρ" # -> ἀνθαιρ
+    @test strcat(PolytonicGreek.splitmorphemes(s7)..., ortho) == "ἀνταιρ"
+
+    s8 = "ἀντ#αἱρ" # -> ἀνθαιρ
+    @test_broken strcat(PolytonicGreek.splitmorphemes(s7)..., ortho) == "ἀνθαιρ"
+
+
     
 end
 

@@ -4,7 +4,6 @@ struct LiteraryGreekOrthography <: GreekOrthography
     tokencategories
 end
 
-
 OrthographyTrait(::Type{LiteraryGreekOrthography}) = IsOrthographicSystem()
 
 """Implement Orthography's tokenize function for LiteraryGreekOrthography.
@@ -14,7 +13,6 @@ $(SIGNATURES)
 function tokenize(s::AbstractString, o::LiteraryGreekOrthography)
     tokenizeLiteraryGreek(s)
 end
-
 
 """Implement Orthography's codepoints functions for LiteraryGreekOrthography.
 
@@ -44,9 +42,6 @@ function literaryGreek()
         Orthography.PunctuationToken
     ]
     LiteraryGreekOrthography(cps, ttypes)
-    #
-    
-  
 end
 
 
@@ -174,7 +169,6 @@ function tokenforstring(s::AbstractString)
         OrthographicToken(normed, Orthography.UnanalyzedToken())
     end
 end
-
 
 
 """

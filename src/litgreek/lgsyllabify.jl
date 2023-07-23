@@ -40,8 +40,8 @@ end
 function splitliqcons(s)
     rholambda = Regex("([ρλ])([$LG_LIQUIDS])")
     splitrholambda = replace(s, rholambda => s"\1 \2")
-    re = Regex("([$LG_LIQUIDS])([$LG_NONLIQUIDS])")
-    replace(splitrholambda, re => s"\1 \2")
+    re = Regex("([$LG_LIQUIDS])([$LG_NONLIQUIDS])(.+)")
+    replace(splitrholambda, re => s"\1 \2\3")
 end
 
 
@@ -141,20 +141,25 @@ join(syllables, "-")
 
 """
 function syllabify(s, ortho::LiteraryGreekOrthography)
-    nfkc(s) |>
-    rmaccents  |>
-    splitmorphemeboundary |>
-    splitdiaeresis |> 
-    splitmunu  |> 
-    splitliqcons |> 
-    splitdiphthongvowel |> 
-    splitvoweldiphthong |>  
-    splitshortvowelvowel |>  splitshortvowelvowel |>  # catch overlap
-    splitlongvowelvowel |> splitlongvowelvowel |>  # catch overlap
-    splitupsilonvowel |> 
-    splitdoubleconsonants |> 
-    splitconsonantcluster |>
-    splitvcv |>   splitvcv |> # catch overlap
-    split
+    morpheme_v =nfkc(s) |>
+    rmaccents |>
+    splitmorphemes 
+
+    map(morpheme_v) do s
+        s |> splitdiaeresis |> 
+        splitmunu  |> 
+        splitliqcons |>  
+        splitdiphthongvowel |> 
+        splitvoweldiphthong |>  
+        splitshortvowelvowel |>  splitshortvowelvowel |>  # catch overlap
+        splitlongvowelvowel |> splitlongvowelvowel |>  # catch overlap
+        splitupsilonvowel |> 
+        splitdoubleconsonants |> 
+        splitconsonantcluster |>
+        splitvcv |>   splitvcv |> # catch overlap
+     
+        split 
+    end  |> Iterators.flatten |> collect
+    
 end
 
