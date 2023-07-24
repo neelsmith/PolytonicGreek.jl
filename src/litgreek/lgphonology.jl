@@ -32,8 +32,30 @@
 
 
  """True if token has a vowel with rough breathing.
- $SIGNATURES.
+ $(SIGNATURES)
  """
  function rough(s, ortho::LiteraryGreekOrthography)
    sylls = syllabify(s,ortho)
  end
+
+"""Make string `s` begin with an aspirate.
+$(SIGNATURES)
+"""
+function aspirate(cp, ortho::LiteraryGreekOrthography = literaryGreek())
+   if haskey(aspiratedict, cp)
+     aspiratedict[cp]
+   else
+      cp
+   end
+end
+
+"""Map stops to equivalent aspirate."""
+aspiratedict = Dict(
+   'τ' => "θ",
+   'π' => "φ",
+   'κ' => "χ",
+
+   'δ' => "θ",
+   'β' => "φ",
+   'γ' => "χ",
+)

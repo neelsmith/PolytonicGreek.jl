@@ -7,4 +7,7 @@
 
     allstops = stops(ortho)
     @test length(allstops) == 9
+
+
+    #@test aspirate("")
 end

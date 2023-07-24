@@ -73,7 +73,17 @@ function lg_appendtopalatal(s1::AbstractString, s2::AbstractString)
     else=#
     if ! occursin(r"^[μστδθ]", s2)
         s1 * s2
+
+    elseif startswith(s2, "σθ")    
+        indices1 = collect(eachindex(s1))
+        quit1 = indices1[end - 1]
+
+        indices2 = collect(eachindex(s2))
+        start2 = indices2[2]
+
+        string(s1[1:quit1], aspirate(s1[indices1[end]]), s2[start2:end] )
         
+
     elseif startswith(s2, "μ")
         indices = collect(eachindex(s1))
         quit = indices[end - 1]
@@ -118,6 +128,15 @@ function lg_appendtodental(s1::AbstractString, s2::AbstractString)
         @debug("Reducing s1 to ",string(s1[1:quit],"θ"))
         string(s1[1:quit],"θ",  rmbreathing(s2,literaryGreek()))
 
+    elseif startswith(s2, "σθ")
+        indices1 = collect(eachindex(s1))
+        quit1 = indices1[end - 1]
+
+        indices2 = collect(eachindex(s2))
+        start2 = indices2[2]
+
+        string(s1[1:quit1], aspirate(s1[indices1[end]]), s2[start2:end] )
+
     elseif ! occursin(r"^[τδθ]", s2)
         s1 * s2
     else
@@ -139,8 +158,20 @@ function lg_appendtolabial(s1::AbstractString, s2::AbstractString)
         @debug("Reducing s1 to ",string(s1[1:quit],"θ"))
         string(s1[1:quit],"φ", rmbreathing(s2,literaryGreek()))
 
+    elseif startswith(s2, "σθ")
+        @debug("STARTING σθ")
+        indices1 = collect(eachindex(s1))
+        quit1 = indices1[end - 1]
+
+        indices2 = collect(eachindex(s2))
+        start2 = indices2[2]
+
+        string(s1[1:quit1], aspirate(s1[indices1[end]]), s2[start2:end] )
     elseif ! occursin(r"^[μστδθ]", s2)
         s1 * s2
+
+    
+
 
     elseif startswith(s2, "μ")
         indices = collect(eachindex(s1))

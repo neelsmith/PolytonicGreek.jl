@@ -43,6 +43,7 @@ include("litgreek/lgelision.jl")
 export GreekOrthography
 export vowels, consonants
 export liquids, labials, dentals, palatals, stops
+export aspirate
 export proclitics, enclitics
 export rmbreathing, addbreathing
 
