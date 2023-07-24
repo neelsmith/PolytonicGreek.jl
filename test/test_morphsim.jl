@@ -18,11 +18,11 @@
     @test accentword(ex2,:RECESSIVE, o) == "ἀναλύει"
 
     dupe2 = reduplicate("ἀνα#λυ", o)
-    @test_broken dupe2 ==  "ἀνα#λελυ"
+    @test dupe2 ==  "ἀνα#λελυ"
     @test accentword(strcat(dupe2, "κε", o), :RECESSIVE, o) ==  "ἀναλέλυκε"
 
     aug2 = augment("ἀνα#λυ", o)
-    @test_broken aug == "ἀνα#ἐλυ"
+    @test aug2 == "ἀν#ελυ"
     @test accentword(strcat(aug2, "ομεθα",o), :RECESSIVE, o) ==  "ἀνελυόμεθα"
 
 end
