@@ -38,10 +38,15 @@ end
 
 """Split between a liquid and non-liquid consonant."""
 function splitliqcons(s)
+    
     rholambda = Regex("([ρλ])([$LG_LIQUIDS])")
     splitrholambda = replace(s, rholambda => s"\1 \2")
     re = Regex("([$LG_LIQUIDS])([$LG_NONLIQUIDS])(.+)")
-    replace(splitrholambda, re => s"\1 \2\3")
+    answer = replace(splitrholambda, re => s"\1 \2\3")
+    if s !=  answer
+        @debug("Split liqcons on $(s) to $(answer)")
+    end
+    answer
 end
 
 
