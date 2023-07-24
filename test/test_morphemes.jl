@@ -2,10 +2,10 @@
     ortho = literaryGreek()
 
     a1 = augment("ἐν#κελευε", ortho)
-    @test a1 == nfkc("ἐνεκελευε")
+    @test a1 == nfkc("ἐν#εκελευε")
 
     a2 = augment("ἐν#αγγελλε", ortho)
-    @test a2 == nfkc("ἐνηγγελλε")
+    @test a2 == nfkc("ἐν#ηγγελλε")
 
     a3 = augment("κελευε", ortho)
     @test a3 == nfkc("ἐκελευε")
@@ -16,10 +16,10 @@ end
     ortho = literaryGreek()
 
     r1 = reduplicate("ἐν#κελευκε", ortho)
-    @test r1 == nfkc("ἐγκεκελευκε")
+    @test r1 == nfkc("ἐν#κεκελευκε")
 
     r2 = reduplicate("ἐν#αγγελκε", ortho)
-    @test r2 == nfkc("ἐνηγγελκε")
+    @test r2 == nfkc("ἐν#ηγγελκε")
 
     r3 = reduplicate("κελευκε", ortho)
     @test r3 == nfkc("κεκελευκε")
