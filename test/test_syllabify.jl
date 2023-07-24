@@ -4,6 +4,12 @@
     @test divided == ["εἰσ", "ῃα"]
 end
 
+@testset "Test splitting consonant groups" begin
+    o = literaryGreek()
+    s = "ὅστις"
+    expected = "ὁσ τις"
+    @test_broken syllablify(s, o) == expected
+end
 
 @testset "Test splitting on diaeresis" begin
     diaeresis = Unicode.normalize("προΐστημι", :NFKC) |> rmaccents
