@@ -8,12 +8,12 @@ $(SIGNATURES)
 """
 function reduplicate(s::AbstractString, ortho::LiteraryGreekOrthography)
     normalized = nfkc(s) |> rmaccents
-    morphemes = split(normalized,"#")
+    morphemes = splitmorphemes(normalized)
 
     if length(morphemes) > 1
         @debug("More than one morpheme")
         dupepiece = applyreduplication(morphemes[end], ortho)
-        strcat(join(morphemes[1:end-1]), rmbreathing(dupepiece,ortho), ortho)
+        strcat(join(morphemes[1:end-1], "#") * "#", rmbreathing(dupepiece,ortho), ortho)
     else
         applyreduplication(s, ortho)
     end

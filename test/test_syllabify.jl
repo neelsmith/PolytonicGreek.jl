@@ -1,9 +1,15 @@
 @testset "Test splitting on morpheme boundary" begin
     morph = nfkc("εἰσ#ῄα") |> rmaccents
-    divided = PolytonicGreek.splitmorphemeboundary(morph)
-    @test divided == "εἰσ ῃα"
+    divided = PolytonicGreek.splitmorphemes(morph)
+    @test divided == ["εἰσ", "ῃα"]
 end
 
+@testset "Test splitting consonant groups" begin
+    o = literaryGreek()
+    s = "ὅσ#τις"
+    expected =  ["ὁσ", "τις"]
+    @test syllabify(s, o) == expected
+end
 
 @testset "Test splitting on diaeresis" begin
     diaeresis = Unicode.normalize("προΐστημι", :NFKC) |> rmaccents
@@ -114,6 +120,7 @@ end
 end
 
 @testset "Test syllabification of continuous passage" begin
+    o = literaryGreek()
     psg = """
 περὶ πολλοῦ ἂν ποιησαίμην, ὦ ἄνδρες, τὸ τοιούτους ὑμᾶς ἐμοὶ δικαστὰς περὶ τούτου τοῦ πράγματος γενέσθαι, 
 οἷοίπερ ἂν ὑμῖν αὐτοῖς εἴητε τοιαῦτα πεπονθότες: εὖ γὰρ οἶδ' ὅτι, 
@@ -121,15 +128,12 @@ end
 ὅστις οὐκ ἐπὶ τοῖς γεγενημένοις ἀγανακτοίη, ἀλλὰ πάντες ἂν περὶ τῶν τὰ τοιαῦτα ἐπιτηδευόντων 
 τὰς ζημίας μικρὰς ἡγοῖσθε.
 """
-    syllables = join(syllabify(psg), " ")
-    expected = "πε ρι πολ λου ἀν ποι η σαι μην, ὠ ἀν δρες, το τοι ου τους ὑ μας ἐ μοι δι κα στας πε ρι του του του πρα γμα τος γε νε σθαι, οἱ οι περ ἀν ὑ μιν αὐ τοις εἰ η τε τοι αυ τα πε πον θο τες: εὐ γαρ οἱ δ' ὁ τι, εἰ την αὐ την γνω μην πε ρι των ἀλ λων ἐ χοι τε, ἡν περ πε ρι ὑ μων αὐ των, οὐκ ἀν εἰ η: ὁ στις οὐκ ἐ πι τοις γε γε νη με νοις ἀ γα να κτοι η, ἀλ λα παν τες ἀν πε ρι των τα τοι αυ τα ἐ πι τη δευ ον των τας ζη μι ας μι κρας ἡ γοι σθε."
-    @test syllables == expected
-    #=@warn("ACTUAL VLAUE:")
-    @warn(syllables)
-    @warn("EXPETED:")
-    @warn(expected)
-    @warn("DIFF")
-    @warn(diff(syllables, expected))=#
+    syllables = map(wrd -> syllabify(wrd, o), split(psg)) |> Iterators.flatten |> collect
+    
+    expected = split("πε ρι πολ λου ἀν ποι η σαι μην, ὠ ἀν δρες, το τοι ου τους ὑ μας ἐ μοι δι κα στας πε ρι του του του πρα γμα τος γε νε σθαι, οἱ οι περ ἀν ὑ μιν αὐ τοις εἰ η τε τοι αυ τα πε πον θο τες: εὐ γαρ οἱ δ' ὁ τι, εἰ την αὐ την γνω μην πε ρι των ἀλ λων ἐ χοι τε, ἡν περ πε ρι ὑ μων αὐ των, οὐκ ἀν εἰ η: ὁ στις οὐκ ἐ πι τοις γε γε νη με νοις ἀ γα να κτοι η, ἀλ λα παν τες ἀν πε ρι των τα τοι αυ τα ἐ πι τη δευ ον των τας ζη μι ας μι κρας ἡ γοι σθε.")
+    for (i,s) in enumerate(syllables)
+        @test s == expected[i]
+    end
 end
 
 

@@ -22,10 +22,10 @@ $(SIGNATURES)
 
 # Example
 ```jldoctest
-PolytonicGreek.splitmorphemeboundary("εἰσ#ῄα")
+PolytonicGreek.splitmorphemes("εἰσ#ῄα")
 "εἰσ ῄα"
 ```
 """
-function splitmorphemeboundary(s)
-    replace(s, "#" => " ")
+function splitmorphemes(s)
+    split(s, "#")
 end

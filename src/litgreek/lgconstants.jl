@@ -42,10 +42,14 @@ const LG_DIPHTHONGS_ACUTE =
 "αί|εί|οί|υί|αύ|εύ|ού|ηύ|ωύ|υἴ|αἴ|εἴ|οἴ|αὔ|εὔ|οὔ|ηὔ|ωὔ|υἴ|αἵ|εἵ|οἵ|αὕ|εὕ|οὕ|ηὕ|ωὕ|υἵ" 
 const LG_DIPHTHONGS_CIRCUMFLEX = 
 "αῖ|εῖ|οῖ|υῖ|αῦ|εῦ|οῦ|ηῦ|ωῦ|υἶ|αἶ|εἶ|οἶ|αὖ|εὖ|οὖ|ηὖ|ωὖ|υἶ|αἷ|εἷ|οἷ|αὗ|εὗ|οὗ|ηὗ|ωὗ|υἷ" 
+const LG_DIPHTHONGS_ROUGH = "αἵ|εἵ|οἵ|αὕ|εὕ|οὕ|ηὕ|ωὕ|υἵ|υἶ|αἶ|εἶ|οἶ|αὖ|εὖ|οὖ|ηὖ|ωὖ"
 const LG_FINALSHORT = ["αι", "οι"]
 
 
-
+"""Compose a list marking all potentially ambiguous vowels as
+explicitly long using macron.
+$(SIGNATURES)
+"""
 function lgmacra()
     addmarks = map(v -> v * "_", split(LG_AMBIGUOUSVOWELS,""))
     join(addmarks,"|")

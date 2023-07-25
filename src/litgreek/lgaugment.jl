@@ -48,7 +48,7 @@ a default augment string that can be applied to verb forms starting with a conso
 """
 function augment(s::AbstractString, ortho::LiteraryGreekOrthography)
     normalized = nfkc(s) |> rmaccents
-    morphemes = split(normalized,"#")
+    morphemes = splitmorphemes(normalized)
 
     if length(morphemes) > 1
         @debug("$(s) has multiple morphemes")
@@ -58,6 +58,7 @@ function augment(s::AbstractString, ortho::LiteraryGreekOrthography)
         
         prepend = join(morphemes[1:end-1])
         @debug("Prepend $(prepend)")
+        
         cplist = collect(graphemes(prepend))
         if occursin(cplist[end], vowels(ortho))
             prepend = join(cplist[1:end-1])
@@ -65,11 +66,14 @@ function augment(s::AbstractString, ortho::LiteraryGreekOrthography)
         
         if endswith(prepend,"εκ") || endswith(prepend,nfkc("ἐκ"))
             prepend = replace(prepend, r"κ$" => "ξ")
-            strcat(prepend, augpiece, ortho)
+            strcat(prepend * "#", augpiece, ortho)
         else
-            strcat(prepend, augpiece, ortho)
+            @debug("Cat $(prepend) and $(augpiece)")
+            strcat(prepend * "#", augpiece, ortho)
         end
+
     else
+        # simplex verb:
         applyaugment(s, ortho)
     end
 end

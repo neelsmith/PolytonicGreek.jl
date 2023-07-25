@@ -11,14 +11,24 @@ function elide(s1::AbstractString, s2::AbstractString, ortho::LiteraryGreekOrtho
     elseif isempty(s2)
         s1
     else
-        split(LG_CONSONANTS)
+        
+        #split(LG_CONSONANTS)
         finalshort = r"[βγδζθκλμνξπρστφχψ][αειο]$"
-        codepts =  graphemes(s1) |> collect
+        
         if  vocalic(s2[1]) && occursin(finalshort, s1) &&
             ! (endswith(s1, "περι")) &&
             ! (endswith(s1, "προ"))
+            codepts =  graphemes(s1) |> collect
+            elided = join(codepts[1:end-1])
 
-            join(codepts[1:end-1])
+
+            if rough(s2, ortho)
+                aspiratefinal(elided, ortho)
+            else
+                elided    
+            end
+            
+           
 
         elseif s1 == "εκ" && vocalic(s2[1])
             "εξ"

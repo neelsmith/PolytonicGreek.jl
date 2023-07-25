@@ -54,19 +54,38 @@ function rmbreathing(s::AbstractString, ortho::LiteraryGreekOrthography)
 end
 
 
+"""True if string `s` begins with a smooth breathing.
+$(SIGNATURES)
+"""
+function smooth(s::AbstractString, ortho::LiteraryGreekOrthography)
+    lginitialsmooth(s)
+end
+
+"""True if string `s` begins with a rough breathing.
+$(SIGNATURES)
+"""
+function rough(s::AbstractString, ortho::LiteraryGreekOrthography)
+    lginitialrough(s)
+end
+
+
 """True is `s` has a rough breathing on the 
 first syllable.
 $(SIGNATURES)
 """
 function lginitialrough(s::AbstractString)
-    @debug("INitial rough: ", s[1])
-    if string(s[1]) in values(lgroughdict())
+    @debug("Initial rough: ", s[1])
+
+
+    if string(s[1]) in collect(values(lgroughdict()))
+        @debug("$(s[1]) was in dict")
         true
     
     else
         rough = false
         for d in values(lgroughdiphdict())
             if startswith(s, d)
+                @debug("$(s) starts wtih $(d)")
                 rough = true
             end
         end
@@ -142,7 +161,7 @@ function lgroughdict()
     
          "α" => nfkc("ἁ"),
          "ε" => nfkc("ἑ"),
-         "ι" => nfkc("ἰ"),
+         "ι" => nfkc("ἱ"),
          "ο" => nfkc("ὁ"),
          "υ" => nfkc("ὑ"),
          "η" => nfkc("ἡ"),
@@ -272,7 +291,7 @@ function lgbreathstripdict()
 
         nfkc("ἁ") => "α",
         nfkc("ἑ") => "ε",
-        nfkc("ἰ") => "ι",
+        nfkc("ἱ") => "ι",
         nfkc("ὁ") => "ο",
         nfkc("ὑ") => "υ",
         nfkc("ἡ") => "η",

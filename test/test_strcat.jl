@@ -61,12 +61,42 @@
     @test strcat("κατα","ἀγγελλω", ortho, elision = true) == "καταγγελλω"
 
 
-    @test_broken strcat("κατα","αἱρεω", ortho, elision = true) == "καθαιρεω"
+    @test strcat("κατα","αἱρεω", ortho, elision = true) == "καθαιρεω"
 
 end
 
-
+#=
 @testset "Test working with compounds" begin
     pieces = split("παρα#ἐκ#εν#φέρω","#")
-    @test_broken strcat(literaryGreek(), pieces...) == nfkc("παρεξεμφέρω")
+    @test_broken strcat(literaryGreek(), pieces...) == nfkc("παρεξεν#φέρω")
+end
+=#
+
+
+@testset "Test phonology of perfect active consonants" begin
+    ortho = literaryGreek()
+    
+    @test strcat("γεγραπ", "μαι", ortho) == "γεγραμμαι"
+    @test strcat("γεγραπ", "σαι", ortho) == "γεγραψαι"
+    @test strcat("γεγραπ", "ται", ortho) == "γεγραπται"
+
+    @test strcat("γεγραπ", "μεθα", ortho) == "γεγραμμεθα"
+    @test strcat("γεγραπ", "σθε", ortho) == "γεγραφθε"
+
+
+    @test strcat("γεγραφ", "μαι", ortho) == "γεγραμμαι"
+    @test strcat("γεγραφ", "σαι", ortho) == "γεγραψαι"
+    @test strcat("γεγραφ", "ται", ortho) == "γεγραπται"
+
+    @test strcat("γεγραφ", "μεθα", ortho) == "γεγραμμεθα"
+    @test strcat("γεγραφ", "σθε", ortho) == "γεγραφθε"
+
+
+    @test strcat("πεπραγ", "μαι", ortho) == "πεπραγμαι"
+    @test strcat("πεπραγ", "σαι", ortho) == "πεπραξαι"
+    @test strcat("πεπραγ", "ται", ortho) == "πεπρακται"
+
+    @test strcat("πεπραγ", "μεθα", ortho) == "πεπραγμεθα"
+    @test strcat("πεπραγ", "σθε", ortho) == "πεπραχθε"
+ 
 end
