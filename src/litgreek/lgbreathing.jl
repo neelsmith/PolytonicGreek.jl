@@ -291,7 +291,7 @@ function lgbreathstripdict()
 
         nfkc("ἁ") => "α",
         nfkc("ἑ") => "ε",
-        nfkc("ἰ") => "ι",
+        nfkc("ἱ") => "ι",
         nfkc("ὁ") => "ο",
         nfkc("ὑ") => "υ",
         nfkc("ἡ") => "η",
