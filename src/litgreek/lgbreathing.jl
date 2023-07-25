@@ -54,12 +54,27 @@ function rmbreathing(s::AbstractString, ortho::LiteraryGreekOrthography)
 end
 
 
+"""True if string `s` begins with a smooth breathing.
+$(SIGNATURES)
+"""
+function smooth(s::AbstractString, ortho::LiteraryGreekOrthography)
+    lginitialsmooth(s)
+end
+
+"""True if string `s` begins with a rough breathing.
+$(SIGNATURES)
+"""
+function rough(s::AbstractString, ortho::LiteraryGreekOrthography)
+    lginitialrough(s)
+end
+
+
 """True is `s` has a rough breathing on the 
 first syllable.
 $(SIGNATURES)
 """
 function lginitialrough(s::AbstractString)
-    @debug("INitial rough: ", s[1])
+    @debug("Initial rough: ", s[1])
     if string(s[1]) in values(lgroughdict())
         true
     

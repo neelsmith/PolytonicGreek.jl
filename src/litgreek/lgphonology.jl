@@ -31,23 +31,27 @@
  end 
 
 
- """True if token has a vowel with rough breathing.
- $(SIGNATURES)
- """
- function rough(s, ortho::LiteraryGreekOrthography)
-   sylls = syllabify(s,ortho)
- end
-
-"""Make string `s` begin with an aspirate.
+"""Aspirate char `cp`.
 $(SIGNATURES)
 """
-function aspirate(cp, ortho::LiteraryGreekOrthography = literaryGreek())
+function aspirate(cp::AbstractChar, ortho::LiteraryGreekOrthography = literaryGreek())
    if haskey(aspiratedict, cp)
      aspiratedict[cp]
    else
       cp
    end
 end
+
+
+
+
+"""Aspirate final consonant of string `s`.
+$(SIGNATURES)
+"""
+function aspiratefinal(s::AbstractString, ortho::LiteraryGreekOrthography = literaryGreek())
+  indexes = collect(graphemes(s))
+end
+
 
 """Map stops to equivalent aspirate."""
 aspiratedict = Dict(
@@ -59,3 +63,11 @@ aspiratedict = Dict(
    'β' => "φ",
    'γ' => "χ",
 )
+
+
+"""Boolean true if if string `s` begins with a vowel.
+$(SIGNATURES)
+"""
+function lginitialvowel(s::AbstractString)
+
+end

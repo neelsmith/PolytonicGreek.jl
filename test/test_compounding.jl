@@ -29,19 +29,19 @@ end
     @test strcat(PolytonicGreek.splitmorphemes(s1)..., ortho) == "ἀπιεναι"
 
     s2 = "ἀπο#οἰσω" # -> ἀποίσω
-    @test_broken strcat(PolytonicGreek.splitmorphemes(s2)..., ortho) == "ἀποισω"
+    @test strcat(PolytonicGreek.splitmorphemes(s2)..., ortho) == "ἀποισω"
 
     s3 = "ἀπο#ἱημι" # -> ἀφίημι
     @test_broken strcat(PolytonicGreek.splitmorphemes(s3)..., ortho) == "ἀφιημι"
 
     s4 = "παρα#ἀγγελλω" # -> παραγγελλω
-    @test_broken strcat(PolytonicGreek.splitmorphemes(s4)..., ortho) == "παραγγελλω"
+    @test strcat(PolytonicGreek.splitmorphemes(s4)..., ortho) == "παραγγελλω"
 
     s5 = "μετα#ελθειν" # -> μετελθειν
-    @test_broken strcat(PolytonicGreek.splitmorphemes(s5)..., ortho) == "μετελθειν"
+    @test strcat(PolytonicGreek.splitmorphemes(s5)..., ortho) == "μετελθειν"
 
     s6 = "ἐπι#ἐθυμουν" # -> ἐπεθυμουν
-    @test_broken strcat(PolytonicGreek.splitmorphemes(s6)..., ortho) == "ἐπεθυμουν"
+    @test strcat(PolytonicGreek.splitmorphemes(s6)..., ortho) == "ἐπεθυμουν"
 
     s7 = "ἀντ#αἰρ" # -> ἀνταιρ
     @test strcat(PolytonicGreek.splitmorphemes(s7)..., ortho) == "ἀνταιρ"

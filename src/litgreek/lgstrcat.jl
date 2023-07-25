@@ -2,11 +2,14 @@
 
 $(SIGNATURES)
 """
-function strcat(s1::AbstractString,s2::AbstractString,ortho::LiteraryGreekOrthography; elision = false)
+function strcat(s1::AbstractString,s2::AbstractString,ortho::LiteraryGreekOrthography; elision = true)
+
+
     part2 = rmbreathing(s2, ortho)
+
     s1 = elision ? elide(s1, part2, ortho) : s1
 
-    @debug("After elision, s1 is ", s1)
+    @info("After elision, s1 is ", s1)
     if occursin(r"[πβφ]$", s1)
         lg_appendtolabial(s1,part2) |> nfkc
 
