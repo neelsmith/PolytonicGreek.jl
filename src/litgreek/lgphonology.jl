@@ -49,7 +49,10 @@ end
 $(SIGNATURES)
 """
 function aspiratefinal(s::AbstractString, ortho::LiteraryGreekOrthography = literaryGreek())
-  indexes = collect(graphemes(s))
+  indexes = collect(eachindex(s))
+  quit = indexes[end-1]
+  aspirated = aspirate(s[indexes[end]], ortho)
+  string(s[1:quit], aspirated)
 end
 
 
@@ -63,11 +66,3 @@ aspiratedict = Dict(
    'β' => "φ",
    'γ' => "χ",
 )
-
-
-"""Boolean true if if string `s` begins with a vowel.
-$(SIGNATURES)
-"""
-function lginitialvowel(s::AbstractString)
-
-end

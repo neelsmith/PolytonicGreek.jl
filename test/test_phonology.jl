@@ -9,5 +9,6 @@
     @test length(allstops) == 9
 
 
-    #@test aspirate("")
+    @test aspirate('κ', ortho) == "χ"
+    @test PolytonicGreek.aspiratefinal("κατ", ortho) == "καθ"
 end

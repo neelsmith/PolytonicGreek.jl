@@ -75,13 +75,17 @@ $(SIGNATURES)
 """
 function lginitialrough(s::AbstractString)
     @debug("Initial rough: ", s[1])
-    if string(s[1]) in values(lgroughdict())
+
+
+    if string(s[1]) in collect(values(lgroughdict()))
+        @debug("$(s[1]) was in dict")
         true
     
     else
         rough = false
         for d in values(lgroughdiphdict())
             if startswith(s, d)
+                @debug("$(s) starts wtih $(d)")
                 rough = true
             end
         end
@@ -157,7 +161,7 @@ function lgroughdict()
     
          "α" => nfkc("ἁ"),
          "ε" => nfkc("ἑ"),
-         "ι" => nfkc("ἰ"),
+         "ι" => nfkc("ἱ"),
          "ο" => nfkc("ὁ"),
          "υ" => nfkc("ὑ"),
          "η" => nfkc("ἡ"),

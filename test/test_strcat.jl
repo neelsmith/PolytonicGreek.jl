@@ -61,14 +61,14 @@
     @test strcat("κατα","ἀγγελλω", ortho, elision = true) == "καταγγελλω"
 
 
-    @test_broken strcat("κατα","αἱρεω", ortho, elision = true) == "καθαιρεω"
+    @test strcat("κατα","αἱρεω", ortho, elision = true) == "καθαιρεω"
 
 end
 
 #=
 @testset "Test working with compounds" begin
     pieces = split("παρα#ἐκ#εν#φέρω","#")
-    @test_broken strcat(literaryGreek(), pieces...) == nfkc("παρεξεμ#φέρω")
+    @test_broken strcat(literaryGreek(), pieces...) == nfkc("παρεξεν#φέρω")
 end
 =#
 

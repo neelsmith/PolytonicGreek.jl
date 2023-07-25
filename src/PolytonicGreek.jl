@@ -44,8 +44,9 @@ export GreekOrthography
 export vowels, consonants
 export liquids, labials, dentals, palatals, stops
 export aspirate
-export proclitics, enclitics
 export rmbreathing, addbreathing
+export smooth, rough
+export proclitics, enclitics
 
 export rmaccents, countaccents, dropsecondaccent
 export accentword, accentpenult, accentultima
