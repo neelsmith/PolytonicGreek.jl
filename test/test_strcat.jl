@@ -98,5 +98,7 @@ end
 
     @test strcat("πεπραγ", "μεθα", ortho) == "πεπραγμεθα"
     @test strcat("πεπραγ", "σθε", ortho) == "πεπραχθε"
+
+    @test strcat("ἐβη", "", ortho) == "ἐβη"
  
 end

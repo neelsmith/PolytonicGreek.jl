@@ -3,14 +3,18 @@
 $(SIGNATURES)
 """
 function strcat(s1::AbstractString,s2::AbstractString,ortho::LiteraryGreekOrthography; elision = true)
-
+    
 
     part2 = rmbreathing(s2, ortho)
-
     s1 = elision ? elide(s1, part2, ortho) : s1
-
     @debug("After elision, s1 is ", s1)
-    if rough(s2, ortho)
+    
+    if isempty(s1)
+        s2
+    elseif isempty(s2)
+        s1
+
+    elseif rough(s2, ortho)
         @debug("$(s2) is rough")
         @debug("Aspirated: ", aspiratefinal(s1, ortho))
         aspiratefinal(s1, ortho) * part2 |> nfkc
