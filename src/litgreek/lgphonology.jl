@@ -42,19 +42,19 @@ function aspirate(cp::AbstractChar, ortho::LiteraryGreekOrthography = literaryGr
    end
 end
 
-
-
-
 """Aspirate final consonant of string `s`.
 $(SIGNATURES)
 """
 function aspiratefinal(s::AbstractString, ortho::LiteraryGreekOrthography = literaryGreek())
   indexes = collect(eachindex(s))
-  quit = indexes[end-1]
-  aspirated = aspirate(s[indexes[end]], ortho)
-  string(s[1:quit], aspirated)
+  if length(indexes) > 1
+   quit = indexes[end-1]
+   aspirated = aspirate(s[indexes[end]], ortho)
+   string(s[1:quit], aspirated)
+  else
+   s
+  end
 end
-
 
 """Map stops to equivalent aspirate."""
 aspiratedict = Dict(
