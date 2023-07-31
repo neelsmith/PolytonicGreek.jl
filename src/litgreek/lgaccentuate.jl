@@ -215,6 +215,7 @@ additional morphological information beyond the string value of the token.
 """
 function accentword(wrd::AbstractString, placement::Symbol, ortho::LiteraryGreekOrthography = literaryGreek())
     sylls = syllabify(wrd, ortho)
+    @info("Syllabify $(wrd) to $(sylls)")
     ult = ultima(wrd, ortho)
     if placement == :PENULT    
         if length(sylls) < 2
