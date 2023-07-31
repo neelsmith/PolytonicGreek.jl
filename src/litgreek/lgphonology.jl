@@ -47,12 +47,16 @@ $(SIGNATURES)
 """
 function aspiratefinal(s::AbstractString, ortho::LiteraryGreekOrthography = literaryGreek())
   indexes = collect(eachindex(s))
-  if length(indexes) > 1
-   quit = indexes[end-1]
-   aspirated = aspirate(s[indexes[end]], ortho)
-   string(s[1:quit], aspirated)
+  if isempty(s)
+      s
   else
-   s
+   aspirated = aspirate(s[indexes[end]], ortho)
+   if length(indexes) > 1
+      quit = indexes[end-1]
+      string(s[1:quit], aspirated)
+   else
+    aspirated
+   end
   end
 end
 
