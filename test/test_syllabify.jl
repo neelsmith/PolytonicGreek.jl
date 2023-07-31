@@ -9,6 +9,10 @@ end
     s = "ὅσ#τις"
     expected =  ["ὁσ", "τις"]
     @test syllabify(s, o) == expected
+
+    @test syllabify("ἠρξαντο", literaryGreek()) ==  ["ἠρ",
+    "ξαν","το"]
+
 end
 
 @testset "Test splitting on diaeresis" begin
