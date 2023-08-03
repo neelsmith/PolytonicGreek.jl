@@ -153,7 +153,7 @@ function syllabify(s, ortho::LiteraryGreekOrthography)
     map(morpheme_v) do s
         s |> splitdiaeresis |> 
         splitmunu  |> 
-        splitliqcons |>    splitliqcons |> 
+        splitliqcons |>    splitliqcons |>   splitliqcons |> 
         splitdiphthongvowel |> 
         splitvoweldiphthong |>  
         splitshortvowelvowel |>  splitshortvowelvowel |>  # catch overlap
