@@ -118,6 +118,7 @@ end
     @test syllabify("τόρνους") == ["τορ", "νους"]
 
     @test length(syllabify("ἀνδριαντουργος")) == 5
+    @test length(syllabify("ἐκονβενταρχησαντο")) == 7
 end
 
 @testset "Support addition of morphological boundary markers in syllabification" begin
