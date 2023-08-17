@@ -179,6 +179,7 @@ function accentpenult(wrd::AbstractString, accent::Symbol, ortho::LiteraryGreekO
         nothing
     else
         sylls[end - 1] = accentsyllable(penult(wrd, ortho), accent)
+        @info("This is sylls: $(sylls)")
         join(sylls,"")
     end
 end

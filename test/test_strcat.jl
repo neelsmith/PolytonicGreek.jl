@@ -1,104 +1,103 @@
 @testset "Test concatenating strings for literary Greek" begin
     ortho = literaryGreek()
 
-    @test strcat("λελειπ", "μαι", ortho) == "λελειμμαι"
-    @test strcat("λελειπ", "σαι", ortho) == "λελειψαι"
-    @test strcat("λελειπ", "ται", ortho) == "λελειπται"
+    @test strcat(ortho, "λελειπ", "μαι") == "λελειμμαι"
+    @test strcat(ortho, "λελειπ", "σαι") == "λελειψαι"
+    @test strcat(ortho, "λελειπ", "ται") == "λελειπται"
 
-    @test strcat("τετριβ", "μαι", ortho) == "τετριμμαι"
-    @test strcat("τετριβ", "σαι", ortho) == "τετριψαι"
-    @test strcat("τετριβ", "ται", ortho) == "τετριπται"
-
-
-    @test strcat("γεγραφ", "μαι", ortho) == "γεγραμμαι"
-    @test strcat("γεγραφ", "σαι", ortho) == "γεγραψαι"
-    @test strcat("γεγραφ", "ται", ortho) == "γεγραπται"
+    @test strcat(ortho, "τετριβ", "μαι") == "τετριμμαι"
+    @test strcat(ortho, "τετριβ", "σαι") == "τετριψαι"
+    @test strcat(ortho, "τετριβ", "ται") == "τετριπται"
 
 
-    @test strcat("πεπλεκ", "μαι", ortho) == "πεπλεγμαι"
-    @test strcat("πεπλεκ", "σαι", ortho) == "πεπλεξαι"
-    @test strcat("πεπλεκ", "ται", ortho) == "πεπλεκται"
+    @test strcat(ortho, "γεγραφ", "μαι") == "γεγραμμαι"
+    @test strcat(ortho, "γεγραφ", "σαι") == "γεγραψαι"
+    @test strcat(ortho, "γεγραφ", "ται") == "γεγραπται"
+
+
+    @test strcat(ortho, "πεπλεκ", "μαι") == "πεπλεγμαι"
+    @test strcat(ortho, "πεπλεκ", "σαι") == "πεπλεξαι"
+    @test strcat(ortho, "πεπλεκ", "ται") == "πεπλεκται"
    
-    @test strcat("λελεγ", "μαι", ortho) == "λελεγμαι"
-    @test strcat("λελεγ", "σαι", ortho) == "λελεξαι"
-    @test strcat("λελεγ", "ται", ortho) == "λελεκται"
+    @test strcat(ortho, "λελεγ", "μαι") == "λελεγμαι"
+    @test strcat(ortho, "λελεγ", "σαι") == "λελεξαι"
+    @test strcat(ortho, "λελεγ", "ται") == "λελεκται"
 
-    @test strcat("βεβρεχ", "μαι", ortho) == "βεβρεγμαι"
-    @test strcat("βεβρεχ", "σαι", ortho) == "βεβρεξαι"
-    @test strcat("βεβρεχ", "ται", ortho) == "βεβρεκται"
-
-
-    @test strcat("πεπειθ", "ται", ortho) == "πεπεισται"
-
-    @test strcat("λειπ", "σω", ortho) == "λειψω"
-    @test strcat("τριβ", "σω", ortho) == "τριψω"
-    @test strcat("γραφ", "σω", ortho) == "γραψω"
+    @test strcat(ortho, "βεβρεχ", "μαι") == "βεβρεγμαι"
+    @test strcat(ortho, "βεβρεχ", "σαι") == "βεβρεξαι"
+    @test strcat(ortho, "βεβρεχ", "ται") == "βεβρεκται"
 
 
-    @test strcat("ἐν","πιπτω", ortho) == "ἐμπιπτω"
-    @test strcat("ἐν","βαλλω", ortho) == "ἐμβαλλω"
-    @test strcat("ἐν","φαινω", ortho) == "ἐμφαινω"
+    @test strcat(ortho, "πεπειθ", "ται") == "πεπεισται"
 
-    @test strcat("ἐν","καλεω", ortho) == "ἐγκαλεω"
-    @test strcat("ἐν","γραφω", ortho) == "ἐγγραφω"
-    @test strcat("συν","χεω", ortho) == "συγχεω"
-    @test strcat("συν","ξυω", ortho) == "συγξυω"
-
-    @test strcat("ἐν","μενω", ortho) == "ἐμμενω"
-
-    @test strcat("συν","λογος", ortho) == "συλλογος"
-    @test strcat("συν","ρεω", ortho) == "συρρεω"
+    @test strcat(ortho, "λειπ", "σω") == "λειψω"
+    @test strcat(ortho, "τριβ", "σω") == "τριψω"
+    @test strcat(ortho, "γραφ", "σω") == "γραψω"
 
 
-    @test strcat("δεικ","σ", ortho) == "δειξ"
+    @test strcat(ortho, "ἐν","πιπτω") == "ἐμπιπτω"
+    @test strcat(ortho, "ἐν","βαλλω") == "ἐμβαλλω"
+    @test strcat(ortho, "ἐν","φαινω") == "ἐμφαινω"
 
-    @test strcat("συν","οἰσω", ortho) == "συνοισω"
+    @test strcat(ortho, "ἐν","καλεω") == "ἐγκαλεω"
+    @test strcat(ortho, "ἐν","γραφω") == "ἐγγραφω"
+    @test strcat(ortho, "συν","χεω") == "συγχεω"
+    @test strcat(ortho, "συν","ξυω") == "συγξυω"
 
-    @test strcat("περι","οἰσω", ortho) == "περιοισω"
+    @test strcat(ortho, "ἐν","μενω") == "ἐμμενω"
 
-    @test strcat("προ","ἠγγελλε", ortho) == "προηγγελλε"
+    @test strcat(ortho, "συν","λογος") == "συλλογος"
+    @test strcat(ortho, "συν","ρεω") == "συρρεω"
 
-    @test strcat("κατα","ἀγγελλω", ortho, elision = true) == "καταγγελλω"
+
+    @test strcat(ortho, "δεικ","σ") == "δειξ"
+
+    @test strcat(ortho, "συν","οἰσω") == "συνοισω"
+
+    @test strcat(ortho, "περι","οἰσω") == "περιοισω"
+
+    @test strcat(ortho, "προ","ἠγγελλε") == "προηγγελλε"
+
+    @test strcat(ortho, "κατα","ἀγγελλω", elision = true) == "καταγγελλω"
 
 
-    @test strcat("κατα","αἱρεω", ortho, elision = true) == "καθαιρεω"
+    @test strcat(ortho, "κατα","αἱρεω", elision = true) == "καθαιρεω"
 
 end
 
-#=
 @testset "Test working with compounds" begin
-    pieces = split("παρα#ἐκ#εν#φέρω","#")
-    @test_broken strcat(literaryGreek(), pieces...) == nfkc("παρεξεν#φέρω")
+    @test strcat(literaryGreek(), nfkc("ἐν"), nfkc("κελεύω")) == nfkc("ἐγκελεύω")
+    @test strcat(literaryGreek(), nfkc("ἐν"), "κε", nfkc("λεύ"), "ω") == nfkc("ἐγκελεύω")
 end
-=#
+
 
 
 @testset "Test phonology of perfect active consonants" begin
     ortho = literaryGreek()
     
-    @test strcat("γεγραπ", "μαι", ortho) == "γεγραμμαι"
-    @test strcat("γεγραπ", "σαι", ortho) == "γεγραψαι"
-    @test strcat("γεγραπ", "ται", ortho) == "γεγραπται"
+    @test strcat(ortho,"γεγραπ", "μαι") == "γεγραμμαι"
+    @test strcat(ortho,"γεγραπ", "σαι") == "γεγραψαι"
+    @test strcat(ortho,"γεγραπ", "ται") == "γεγραπται"
 
-    @test strcat("γεγραπ", "μεθα", ortho) == "γεγραμμεθα"
-    @test strcat("γεγραπ", "σθε", ortho) == "γεγραφθε"
-
-
-    @test strcat("γεγραφ", "μαι", ortho) == "γεγραμμαι"
-    @test strcat("γεγραφ", "σαι", ortho) == "γεγραψαι"
-    @test strcat("γεγραφ", "ται", ortho) == "γεγραπται"
-
-    @test strcat("γεγραφ", "μεθα", ortho) == "γεγραμμεθα"
-    @test strcat("γεγραφ", "σθε", ortho) == "γεγραφθε"
+    @test strcat(ortho,"γεγραπ", "μεθα") == "γεγραμμεθα"
+    @test strcat(ortho,"γεγραπ", "σθε") == "γεγραφθε"
 
 
-    @test strcat("πεπραγ", "μαι", ortho) == "πεπραγμαι"
-    @test strcat("πεπραγ", "σαι", ortho) == "πεπραξαι"
-    @test strcat("πεπραγ", "ται", ortho) == "πεπρακται"
+    @test strcat(ortho,"γεγραφ", "μαι") == "γεγραμμαι"
+    @test strcat(ortho,"γεγραφ", "σαι") == "γεγραψαι"
+    @test strcat(ortho,"γεγραφ", "ται") == "γεγραπται"
 
-    @test strcat("πεπραγ", "μεθα", ortho) == "πεπραγμεθα"
-    @test strcat("πεπραγ", "σθε", ortho) == "πεπραχθε"
+    @test strcat(ortho,"γεγραφ", "μεθα") == "γεγραμμεθα"
+    @test strcat(ortho,"γεγραφ", "σθε") == "γεγραφθε"
 
-    @test strcat("ἐβη", "", ortho) == "ἐβη"
+
+    @test strcat(ortho,"πεπραγ", "μαι") == "πεπραγμαι"
+    @test strcat(ortho,"πεπραγ", "σαι") == "πεπραξαι"
+    @test strcat(ortho,"πεπραγ", "ται") == "πεπρακται"
+
+    @test strcat(ortho,"πεπραγ", "μεθα") == "πεπραγμεθα"
+    @test strcat(ortho,"πεπραγ", "σθε") == "πεπραχθε"
+
+    @test strcat(ortho,"ἐβη", "") == "ἐβη"
  
 end
