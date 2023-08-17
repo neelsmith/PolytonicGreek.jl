@@ -29,15 +29,15 @@ modifications required by orthography `ortho`.
 
 $(SIGNATURES)
 """
-function strcat(ortho::T, s1::AbstractString,slist...) where {T <: GreekOrthography}
+function strcat(ortho::T, s1::AbstractString, slist...) where {T <: GreekOrthography}
     if isempty(slist)
         s1
     elseif length(slist) == 1
-        strcat(s1,slist[1],ortho)
+        strcat(ortho, s1,slist[1])
     else
         @debug("s1 is ", s1)
         @debug("slist[1] is ", slist[1])
-        pair1 =  strcat(s1, slist[1],ortho)
+        pair1 =  strcat(ortho, s1, slist[1])
         @debug("pair 1", pair1)
         strcat(ortho, pair1, slist[2:end]...)
     end
@@ -48,7 +48,7 @@ modifications required by orthography `ortho`.
 
 $(SIGNATURES)
 """
-function strcat(s1::AbstractString,s2::AbstractString,ortho::T) where {T <: GreekOrthography}
+function strcat(ortho::T, s1::AbstractString,s2::AbstractString) where {T <: GreekOrthography}
     @warn "Function strcat not defined for orthography $(typeof(ortho))"
     nothing
 end

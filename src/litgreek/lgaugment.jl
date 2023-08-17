@@ -66,10 +66,10 @@ function augment(s::AbstractString, ortho::LiteraryGreekOrthography)
         
         if endswith(prepend,"εκ") || endswith(prepend,nfkc("ἐκ"))
             prepend = replace(prepend, r"κ$" => "ξ")
-            strcat(prepend * "#", augpiece, ortho)
+            strcat(ortho, prepend * "#", augpiece)
         else
             @debug("Cat $(prepend) and $(augpiece)")
-            strcat(prepend * "#", augpiece, ortho)
+            strcat(ortho, prepend * "#", augpiece)
         end
 
     else

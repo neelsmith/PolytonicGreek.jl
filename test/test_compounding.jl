@@ -5,31 +5,31 @@
     ortho = literaryGreek()
 
     s1 = "ἀπ#ἰεναι" # -> ἀπιέναι
-    @test strcat(PolytonicGreek.splitmorphemes(s1)..., ortho) == "ἀπιεναι"
+    @test strcat(ortho, PolytonicGreek.splitmorphemes(s1)...) == nfkc("ἀπιεναι")
 
     s2 = "ἀπο#οἰσω" # -> ἀποίσω
-    @test strcat(PolytonicGreek.splitmorphemes(s2)..., ortho) == "ἀποισω"
+    @test strcat(ortho, PolytonicGreek.splitmorphemes(s2)...) == "ἀποισω"
 
     s3 = "ἀπο#ἱημι" # -> ἀφίημι
-    @test strcat(PolytonicGreek.splitmorphemes(s3)..., ortho) == "ἀφιημι"
+    @test strcat(ortho, PolytonicGreek.splitmorphemes(s3)...) == "ἀφιημι"
 
     s4 = "παρα#ἀγγελλω" # -> παραγγελλω
-    @test strcat(PolytonicGreek.splitmorphemes(s4)..., ortho) == "παραγγελλω"
+    @test strcat(ortho, PolytonicGreek.splitmorphemes(s4)...) == "παραγγελλω"
 
     s5 = "μετα#ελθειν" # -> μετελθειν
-    @test strcat(PolytonicGreek.splitmorphemes(s5)..., ortho) == "μετελθειν"
+    @test strcat(ortho, PolytonicGreek.splitmorphemes(s5)...) == "μετελθειν"
 
     s6 = "ἐπι#ἐθυμουν" # -> ἐπεθυμουν
-    @test strcat(PolytonicGreek.splitmorphemes(s6)..., ortho) == "ἐπεθυμουν"
+    @test strcat(ortho, PolytonicGreek.splitmorphemes(s6)...) == "ἐπεθυμουν"
 
     s7 = "ἀντ#αἰρ" # -> ἀνταιρ
-    @test strcat(PolytonicGreek.splitmorphemes(s7)..., ortho) == "ἀνταιρ"
+    @test strcat(ortho, PolytonicGreek.splitmorphemes(s7)...) == "ἀνταιρ"
 
     s8 = "ἀντ#αἱρ" # -> ἀνθαιρ
-    @test strcat(PolytonicGreek.splitmorphemes(s8)..., ortho) == "ἀνθαιρ"
+    @test strcat(ortho, PolytonicGreek.splitmorphemes(s8)...) == "ἀνθαιρ"
 
 
-    @test strcat("ἀπο", "ἱκνεομαι", ortho) == "ἀφικνεομαι"
+    @test strcat(ortho, "ἀπο", "ἱκνεομαι") == "ἀφικνεομαι"
     
 end
 

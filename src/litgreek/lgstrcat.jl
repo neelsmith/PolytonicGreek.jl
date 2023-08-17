@@ -2,7 +2,7 @@
 
 $(SIGNATURES)
 """
-function strcat(s1::AbstractString,s2::AbstractString,ortho::LiteraryGreekOrthography; elision = true)
+function strcat(ortho::LiteraryGreekOrthography, s1::AbstractString,s2::AbstractString; elision = true)
     
 
     part2 = rmbreathing(s2, ortho)
@@ -37,37 +37,35 @@ function strcat(s1::AbstractString,s2::AbstractString,ortho::LiteraryGreekOrthog
     end
 end
 
+
+
 """Append string `s2` to a string ending in ν, `s1`.
 $(SIGNATURES)
 """
 function lg_appendtonu(s1::AbstractString, s2::AbstractString)
+    indices = collect(eachindex(s1))
+    quit = indices[end - 1]
+
     if ! occursin(r"^[πβφψκγχξμλρ]", s2)
         s1 * s2
-        
+
     elseif occursin(r"^[πβφ]", s2)
-        indices = collect(eachindex(s1))
-        quit = indices[end - 1]
         string(s1[1:quit],"μ", s2)
 
-    elseif occursin(r"^[κγχξ]", s2)
-        indices = collect(eachindex(s1))
-        quit = indices[end - 1]
+    elseif occursin(r"^[κγχξ]", s2)        
         string(s1[1:quit],"γ", s2)
 
     elseif startswith(s2, "μ")
-        indices = collect(eachindex(s1))
-        quit = indices[end - 1]
         string(s1[1:quit],"μ", s2)
 
     elseif startswith(s2, "λ")
-        indices = collect(eachindex(s1))
-        quit = indices[end - 1]
         string(s1[1:quit],"λ", s2)
 
     elseif startswith(s2, "ρ")
-        indices = collect(eachindex(s1))
-        quit = indices[end - 1]
         string(s1[1:quit],"ρ", s2)
+
+    elseif occursin(r"^γκχ", s2)
+        string(s1[1:quit], "γ", s2)
 
     end
 
