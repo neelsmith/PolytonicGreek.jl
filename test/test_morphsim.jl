@@ -1,28 +1,28 @@
 @testset "Simulate phonology used in morphological generation" begin
     o = literaryGreek()
 
-    ex1 = strcat("λυ", "ει", o)
+    ex1 = strcat(o, "λυ", "ει")
     @test ex1 ==  "λυει"
-    @test accentword(ex1,:RECESSIVE, o) == "λύει"
+    @test accentword(ex1,:RECESSIVE) == "λύει"
 
     dupe = reduplicate("λυ", o)
     @test dupe ==  "λελυ"
-    @test accentword(strcat(dupe, "κε", o), :RECESSIVE, o) ==  "λέλυκε"
+    @test accentword(strcat(o, dupe, "κε"), :RECESSIVE) ==  "λέλυκε"
 
     aug = augment("λυ", o)
     @test aug == "ἐλυ"
-    @test accentword(strcat(aug, "ομεθα",o), :RECESSIVE, o) ==  "ἐλυόμεθα"
+    @test accentword(strcat(o, aug, "ομεθα"), :RECESSIVE) ==  "ἐλυόμεθα"
 
-    ex2 = strcat("ἀνα#λυ", "ει", o)
+    ex2 = strcat(o, "ἀνα#λυ", "ει")
     @test ex2 == "ἀνα#λυει"
-    @test accentword(ex2,:RECESSIVE, o) == "ἀναλύει"
+    @test accentword(ex2,:RECESSIVE) == "ἀναλύει"
 
     dupe2 = reduplicate("ἀνα#λυ", o)
     @test dupe2 ==  "ἀνα#λελυ"
-    @test accentword(strcat(dupe2, "κε", o), :RECESSIVE, o) ==  "ἀναλέλυκε"
+    @test accentword(strcat(o, dupe2, "κε"), :RECESSIVE) ==  "ἀναλέλυκε"
 
     aug2 = augment("ἀνα#λυ", o)
     @test aug2 == "ἀν#ελυ"
-    @test accentword(strcat(aug2, "ομεθα",o), :RECESSIVE, o) ==  "ἀνελυόμεθα"
+    @test accentword(strcat(o, aug2, "ομεθα"), :RECESSIVE) ==  "ἀνελυόμεθα"
 
 end
