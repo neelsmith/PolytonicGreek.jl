@@ -100,3 +100,9 @@ end
     lg = literaryGreek()
     @test PolytonicGreek.finallong("οις", lg) 
 end
+
+
+@testset "Test word accenting" begin
+    lg = literaryGreek()
+    accentword("ἐν#κελευω", :RECESSIVE, lg)
+end
