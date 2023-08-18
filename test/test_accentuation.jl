@@ -104,5 +104,6 @@ end
 
 @testset "Test word accenting" begin
     lg = literaryGreek()
-    accentword("ἐν#κελευω", :RECESSIVE, lg)
+    @test accentword("ἐν#κελευω", :RECESSIVE, lg) == nfkc("ἐγκελεύω")
+    @test accentword("νοηματος", :RECESSIVE, lg) == nfkc("νοήματος")
 end
