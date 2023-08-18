@@ -2,12 +2,12 @@
 
 $(SIGNATURES)
 """
-function strcat(ortho::LiteraryGreekOrthography, s1::AbstractString,s2::AbstractString; elision = true)
+function strcat(ortho::LiteraryGreekOrthography, s1::AbstractString,s2::AbstractString; elision = false)
     
-
+    @info("Strcatting $(s1) and $(s2)")
     part2 = rmbreathing(s2, ortho)
     s1 = elision ? elide(s1, part2, ortho) : s1
-    @debug("After elision, s1 is ", s1)
+    @debug("strcat: After elision, s1 is ", s1)
     
     if isempty(s1)
         s2
@@ -29,7 +29,7 @@ function strcat(ortho::LiteraryGreekOrthography, s1::AbstractString,s2::Abstract
         lg_appendtopalatal(s1,part2) |> nfkc
 
     elseif endswith(s1, "ν")
-        @debug("Append to nu")
+        @debug("strcat: append to nu")
         lg_appendtonu(s1,part2) |> nfkc
 
     else
@@ -43,8 +43,15 @@ end
 $(SIGNATURES)
 """
 function lg_appendtonu(s1::AbstractString, s2::AbstractString)
+    @debug("Appending to nu, $(s2) to $(s1)")
+    
     indices = collect(eachindex(s1))
-    quit = indices[end - 1]
+    @debug("Indices $(indices)")
+    if isempty(s1)
+        s2
+    else
+        quit =  length(s1) > 1  ? indices[end - 1] : indices[1]
+    end
 
     if ! occursin(r"^[πβφψκγχξμλρ]", s2)
         s1 * s2

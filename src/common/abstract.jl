@@ -29,15 +29,15 @@ modifications required by orthography `ortho`.
 
 $(SIGNATURES)
 """
-function strcat(ortho::T, s1::AbstractString, slist...) where {T <: GreekOrthography}
+function strcat(ortho::T, s1::AbstractString, slist...; elision = false) where {T <: GreekOrthography}
     if isempty(slist)
         s1
     elseif length(slist) == 1
         strcat(ortho, s1,slist[1])
     else
-        @debug("s1 is ", s1)
+        @debug("strcat: s1 is ", s1)
         @debug("slist[1] is ", slist[1])
-        pair1 =  strcat(ortho, s1, slist[1])
+        pair1 =  strcat(ortho, s1, slist[1]; elision  = elision)
         @debug("pair 1", pair1)
         strcat(ortho, pair1, slist[2:end]...)
     end

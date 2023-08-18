@@ -174,12 +174,15 @@ $(SIGNATURES)
 """
 function accentpenult(wrd::AbstractString, accent::Symbol, ortho::LiteraryGreekOrthography = literaryGreek())
     sylls = syllabify(wrd, ortho)
+    @debug("Accenting penult, sylls $(syll)")
     if length(sylls) < 2
         @warn("accentpenult: can't accent word with fewer than two syllables $wrd")
         nothing
     else
+        pen = penult(wrd,ortho)
+        @debug("Get the penult: $(pen)")
         sylls[end - 1] = accentsyllable(penult(wrd, ortho), accent)
-        @debug("This is sylls: $(sylls)")
+        
         strcat(ortho, sylls...)
     end
 end
@@ -190,11 +193,15 @@ $(SIGNATURES)
 """
 function accentantepenult(wrd::AbstractString, ortho::LiteraryGreekOrthography)
     sylls = syllabify(wrd)
+    @debug("Accent antepenult on sylls $(sylls)")
     if length(sylls) < 3
         @warn("accentantepenult: can't accent word with fewer than three syllables $wrd")
         nothing
     else
+        @debug("Accent antepen with sylls $(sylls)")
+        @debug("Antepen is $(antepenult(wrd, ortho))")
         sylls[end - 2] = accentsyllable(antepenult(wrd, ortho), :ACUTE)
+        @debug("Modified sylls to get $(sylls)")
         strcat(ortho, sylls...)
     end
 end
@@ -216,7 +223,7 @@ additional morphological information beyond the string value of the token.
 """
 function accentword(wrd::AbstractString, placement::Symbol, ortho::LiteraryGreekOrthography = literaryGreek())
     sylls = syllabify(wrd, ortho)
-    @debug("Syllabify $(wrd) to $(sylls)")
+    @debug("Acccent syllabified $(wrd) to $(sylls)")
     ult = ultima(wrd, ortho)
     if placement == :PENULT    
         if length(sylls) < 2
@@ -243,9 +250,11 @@ function accentword(wrd::AbstractString, placement::Symbol, ortho::LiteraryGreek
                 accentword(wrd, :PENULT)
 
             elseif finallong(ult, ortho)
+                @debug("Final long: accent penult")
                 accentpenult(wrd, :ACUTE)
 
             else
+                @debug("Final short: accent antepenult")
                 accentantepenult(wrd, ortho)
             end
         end
