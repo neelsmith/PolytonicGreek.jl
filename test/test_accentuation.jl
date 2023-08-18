@@ -106,4 +106,5 @@ end
     lg = literaryGreek()
     @test accentword("ἐν#κελευω", :RECESSIVE, lg) == nfkc("ἐγκελεύω")
     @test accentword("νοηματος", :RECESSIVE, lg) == nfkc("νοήματος")
+    @test accentword("πραττω", :RECESSIVE, lg) == nfkc("πράττω")
 end
