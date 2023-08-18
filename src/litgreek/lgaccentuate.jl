@@ -165,7 +165,7 @@ $(SIGNATURES)
 function accentultima(wrd::AbstractString, accent::Symbol, ortho::LiteraryGreekOrthography = literaryGreek())
     sylls = syllabify(wrd, ortho)
     sylls[end] = accentsyllable(ultima(wrd, ortho), accent)
-    join(sylls,"")
+    strcat(ortho, sylls...)
 end
 
 """Place accent on penult.
@@ -180,7 +180,7 @@ function accentpenult(wrd::AbstractString, accent::Symbol, ortho::LiteraryGreekO
     else
         sylls[end - 1] = accentsyllable(penult(wrd, ortho), accent)
         @debug("This is sylls: $(sylls)")
-        join(sylls,"")
+        strcat(ortho, sylls...)
     end
 end
 
@@ -195,7 +195,7 @@ function accentantepenult(wrd::AbstractString, ortho::LiteraryGreekOrthography)
         nothing
     else
         sylls[end - 2] = accentsyllable(antepenult(wrd, ortho), :ACUTE)
-        join(sylls,"")
+        strcat(ortho, sylls...)
     end
 end
 
