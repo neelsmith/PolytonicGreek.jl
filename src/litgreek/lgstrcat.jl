@@ -7,7 +7,7 @@ function strcat(ortho::LiteraryGreekOrthography, s1::AbstractString,s2::Abstract
     @debug("Strcatting $(s1) and $(s2)")
     part2 = rmbreathing(s2, ortho)
     s1 = elision ? elide(s1, part2, ortho) : s1
-    @info("strcat: After elision, s1 is ", s1)
+    @debug("strcat: After elision, s1 is ", s1)
     
     if isempty(s1)
         s2
@@ -23,7 +23,7 @@ function strcat(ortho::LiteraryGreekOrthography, s1::AbstractString,s2::Abstract
         lg_appendtolabial(s1,part2) |> nfkc
 
     elseif occursin(r"[τδθ]$", s1)
-        @info("Cat")
+        @debug("Cat")
         lg_appendtodental(s1,part2) |> nfkc
 
     elseif occursin(r"[κγχ]$", s1)
@@ -140,7 +140,7 @@ end
 $(SIGNATURES)
 """
 function lg_appendtodental(s1::AbstractString, s2::AbstractString)
-    @info("Appending dental $(s1) and $(s2)")
+    @debug("Appending dental $(s1) and $(s2)")
 
     # Aspirate dental if next syllable starts with rough breathing:
     if lginitialrough(s2)
