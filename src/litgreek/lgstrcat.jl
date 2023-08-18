@@ -7,7 +7,7 @@ function strcat(ortho::LiteraryGreekOrthography, s1::AbstractString,s2::Abstract
     @debug("Strcatting $(s1) and $(s2)")
     part2 = rmbreathing(s2, ortho)
     s1 = elision ? elide(s1, part2, ortho) : s1
-    @debug("strcat: After elision, s1 is ", s1)
+    @info("strcat: After elision, s1 is ", s1)
     
     if isempty(s1)
         s2
@@ -23,6 +23,7 @@ function strcat(ortho::LiteraryGreekOrthography, s1::AbstractString,s2::Abstract
         lg_appendtolabial(s1,part2) |> nfkc
 
     elseif occursin(r"[τδθ]$", s1)
+        @info("Cat")
         lg_appendtodental(s1,part2) |> nfkc
 
     elseif occursin(r"[κγχ]$", s1)
@@ -139,12 +140,17 @@ end
 $(SIGNATURES)
 """
 function lg_appendtodental(s1::AbstractString, s2::AbstractString)
+    @info("Appending dental $(s1) and $(s2)")
+
+    # Aspirate dental if next syllable starts with rough breathing:
     if lginitialrough(s2)
         indices = collect(eachindex(s1))
         quit = indices[end - 1]
         @debug("Reducing s1 to ",string(s1[1:quit],"θ"))
         string(s1[1:quit],"θ",  rmbreathing(s2,literaryGreek()))
 
+    # if next syllable starts with σθ, drop σ
+    #  and aspirate dental
     elseif startswith(s2, "σθ")
         indices1 = collect(eachindex(s1))
         quit1 = indices1[end - 1]
@@ -154,12 +160,16 @@ function lg_appendtodental(s1::AbstractString, s2::AbstractString)
 
         string(s1[1:quit1], aspirate(s1[indices1[end]]), s2[start2:end] )
 
-    elseif ! occursin(r"^[τδθ]", s2)
-        s1 * s2
-    else
+    # when an aspirated dental is followed by another dental,
+    # replace it with ς  
+    elseif endswith(s1, "θ") && occursin(r"^[τδθ]", s2)
         indices = collect(eachindex(s1))
         quit = indices[end - 1]
         string(s1[1:quit],"σ", s2)
+ 
+    # Just cat the two together:
+    else
+        s1 * s2
     end
 end
 
