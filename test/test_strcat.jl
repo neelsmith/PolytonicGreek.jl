@@ -98,6 +98,8 @@ end
     @test strcat(ortho,"πεπραγ", "μεθα") == "πεπραγμεθα"
     @test strcat(ortho,"πεπραγ", "σθε") == "πεπραχθε"
 
+    @test strcat(ortho, "ἠρχ","κα") == "ἠρχα"
+
     @test strcat(ortho,"ἐβη", "") == "ἐβη"
  
 end
