@@ -101,5 +101,7 @@ end
     @test strcat(ortho, "ἠρχ","κα") == "ἠρχα"
 
     @test strcat(ortho,"ἐβη", "") == "ἐβη"
+
+    @test strcat(ortho,"ἀρχ", "κ") == "ἀρχ"
  
 end

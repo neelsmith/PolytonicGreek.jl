@@ -83,16 +83,6 @@ end
 $(SIGNATURES)
 """
 function lg_appendtopalatal(s1::AbstractString, s2::AbstractString)
-    #=if lginitialrough(s2)
-        indices = collect(eachindex(s1))
-        quit = indices[end - 1]
-        string(s1[1:quit],"χ", s2)
-
-    else=#
-   # if ! occursin(r"^[μστδθ]", s2)
-    #    s1 * s2
-
-
     # Aspirate s1 if s2 starts with rough breathing:
     if lginitialrough(s2)
         indices = collect(eachindex(s1))
@@ -145,11 +135,15 @@ function lg_appendtopalatal(s1::AbstractString, s2::AbstractString)
         string(s1[1:quit],"χ", s2)
 
     elseif endswith(s1, "χ") && occursin(r"^[κγχ]", s2)
-        indices = collect(eachindex(s2))
-        quit = indices[2:end]
-        indices2 = collect(eachindex(s2))
-        start2 = indices2[2]
-        string(s1, s2[start2:end])
+        if length(s2) == 1
+            s1
+        else
+            indices = collect(eachindex(s2))
+            quit = indices[2:end]
+            indices2 = collect(eachindex(s2))
+            start2 = indices2[2]
+            string(s1, s2[start2:end])
+        end
 
     else
         s1 * s2
@@ -183,10 +177,13 @@ function lg_appendtodental(s1::AbstractString, s2::AbstractString)
     # when an aspirated dental is followed by another dental,
     # replace it with ς  
     elseif endswith(s1, "θ") && occursin(r"^[τδθ]", s2)
-        indices = collect(eachindex(s1))
-        quit = indices[end - 1]
-        string(s1[1:quit],"σ", s2)
- 
+        if length(s2) == 1
+            s1
+        else
+            indices = collect(eachindex(s1))
+            quit = indices[end - 1]
+            string(s1[1:quit],"σ", s2)
+        end
     # Just cat the two together:
     else
         s1 * s2
