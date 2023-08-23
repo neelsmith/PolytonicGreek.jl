@@ -4,7 +4,7 @@ $(SIGNATURES)
 """
 function strcat(ortho::LiteraryGreekOrthography, s1::AbstractString,s2::AbstractString; elision = false)
     
-    @debug("Strcatting $(s1) and $(s2)")
+    @info("Strcatting $(s1) and $(s2)")
     part2 = rmbreathing(s2, ortho)
     s1 = elision ? elide(s1, part2, ortho) : s1
     @debug("strcat: After elision, s1 is ", s1)
@@ -83,6 +83,7 @@ end
 $(SIGNATURES)
 """
 function lg_appendtopalatal(s1::AbstractString, s2::AbstractString)
+    @info("Appending str to palatal")
     # Aspirate s1 if s2 starts with rough breathing:
     if lginitialrough(s2)
         indices = collect(eachindex(s1))
@@ -134,9 +135,11 @@ function lg_appendtopalatal(s1::AbstractString, s2::AbstractString)
         quit = indices[end - 1]
         string(s1[1:quit],"χ", s2)
 
-    elseif endswith(s1, "χ") && occursin(r"^[κγχ]", s2)
+    elseif occursin(r"[χκ]$", s1) && occursin(r"^[κγχ]", s2)
         if length(s2) == 1
-            s1
+            indices = collect(eachindex(s1))
+            quit = indices[end - 1]
+            string(s1[1:quit],"χ")
         else
             indices = collect(eachindex(s2))
             quit = indices[2:end]
