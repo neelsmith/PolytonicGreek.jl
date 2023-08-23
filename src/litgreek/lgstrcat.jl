@@ -83,7 +83,7 @@ end
 $(SIGNATURES)
 """
 function lg_appendtopalatal(s1::AbstractString, s2::AbstractString)
-    @info("Appending str to palatal")
+    @debug("Appending str to palatal")
     # Aspirate s1 if s2 starts with rough breathing:
     if lginitialrough(s2)
         indices = collect(eachindex(s1))
