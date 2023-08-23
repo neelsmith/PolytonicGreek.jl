@@ -4,7 +4,7 @@ $(SIGNATURES)
 """
 function strcat(ortho::LiteraryGreekOrthography, s1::AbstractString,s2::AbstractString; elision = false)
     
-    @info("Strcatting $(s1) and $(s2)")
+    @debug("Strcatting $(s1) and $(s2)")
     part2 = rmbreathing(s2, ortho)
     s1 = elision ? elide(s1, part2, ortho) : s1
     @debug("strcat: After elision, s1 is ", s1)
