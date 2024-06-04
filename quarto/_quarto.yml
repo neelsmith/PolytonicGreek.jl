@@ -12,7 +12,7 @@ format:
 
 
 website:
-  title: "orthography"
+  title: "polytonicgreek"
   navbar:
     background: primary
     search: true
@@ -29,7 +29,7 @@ website:
         file: reference/index.qmd  
     right:   
       - icon: github
-        href: https://github.com/hcmid/Orthography.jl
+        href: https://github.com/neelsmith/PolytonicGreek.jl
         aria-label: GitHub
       - icon: person-circle
         menu:
