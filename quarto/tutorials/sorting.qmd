@@ -5,24 +5,23 @@ The `sortWords` function sorts Unicode Greek by the logic of the Greek alphabet,
 
 Compare what happens when sorting words in the phrase *μῆνιν ἄειδε θεά* by Unicode value and by using PolytonicGreek's `sortWords` function.
 
-```jldoctest loaded
+```{julia}
 wordlist = split("μῆνιν ἄειδε θεά")
 unicodesort = sort(wordlist)
 join(unicodesort, " ")
 
 # output
-
-"θεά μῆνιν ἄειδε"
+#"θεά μῆνιν ἄειδε"
 ```
 
-```jldoctest loaded
+```{julia}
 using PolytonicGreek
 lg = literaryGreek()
 rationalsort = PolytonicGreek.sortWords(wordlist,lg)
 join(rationalsort, " ")
 
 # output
-
-"ἄειδε θεά μῆνιν"
+# "ἄειδε θεά μῆνιν"
 ```
+
 

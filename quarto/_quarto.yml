@@ -5,7 +5,7 @@ theme: spacelab
 execute:
   freeze: auto
 date: last-modified  
-margin-header: "⚠️ *Draft release.*"
+margin-header: "Package version: `0.21.12`"
 format:
   html: 
     toc: true
@@ -45,15 +45,22 @@ website:
         - tutorials/index.qmd
         - tutorials/literarygreek.qmd
         - tutorials/lgstrings.qmd
+        - tutorials/sorting.qmd
+        - tutorials/syllabification.qmd
 
     - title: "Guides"
       contents:
         - guides/index.qmd
+        - guides/accentuation.qmd
+        - guides/strcat.qmd
+        - guides/augment.qmd
+
 
     - title: "Reference"
       contents: 
         - reference/index.qmd
         - reference/lg_charset.qmd
+        - reference/api.qmd
 
     - title: "Concepts"
       contents: 

@@ -4,31 +4,28 @@
 
 The `augment` function adds appropriate syllabic or temporal augment to a string.  It does *not* accent the string: you can do that separately with the functions described on the previous page.
 
-```jldoctest augment
+```{julia}
 using PolytonicGreek 
 lg = literaryGreek()
 augment("βαλε", lg)
 
 # output
-
-"ἐβαλε"
+#"ἐβαλε"
 ```
 
-```jldoctest augment
+```{julia}
 augment("αἱρει", lg)
 
 # output
-
-"ᾑρει"
+#"ᾑρει"
 ```
 
 
-```jldoctest augment
+```{julia}
  augment("ὑβριζε", lg) 
 
 # output
-
-"ὑ_βριζε"
+#"ὑ_βριζε"
 ```
 
 
@@ -37,40 +34,36 @@ augment("αἱρει", lg)
 
 Two functions identify the syllabic string value for an orthography for augmenting simplex and compound verbs, `augment_initial`  and `augment_medial`, respectively.
 
-```jldoctest augment
+```{julia}
 augment_initial(lg)
 
 # output
-
-"ἐ"
+#"ἐ"
 ```
 
 
 
 
-```jldoctest augment
+```{julia}
 augment_medial(lg)
 
 # output
-
-"ε"
+#"ε"
 ```
 
 You can always find appropriate values for temporal augment in a given orthography by using the `augment` function with a verb form's initial vowel or diphthong.
 
-```jldoctest augment
+```{julia}
 augment("αἱ", lg)
 
 # output
-
-"ᾑ"
+#"ᾑ"
 ```
 
 
-```jldoctest augment
+```{julia}
 augment("ε", lg)
 
 # output
-
-"η"
+#"η"
 ```

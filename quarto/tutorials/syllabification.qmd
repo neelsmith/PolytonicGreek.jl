@@ -1,6 +1,3 @@
-```@meta
-CurrentModule = PolytonicGreek
-```
 
 
 # Syllabification
@@ -9,178 +6,160 @@ The `syllabify` functions handles the complex task of dividing Greek words into 
 
 The following examples illustrate correct division of a variety of consonant and vowel patterns.
 
-```jldoctest syllables
+```{julia}
 using PolytonicGreek 
 lg = literaryGreek()
 syllables = syllabify("ἄνδρασι",lg)
 join(syllables, "-")
 
 # output
-
-"ἀν-δρα-σι"
+#"ἀν-δρα-σι"
 ```
-```jldoctest syllables
+```{julia}
 syllables = syllabify("προΐστημι",lg)
 join(syllables, "-")
 
 # output
-
-"προ-ϊ-στη-μι"
+#"προ-ϊ-στη-μι"
 ```
-```jldoctest syllables
+```{julia}
 syllables = syllabify("ἀναμιμνησκόμενος",lg)
 join(syllables, "-")
 
 # output
-
-"ἀ-να-μι-μνη-σκο-με-νος"
+#"ἀ-να-μι-μνη-σκο-με-νος"
 ```
 
-```jldoctest syllables
+```{julia}
 syllables = syllabify("καταβάλλω",lg)
 join(syllables, "-")
 
 # output
-
-"κα-τα-βαλ-λω"
+#"κα-τα-βαλ-λω"
 ```
 
 
-```jldoctest syllables
+```{julia}
 syllables = syllabify("δέομαι",lg)
 join(syllables, "-")
 
 # output
-
-"δε-ο-μαι"
+#"δε-ο-μαι"
 ```
 
 
 
-```jldoctest syllables
+```{julia}
 syllables = syllabify("ὀΐω",lg)
 join(syllables, "-")
 
 # output
-
-"ὀ-ϊ-ω"
+#"ὀ-ϊ-ω"
 ```
 
 
 
-```jldoctest syllables
+```{julia}
 syllables = syllabify("ὀίω",lg)
 join(syllables, "-")
 
 # output
-
-"ὀι-ω"
+#"ὀι-ω"
 ```
 
 
-```jldoctest syllables
+```{julia}
 syllables = syllabify("ἑωρακυῖα",lg)
 join(syllables, "-")
 
 # output
-
-"ἑ-ω-ρα-κυι-α"
+#"ἑ-ω-ρα-κυι-α"
 ```
 
 
 
 
-```jldoctest syllables
+```{julia}
 syllables = syllabify("δεδιέναι",lg)
 join(syllables, "-")
 
 # output
-
-"δε-δι-ε-ναι"
+#"δε-δι-ε-ναι"
 ```
 
 
 
-```jldoctest syllables
+```{julia}
 syllables = syllabify("ἔργμα",lg)
 join(syllables, "-")
 
 # output
-
-"ἐρ-γμα"
+#"ἐρ-γμα"
 ```
 
 
 
-```jldoctest syllables
+```{julia}
 syllables = syllabify("οὐδέποτε",lg)
 join(syllables, "-")
 
 # output
-
-"οὐ-δε-πο-τε"
+#"οὐ-δε-πο-τε"
 ```
 
 
 
-```jldoctest syllables
+```{julia}
 syllables = syllabify("κελεύει",lg)
 join(syllables, "-")
 
 # output
-
-"κε-λευ-ει"
+#"κε-λευ-ει"
 ```
 
 
-```jldoctest syllables
+```{julia}
 syllables = syllabify("οἰκίαις",lg)
 join(syllables, "-")
 
 # output
-
-"οἰ-κι-αις"
+#"οἰ-κι-αις"
 ```
 
    
 
-```jldoctest syllables
+```{julia}
 syllables = syllabify("θύειν", lg)
 join(syllables, "-")
 
 # output
-
-"θυ-ειν"
+#"θυ-ειν"
 ```
 
   
- ```jldoctest syllables
+ ```{julia}
 syllables = syllabify("ποιησαίμην",lg)
 join(syllables, "-")
 
 # output
-
-"ποι-η-σαι-μην"
+#"ποι-η-σαι-μην"
 ```
 
 
     
-```jldoctest syllables
+```{julia}
 syllables = syllabify("ποῖος", lg)
 join(syllables, "-")
 
 # output
-
-"ποι-ος"
+#"ποι-ος"
 ```  
 
     
-```jldoctest syllables
+```{julia}
 syllables = syllabify("γνώμην", lg)
 join(syllables, "-")
 
 # output
-
-"γνω-μην"
+#"γνω-μην"
 ```  
-  

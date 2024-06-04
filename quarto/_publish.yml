@@ -1,0 +1,4 @@
+- source: project
+  quarto-pub:
+    - id: 05ce1cf1-be08-4b8e-961f-755ebcd13102
+      url: 'https://neelsmith.quarto.pub/polytonicgreek'
