@@ -4,7 +4,7 @@
 `LiteraryGreekOrthography` implements the following functions from the `GreekOrthography` interface.
 
 
-```@example lgstrings
+```{julia}
 using PolytonicGreek
 lg = literaryGreek()
 typeof(lg)
@@ -15,19 +15,19 @@ typeof(lg)
 
 Strip accents from a string according to a specified implementation of `GreekOrthography`.
 
-```@example lgstrings
+```{julia}
 rmaccents("πολλά", lg)
 ```
 
 
 You can add accents to an unaccented word by specifying the accent pattern as `:RECESSIVE`
 
-```@example lgstrings
+```{julia}
 accentword("ἀνθρωποι", :RECESSIVE, lg) 
 ```
 ## Syllabification
 
-```@example lgstrings
+```{julia}
 syllabify("ἄνθρωποι", lg) 
 ```
 
@@ -36,7 +36,7 @@ syllabify("ἄνθρωποι", lg)
 ## Sorting
 
 
-```@example lgstrings
+```{julia}
 wordlist = split("μῆνιν ἄειδε θεά")
 sortWords(wordlist, lg)
 ```

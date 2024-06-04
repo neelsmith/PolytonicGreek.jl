@@ -43,6 +43,8 @@ website:
     - title: "Tutorials"
       contents: 
         - tutorials/index.qmd
+        - tutorials/literarygreek.qmd
+        - tutorials/lgstrings.qmd
 
     - title: "Guides"
       contents:
@@ -51,6 +53,7 @@ website:
     - title: "Reference"
       contents: 
         - reference/index.qmd
+        - reference/lg_charset.qmd
 
     - title: "Concepts"
       contents: 

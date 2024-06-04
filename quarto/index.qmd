@@ -5,6 +5,9 @@ title: "PolytonicGreek.jl"
 > *Rigorously defined orthographies for text in polytonic ancient Greek.* 
 
 
+The `PolytonicGreek` package supports working with accented ancient Greek encoded in Unicode.  
+
+
 | | Learning the package | Using the package |
 | --- | --- | --- |
 | **Hands-on** |  Try a [tutorial](./tutorials/) to start using  the package  | Find [recipes](./guides/) for specific tasks |
