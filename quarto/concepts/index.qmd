@@ -1,0 +1,47 @@
+---
+title: Concepts
+---
+
+
+
+## An abstract interface
+
+`GreekOrthography` is an abstract  type for functions that understand the phonology of ancient Greek as it is represented in specific orthographic systems, and can therefore:
+
+- sort Unicode Greek strings by the logic of the Greek alphabet
+- syllabify Greek strings
+- work with accents, including correct placement for recessive and persistent accent patterns, respecting morpheme boundaries in compound verbs
+- support reduplication and augment (both temporal and syllabic) of verbal stems
+- concatenate strings in a specified orthography with appropriate phonological adjustments, optionally including elision
+- implement the `OrthographicSystem` interface (from the HCMID [Orthography package](https://hcmid.github.io/Orthography.jl/stable/)), with semantic tokenization of text in polytonic Greek
+
+
+## Generic features of an orthographic system
+
+The `GreekOrthography` abstract type is a subtype of `OrthographicSystem`.  Concrete implementations of `GreekOrthography` are therefore also implementations of an `OrthographicSystem`. In the following code blocks, you can see that  `LiteraryGreekOrthography` inherits from `OrthographicSystem` via `GreekOrthography`, and can be used like any other `OrthographicSystem` to assess the validity of characters and strings, and analyze strings of characters as sequences of classified tokens.
+
+
+## The `GreekOrthography` abstraction
+
+`GreekOrthography` is an abstract type, which in turn is a 
+subtype of the [Orthography package](https://github.com/hcmid/Orthography.jl)'s `OrthographicSystem`.
+
+Implementations of `GreekOrthography` can therefore:
+
+
+1. use the functions specific to implementations of `GreekOrthography` to remove and add accents to words, to break words into syllables, and to sort words according to the logic of the Greek alphabet
+2. use the generic functions of the `Orthography` package to assess the validity of characters and strings, and to tokenize a string into a series of explicitly classified tokens.
+
+
+
+
+## Concrete implementations
+
+This package  includes `PolytonicGreek`, an implementation of the `GreekOrthography` type for literary Greek as it appears in standard printed editions. 
+
+Other implementations are possible. Examples are:
+
+
+- `ScientificGreekOrthography`, for texts that including numeric and synmbolic content used in Greek mathematical and scientific texts
+- [ManuscriptOrthography](https://homermultitext.github.io/ManuscriptOrthography.jl/stable/) (from the Homer Multitext project) for working with the orthography of polytonic Greek in medieval manuscripts
+- [AtticGreek](https://github.com/neelsmith/AtticGreek.jl), an implementation for the epichoric alphabet used in Athens before 403 BCE

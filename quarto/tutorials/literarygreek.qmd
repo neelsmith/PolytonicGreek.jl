@@ -1,20 +1,17 @@
-# Generic features of an orthographic system
-
-The `GreekOrthography` abstract type is a subtype of `OrthographicSystem`.  Concrete implementations of `GreekOrthography` are therefore also implementations of an `OrthographicSystem`. In the following code blocks, you can see that  `LiteraryGreekOrthography` inherits from `OrthographicSystem` via `GreekOrthography`, and can be used like any other `OrthographicSystem` to assess the validity of characters and strings, and analyze strings of characters as sequences of classified tokens.
+# Literary Greek orthography
 
 
-
-```@example loaded
+```{julia}
 using PolytonicGreek
 lg = literaryGreek()
 typeof(lg)
 ```
 
-```@example loaded
+```{julia}
 typeof(lg) |> supertype
 ```
 
-```@example loaded
+```{julia}
 typeof(lg) |> supertype |> supertype
 ```
 
@@ -23,24 +20,24 @@ typeof(lg) |> supertype |> supertype
 ## Assessing characters and strings
     
     
-```@example loaded
+```{julia}
 using Orthography
 omicron = "ο"
 validcp(omicron, lg)
 ```
 
-```@example loaded
+```{julia}
 latinO = "o"
 validcp(latinO, lg)
 ```
 
 
-```@example loaded
+```{julia}
 greek = "μῆνιν ἄειδε"
 validstring(greek, lg)
 ```
 
-```@example loaded
+```{julia}
 notgreek = "μῆνιν?"
 validstring(notgreek, lg)
 ```
@@ -50,25 +47,25 @@ validstring(notgreek, lg)
     
 Subtypes of `Orthography.OrthographicSystem` include a `tokenizer` function that analyzes a string encoded in this orthographic system into an Array of `OrthographicToken`s, which are classified string values.  For example, the string *μῆνιν ἄειδε,* is analyzed as three tokens, two of type `LexicalToken`, and one of type `PunctuationToken`
 
-```@example loaded
+```{julia}
 tokenized = tokenize("μῆνιν ἄειδε,", lg)
 length(tokenized)
 ```
 
-```@example loaded
+```{julia}
 tokenized[1].text
 ```
 
-```@example loaded
+```{julia}
 tokenized[1].tokencategory
 ```
 
 
-```@example loaded
+```{julia}
 tokenized[end].text
 ```
 
 
-```@example loaded
+```{julia}
 tokenized[end].tokencategory
 ```

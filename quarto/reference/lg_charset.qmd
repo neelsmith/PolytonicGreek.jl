@@ -1,6 +1,3 @@
-```@meta
-CurrentModule = PolytonicGreek
-```
 
 # `LiteraryGreekOrthography`: details of character set and accentuation
 
@@ -19,3 +16,4 @@ The `LiteraryGreekOrthography` supports including explicit indications of vowel 
 - a hat following ω indicates that the preceding vowel is short (e.g., πόλεω^ς)
 
 The underscore and hat characters are not considered valid characters:  `validchar` will return `false` for strings containing those characters.  However, accentuation functions will work properly with those metacharacters, which can be stripped out after the fact to arrive at a valid, accented string.
+

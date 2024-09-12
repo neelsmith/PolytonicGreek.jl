@@ -1,0 +1,374 @@
+# API documentation
+
+## String composition
+
+
+`strcat`
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+using PolytonicGreek
+@doc strcat
+```
+:::
+
+`sortWords`
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+@doc sortWords
+```
+:::
+
+## Phonology
+
+
+`vocalic`
+
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+@doc vocalic
+```
+:::
+
+`consonantal`
+
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+@doc consonantal
+```
+:::
+
+`liquids`
+
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+@doc liquids
+```
+:::
+
+`labials`
+
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+@doc liquids
+```
+:::
+
+`dentals`
+
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+@doc dentals
+```
+:::
+
+`palatals`
+
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+@doc palatals
+```
+:::
+
+`stops`
+
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+@doc stops
+```
+:::
+
+
+## Reduplication and augment
+
+`augment`
+
+
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+@doc augment
+```
+:::
+
+
+`augment_initial`
+
+
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+@doc augment_initial
+```
+:::
+
+`augment_medial`
+
+
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+@doc augment_medial
+```
+:::
+
+`reduplicate`
+
+
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+@doc reduplicate
+```
+:::
+
+## Accentuation
+
+`rmaccents`
+
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+@doc rmaccents
+```
+:::
+
+
+`accentword`
+
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+@doc accentword
+```
+:::
+
+
+`accented`
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+@doc accented
+```
+:::
+
+
+`proclitics`
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+@doc proclitics
+```
+:::
+
+
+`enclitics`
+
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+@doc enclitics
+```
+:::
+
+`rmbreathing`
+
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+@doc rmbreathing
+```
+:::
+
+`addbreathing`
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+@doc addbreathing
+```
+:::
+
+`countaccents`
+
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+@doc countaccents
+```
+:::
+
+`accentpenult`
+
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+@doc accentpenult
+```
+:::
+
+`accentultima`
+
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+@doc accentultima
+```
+:::
+
+
+
+## Syllabification
+
+
+
+`syllabify`
+
+
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+@doc syllabify
+```
+:::
+
+
+
+##  Orthographic system
+
+
+
+`LiteraryGreekOrthography`
+
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+@doc LiteraryGreekOrthography
+```
+:::
+
+`literaryGreek`
+
+
+:::{.callout-note appearance="minimal"}
+```{julia}
+#| echo: false
+#| warning: false
+@doc literaryGreek
+```
+:::
+
+
+
+
+
+### Internals
+
+Syllabification is implemented with a chain of functions applying regular expressions to an input string.  These internal functions would not normally be of any use or interest to anyone who simply wants to break a string in polytonic Greek into syllables.
+
+```
+PolytonicGreek.splitmorphemes
+PolytonicGreek.splitmunu
+PolytonicGreek.splitliqcons
+PolytonicGreek.splitdiphthongvowel
+PolytonicGreek.splitvoweldiphthong
+```
+
+
+
+
+
+### Internals
+
+```
+PolytonicGreek.alphabetic
+PolytonicGreek.punctuation
+PolytonicGreek.isAlphabetic
+PolytonicGreek.isPunctuation
+PolytonicGreek.tokenforstring
+PolytonicGreek.splitPunctuation
+```
+
+
+
+### Internals
+
+```
+PolytonicGreek.allaccents
+PolytonicGreek.accentstripdict
+PolytonicGreek.flipdict
+PolytonicGreek.acutedict
+PolytonicGreek.circumflexdict
+PolytonicGreek.addacute
+PolytonicGreek.addcircumflex
+PolytonicGreek.accentsyllable
+PolytonicGreek.accentantepenult
+PolytonicGreek.ultima
+PolytonicGreek.penult
+PolytonicGreek.longsyllable
+PolytonicGreek.shortsyllable
+PolytonicGreek.includesdiphthong
+PolytonicGreek.flipaccent
+PolytonicGreek.vowelsonly
+PolytonicGreek.tokenform
+PolytonicGreek.stripenclitic
+PolytonicGreek.normalizediaresis
+PolytonicGreek.normalizeaccentcombos
+```
