@@ -1,5 +1,6 @@
 ---
 title: "Guides"
+engine: julia
 ---
 
 Recipe book for working with `PolytonicGreek.jl`
