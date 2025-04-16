@@ -4,3 +4,4 @@ docs/build/
 scratch/
 _site/
 _freeze/
+quarto/.quarto/
