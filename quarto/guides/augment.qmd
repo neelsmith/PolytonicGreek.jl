@@ -1,3 +1,7 @@
+---
+engine: julia
+---
+
 # Augment
 
 ## Adding augment to strings
@@ -5,27 +9,18 @@
 The `augment` function adds appropriate syllabic or temporal augment to a string.  It does *not* accent the string: you can do that separately with the functions described on the previous page.
 
 ```{julia}
-using PolytonicGreek 
+using PolytonicGreek
 lg = literaryGreek()
 augment("βαλε", lg)
-
-# output
-#"ἐβαλε"
 ```
 
 ```{julia}
 augment("αἱρει", lg)
-
-# output
-#"ᾑρει"
 ```
 
 
 ```{julia}
  augment("ὑβριζε", lg) 
-
-# output
-#"ὑ_βριζε"
 ```
 
 
